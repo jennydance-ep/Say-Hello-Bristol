@@ -886,6 +886,28 @@
       btnRerecord.style.display = 'none';
     });
 
+    // ── Mobile viewBox + pin overrides ─────────────────────────────────────────
+    // On mobile the container is 5:6 but the SVG viewBox is 4:3, leaving
+    // letterbox strips.  Switching to an 800×960 viewBox fills the container
+    // exactly, then we translate Bristol Airport down to the new bottom edge.
+    // Bristol Parkway is already near the top of the taller space (y=38/960).
+    function applyMobileLayout() {
+      const isMobile  = window.innerWidth <= 768;
+      const mapSvg    = document.querySelector('#map-container svg');
+      const airportPin = document.querySelector('.pin[data-place="Bristol Airport"]');
+
+      if (isMobile) {
+        mapSvg.setAttribute('viewBox', '0 0 800 960');
+        airportPin.setAttribute('transform', 'translate(0,330)');
+      } else {
+        mapSvg.setAttribute('viewBox', '0 0 800 600');
+        airportPin.removeAttribute('transform');
+      }
+    }
+
+    applyMobileLayout();
+    window.addEventListener('resize', applyMobileLayout);
+
     // Warm up mic permission once on page load so the browser prompt never interrupts recording
     navigator.mediaDevices?.getUserMedia({ audio: true })
       .then(stream => stream.getTracks().forEach(t => t.stop()))
