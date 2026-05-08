@@ -438,7 +438,8 @@
     <svg viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
 
       <!-- River Avon -->
-      <path d="M 800,385 C 680,380 580,368 500,360
+      <path id="river-avon-path"
+            d="M 800,385 C 680,380 580,368 500,360
                C 440,354 375,354 315,358
                C 260,362 215,362 175,352
                C 140,344 70,348 0,350"
@@ -446,7 +447,8 @@
             stroke-linecap="round" opacity="0.9"/>
 
       <!-- River label -->
-      <text x="88" y="338" font-size="11" fill="#5a9cbb"
+      <text id="river-avon-label"
+            x="88" y="338" font-size="11" fill="#5a9cbb"
             font-family="Georgia, serif" font-style="italic">River Avon</text>
 
       <!-- Clifton -->
@@ -886,22 +888,57 @@
       btnRerecord.style.display = 'none';
     });
 
-    // ── Mobile viewBox + pin overrides ─────────────────────────────────────────
-    // On mobile the container is 5:6 but the SVG viewBox is 4:3, leaving
-    // letterbox strips.  Switching to an 800×960 viewBox fills the container
-    // exactly, then we translate Bristol Airport down to the new bottom edge.
-    // Bristol Parkway is already near the top of the taller space (y=38/960).
+    // ── Mobile pin layout ───────────────────────────────────────────────────────
+    // On mobile, switches the SVG to an 800×960 viewBox (fills the 5:6
+    // container exactly), shifts the River Avon to y≈480 (vertical centre),
+    // and applies a translate(0, delta) to every pin so northern pins cluster
+    // in the upper half and southern pins in the lower half.
+    // Desktop positions are completely unchanged.
+    const MOBILE_PIN_DELTAS = {
+      // Northern — upper half (above river at y≈480)
+      'Bristol Parkway':        17,
+      'Gloucester Road':        18,
+      'Redland':                 0,
+      'The Downs':               7,
+      'Cotham':                 29,
+      'Portishead':             37,
+      'Clifton':                72,
+      'Stokes Croft':           92,
+      'Cabot Circus':          103,
+      'Hotwells':               82,
+      'Clevedon':              -35,
+      'Bath':                  135,
+      // Southern — lower half (below river)
+      'The Harbourside':       176,
+      'Bristol Temple Meads':  208,
+      'Ashton Gate':           158,
+      'Ashton Court':          253,
+      'The River Avon':        323,
+      'Bedminster':            292,
+      'Totterdown':            330,
+      'Weston-super-Mare':     320,
+      'Bristol Airport':       338,
+    };
+
     function applyMobileLayout() {
-      const isMobile  = window.innerWidth <= 768;
-      const mapSvg    = document.querySelector('#map-container svg');
-      const airportPin = document.querySelector('.pin[data-place="Bristol Airport"]');
+      const isMobile   = window.innerWidth <= 768;
+      const mapSvg     = document.querySelector('#map-container svg');
+      const riverPath  = document.getElementById('river-avon-path');
+      const riverLabel = document.getElementById('river-avon-label');
 
       if (isMobile) {
         mapSvg.setAttribute('viewBox', '0 0 800 960');
-        airportPin.setAttribute('transform', 'translate(0,330)');
+        riverPath.setAttribute('transform', 'translate(0,115)');
+        riverLabel.setAttribute('transform', 'translate(0,115)');
+        document.querySelectorAll('.pin').forEach(pin => {
+          const delta = MOBILE_PIN_DELTAS[pin.dataset.place];
+          if (delta !== undefined) pin.setAttribute('transform', `translate(0,${delta})`);
+        });
       } else {
         mapSvg.setAttribute('viewBox', '0 0 800 600');
-        airportPin.removeAttribute('transform');
+        riverPath.removeAttribute('transform');
+        riverLabel.removeAttribute('transform');
+        document.querySelectorAll('.pin').forEach(pin => pin.removeAttribute('transform'));
       }
     }
 
