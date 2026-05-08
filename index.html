@@ -236,6 +236,97 @@
       color: #666;
       letter-spacing: 0.01em;
     }
+
+    /* Onboarding overlay */
+    #onboarding-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.48);
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    #onboarding-card {
+      background: #fff;
+      border-radius: 16px;
+      padding: 32px 28px 26px;
+      max-width: 380px;
+      width: 100%;
+      box-shadow: 0 8px 40px rgba(0, 0, 0, 0.22);
+    }
+
+    #onboarding-card h2 {
+      font-size: 1.35rem;
+      font-weight: normal;
+      color: #222;
+      margin-bottom: 14px;
+    }
+
+    .ob-intro {
+      font-size: 0.88rem;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 20px;
+    }
+
+    .ob-legend {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 24px;
+    }
+
+    .ob-legend-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: sans-serif;
+      font-size: 0.8rem;
+      color: #555;
+    }
+
+    .ob-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .ob-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    #btn-lets-go {
+      background: #E07850;
+      color: #fff;
+      border: none;
+      border-radius: 24px;
+      padding: 10px 30px;
+      font-size: 0.95rem;
+      font-family: Georgia, serif;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    #btn-lets-go:hover { background: #c85e32; }
+
+    .ob-suppress {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-family: sans-serif;
+      font-size: 0.76rem;
+      color: #aaa;
+      cursor: pointer;
+      user-select: none;
+    }
+    .ob-suppress input { cursor: pointer; }
   </style>
 </head>
 <body>
@@ -247,6 +338,34 @@
 
       <!-- Land background -->
       <rect width="800" height="600" fill="#ede9e4" rx="8"/>
+
+      <!-- Hot air balloon watermarks — drawn behind all pins -->
+      <g fill="#6b5040" stroke="#6b5040">
+        <!-- Balloon 1: large, upper-right -->
+        <g transform="translate(688,108)" opacity="0.15">
+          <ellipse cx="0" cy="0" rx="24" ry="28"/>
+          <path d="M -9,27 Q 0,35 9,27" fill="none" stroke-width="2"/>
+          <line x1="-7" y1="39" x2="-9" y2="28" stroke-width="1.5"/>
+          <line x1="7" y1="39" x2="9" y2="28" stroke-width="1.5"/>
+          <rect x="-8" y="39" width="16" height="11" rx="2" stroke="none"/>
+        </g>
+        <!-- Balloon 2: medium, lower-right -->
+        <g transform="translate(706,498)" opacity="0.15">
+          <ellipse cx="0" cy="0" rx="19" ry="22"/>
+          <path d="M -7,21 Q 0,28 7,21" fill="none" stroke-width="1.5"/>
+          <line x1="-6" y1="31" x2="-7" y2="22" stroke-width="1.5"/>
+          <line x1="6" y1="31" x2="7" y2="22" stroke-width="1.5"/>
+          <rect x="-7" y="31" width="14" height="9" rx="2" stroke="none"/>
+        </g>
+        <!-- Balloon 3: small, mid-left -->
+        <g transform="translate(74,298)" opacity="0.15">
+          <ellipse cx="0" cy="0" rx="16" ry="19"/>
+          <path d="M -6,18 Q 0,24 6,18" fill="none" stroke-width="1.5"/>
+          <line x1="-5" y1="27" x2="-6" y2="19" stroke-width="1.5"/>
+          <line x1="5" y1="27" x2="6" y2="19" stroke-width="1.5"/>
+          <rect x="-6" y="27" width="12" height="8" rx="2" stroke="none"/>
+        </g>
+      </g>
 
       <!-- River Avon -->
       <path d="M 800,385 C 680,380 580,368 500,360
@@ -698,6 +817,53 @@
     navigator.mediaDevices?.getUserMedia({ audio: true })
       .then(stream => stream.getTracks().forEach(t => t.stop()))
       .catch(() => {});
+
+    // ── Onboarding popup ────────────────────────────────────────────────────
+    const obOverlay  = document.getElementById('onboarding-overlay');
+    const obSuppress = document.getElementById('chk-suppress');
+
+    if (!localStorage.getItem('shb_onboarding_seen')) {
+      obOverlay.style.display = 'flex';
+    }
+
+    document.getElementById('btn-lets-go').addEventListener('click', () => {
+      if (obSuppress.checked) localStorage.setItem('shb_onboarding_seen', '1');
+      obOverlay.style.display = 'none';
+    });
   </script>
+
+  <!-- Onboarding popup -->
+  <div id="onboarding-overlay" style="display:none">
+    <div id="onboarding-card">
+      <h2>Welcome to Say Hello Bristol!</h2>
+      <p class="ob-intro">
+        Tap any pin on the map to hear how Bristol locals say that place name.<br>
+        Listen to the model pronunciation, record yourself, and compare — as many times as you like.
+      </p>
+      <div class="ob-legend">
+        <div class="ob-legend-item">
+          <span class="ob-dot" style="background:#E07850"></span>Districts &amp; Neighbourhoods
+        </div>
+        <div class="ob-legend-item">
+          <span class="ob-dot" style="background:#2E8B8B"></span>Landmarks &amp; Destinations
+        </div>
+        <div class="ob-legend-item">
+          <span class="ob-dot" style="background:#D4922A"></span>Streets &amp; Roads
+        </div>
+        <div class="ob-legend-item">
+          <span class="ob-dot" style="background:#3A7BC8"></span>River &amp; Geography
+        </div>
+        <div class="ob-legend-item">
+          <span class="ob-dot" style="background:#7952A3"></span>Transport &amp; Surrounding Towns
+        </div>
+      </div>
+      <div class="ob-footer">
+        <button id="btn-lets-go">Let's go!</button>
+        <label class="ob-suppress">
+          <input type="checkbox" id="chk-suppress"> Don't show this again
+        </label>
+      </div>
+    </div>
+  </div>
 </body>
 </html>
