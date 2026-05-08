@@ -1,14 +1,14 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 235">
   <defs>
     <!--
-      Speech bubble = large clockwise arc (top → right → bottom → lower-left)
-      + tail spike + short clockwise arc back up to top.
+      Speech bubble = short clockwise arc (top → right → lower-right exit)
+      + tail spike + large clockwise arc back up to top.
       Ellipse: cx=100 cy=70 rx=90 ry=58.
-      Exit point  124°: (50, 118)  — verified on ellipse
-      Entry point 108°: (72, 125)  — verified on ellipse
+      Exit point   56°: (150, 118)  — verified on ellipse
+      Entry point  72°: (128, 125)  — verified on ellipse
     -->
     <clipPath id="bubble-clip">
-      <path d="M 100,12 A 90,58 0 1 1 50,118 L 26,155 L 72,125 A 90,58 0 0 1 100,12 Z"/>
+      <path d="M 100,12 A 90,58 0 0 1 150,118 L 174,155 L 128,125 A 90,58 0 1 1 100,12 Z"/>
     </clipPath>
     <filter id="drop-shadow" x="-15%" y="-10%" width="140%" height="148%">
       <feDropShadow dx="0" dy="3" stdDeviation="5" flood-color="#00000022"/>
@@ -16,7 +16,7 @@
   </defs>
 
   <!-- Bubble white background + shadow -->
-  <path d="M 100,12 A 90,58 0 1 1 50,118 L 26,155 L 72,125 A 90,58 0 0 1 100,12 Z"
+  <path d="M 100,12 A 90,58 0 0 1 150,118 L 174,155 L 128,125 A 90,58 0 1 1 100,12 Z"
         fill="white" filter="url(#drop-shadow)"/>
 
   <!-- Union Jack, clipped to full bubble shape (including tail) -->
@@ -42,7 +42,7 @@
   </g>
 
   <!-- Bubble outline — drawn last to crisp up the clipped edges -->
-  <path d="M 100,12 A 90,58 0 1 1 50,118 L 26,155 L 72,125 A 90,58 0 0 1 100,12 Z"
+  <path d="M 100,12 A 90,58 0 0 1 150,118 L 174,155 L 128,125 A 90,58 0 1 1 100,12 Z"
         fill="none" stroke="#aaaaaa" stroke-width="1.5"/>
 
   <!-- Three typing dots — white fill + navy stroke for contrast on any flag zone -->
