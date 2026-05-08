@@ -337,6 +337,43 @@
       user-select: none;
     }
     .ob-suppress input { cursor: pointer; }
+
+    /* ── Mobile layout ──────────────────────────────────────────────────── */
+    @media (max-width: 768px) {
+      body {
+        padding: 16px 0;
+      }
+
+      h1 {
+        font-size: 1.5rem;
+        margin-bottom: 16px;
+        padding: 0 12px;
+      }
+
+      /* Full-bleed map, portrait-leaning aspect ratio so the map fills
+         more vertical screen space; SVG centres within the taller container
+         with warm parchment background framing it above and below */
+      #map-container {
+        border-radius: 0;
+        aspect-ratio: 5 / 6;
+      }
+
+      #legend {
+        padding: 0 12px;
+      }
+
+      /* CSS font-size overrides SVG presentation attribute —
+         17 px renders at a readable size at mobile scale */
+      .pin text {
+        font-size: 17px;
+      }
+
+      /* Larger circle radius (SVG 2 geometry property) for a more
+         comfortable tap target on touch screens */
+      .pin circle {
+        r: 16;
+      }
+    }
   </style>
 </head>
 <body>
@@ -358,9 +395,9 @@
           <feTurbulence type="fractalNoise" baseFrequency="0.022 0.018" numOctaves="4" seed="3" result="coarse"/>
           <feColorMatrix in="coarse" type="saturate" values="0" result="grayCoarse"/>
           <feComponentTransfer in="grayCoarse" result="warmCoarse">
-            <feFuncR type="linear" slope="0.13" intercept="0.87"/>
-            <feFuncG type="linear" slope="0.11" intercept="0.86"/>
-            <feFuncB type="linear" slope="0.08" intercept="0.84"/>
+            <feFuncR type="linear" slope="0.10" intercept="0.90"/>
+            <feFuncG type="linear" slope="0.20" intercept="0.80"/>
+            <feFuncB type="linear" slope="0.32" intercept="0.68"/>
           </feComponentTransfer>
           <!-- Fine paper grain -->
           <feTurbulence type="fractalNoise" baseFrequency="0.55" numOctaves="2" seed="9" result="fine"/>
