@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 230">
+  <defs>
+    <!-- Clip Union Jack to rounded-rect bubble body only (no tail) -->
+    <clipPath id="bubble-body-clip">
+      <rect x="20" y="10" width="160" height="110" rx="14" ry="14"/>
+    </clipPath>
+    <filter id="drop-shadow" x="-12%" y="-12%" width="135%" height="145%">
+      <feDropShadow dx="0" dy="3" stdDeviation="5" flood-color="#00000022"/>
+    </filter>
+  </defs>
+
+  <!-- Speech bubble white fill + soft shadow -->
+  <path d="M 34,10 Q 20,10 20,24 L 20,106 Q 20,120 34,120
+           L 44,120 L 30,152 L 68,120
+           L 166,120 Q 180,120 180,106 L 180,24 Q 180,10 166,10 Z"
+        fill="white" filter="url(#drop-shadow)"/>
+
+  <!-- Union Jack, clipped to bubble body (rounded rect) -->
+  <g clip-path="url(#bubble-body-clip)">
+    <!-- Blue background -->
+    <rect x="20" y="10" width="160" height="110" fill="#012169"/>
+
+    <!-- St Andrew's cross: white diagonals -->
+    <line x1="20" y1="10"  x2="180" y2="120" stroke="#FFFFFF" stroke-width="26"/>
+    <line x1="180" y1="10" x2="20"  y2="120" stroke="#FFFFFF" stroke-width="26"/>
+
+    <!-- St Patrick's cross: red diagonals (simplified, no countercharge) -->
+    <line x1="20" y1="10"  x2="180" y2="120" stroke="#C8102E" stroke-width="13"/>
+    <line x1="180" y1="10" x2="20"  y2="120" stroke="#C8102E" stroke-width="13"/>
+
+    <!-- St George's cross: white horizontal + vertical -->
+    <rect x="20"  y="54" width="160" height="22" fill="#FFFFFF"/>
+    <rect x="89"  y="10" width="22"  height="110" fill="#FFFFFF"/>
+
+    <!-- St George's cross: red horizontal + vertical (narrower, centred) -->
+    <rect x="20"  y="58" width="160" height="14" fill="#C8102E"/>
+    <rect x="93"  y="10" width="14"  height="110" fill="#C8102E"/>
+  </g>
+
+  <!-- Bubble outline drawn on top to crisp up the rounded corners -->
+  <path d="M 34,10 Q 20,10 20,24 L 20,106 Q 20,120 34,120
+           L 44,120 L 30,152 L 68,120
+           L 166,120 Q 180,120 180,106 L 180,24 Q 180,10 166,10 Z"
+        fill="none" stroke="#bbbbbb" stroke-width="1.5"/>
+
+  <!-- Place name -->
+  <text x="100" y="180"
+        text-anchor="middle"
+        font-family="Georgia, 'Times New Roman', serif"
+        font-size="30"
+        fill="#222222"
+        letter-spacing="0.04em">Bristol</text>
+
+  <!-- IPA transcription -->
+  <text x="100" y="204"
+        text-anchor="middle"
+        font-family="Georgia, 'Times New Roman', serif"
+        font-size="15"
+        fill="#888888"
+        letter-spacing="0.04em">/ˈbrɪs.təl/</text>
+</svg>
