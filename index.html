@@ -35,9 +35,23 @@
       width: 100%;
       max-width: 800px;
       aspect-ratio: 4 / 3;
-      background: #dfd8cc;
+      background: transparent;
       border-radius: 8px;
       overflow: hidden;
+      isolation: isolate; /* stacking context so ::before z-index:-1 stays inside */
+    }
+
+    /* Full-container parchment background — covers the map area AND the
+       top/bottom strips that appear on mobile (where the container is taller
+       than the 4:3 SVG).  Defined as a pseudo-element so the SVG pins and
+       popup card are unaffected by the filter. */
+    #map-container::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background-color: #ede9e4;
+      filter: url(#parchment);
     }
 
     #map-icon {
@@ -379,42 +393,49 @@
 <body>
   <h1>Say Hello Bristol</h1>
 
+  <!--
+    Standalone SVG containing filter definitions.  Placing the filter here
+    (outside the map SVG) allows CSS to reference url(#parchment) from the
+    #map-container::before pseudo-element, so the texture covers the full
+    container — including the top/bottom strips on mobile.
+  -->
+  <svg aria-hidden="true" focusable="false"
+       style="position:absolute;width:0;height:0;overflow:hidden">
+    <defs>
+      <!--
+        Parchment texture: coarse fractalNoise for large aging blotches +
+        fine grain for paper texture.  feComponentTransfer widens the R–B
+        intercept gap so multiply-blending produces warm amber staining
+        rather than grey.  Lightest spots remain original cream; darkest
+        drop ~30% to aged amber.
+      -->
+      <filter id="parchment" x="0%" y="0%" width="100%" height="100%" color-interpolation-filters="sRGB">
+        <!-- Coarse aging blotches -->
+        <feTurbulence type="fractalNoise" baseFrequency="0.022 0.018" numOctaves="4" seed="3" result="coarse"/>
+        <feColorMatrix in="coarse" type="saturate" values="0" result="grayCoarse"/>
+        <feComponentTransfer in="grayCoarse" result="warmCoarse">
+          <feFuncR type="linear" slope="0.10" intercept="0.90"/>
+          <feFuncG type="linear" slope="0.20" intercept="0.80"/>
+          <feFuncB type="linear" slope="0.32" intercept="0.68"/>
+        </feComponentTransfer>
+        <!-- Fine paper grain -->
+        <feTurbulence type="fractalNoise" baseFrequency="0.55" numOctaves="2" seed="9" result="fine"/>
+        <feColorMatrix in="fine" type="saturate" values="0" result="grayFine"/>
+        <feComponentTransfer in="grayFine" result="subtleFine">
+          <feFuncR type="linear" slope="0.04" intercept="0.96"/>
+          <feFuncG type="linear" slope="0.04" intercept="0.96"/>
+          <feFuncB type="linear" slope="0.04" intercept="0.96"/>
+        </feComponentTransfer>
+        <!-- Coarse warm aging first, then fine neutral grain -->
+        <feBlend in="SourceGraphic" in2="warmCoarse" mode="multiply" result="aged"/>
+        <feBlend in="aged"          in2="subtleFine"  mode="multiply"/>
+      </filter>
+    </defs>
+  </svg>
+
   <div id="map-container">
 
     <svg viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
-      <defs>
-        <!--
-          Parchment texture: two-frequency fractalNoise gives both large blotchy
-          aging and fine paper grain. feComponentTransfer remaps grayscale noise
-          to a warm range (R floor higher than B floor) so multiply-blending
-          against the cream base produces amber-brown staining rather than grey.
-          Lightest spots stay at original cream; darkest drop ~16% to aged amber.
-        -->
-        <filter id="parchment" x="0%" y="0%" width="100%" height="100%" color-interpolation-filters="sRGB">
-          <!-- Coarse aging blotches -->
-          <feTurbulence type="fractalNoise" baseFrequency="0.022 0.018" numOctaves="4" seed="3" result="coarse"/>
-          <feColorMatrix in="coarse" type="saturate" values="0" result="grayCoarse"/>
-          <feComponentTransfer in="grayCoarse" result="warmCoarse">
-            <feFuncR type="linear" slope="0.10" intercept="0.90"/>
-            <feFuncG type="linear" slope="0.20" intercept="0.80"/>
-            <feFuncB type="linear" slope="0.32" intercept="0.68"/>
-          </feComponentTransfer>
-          <!-- Fine paper grain -->
-          <feTurbulence type="fractalNoise" baseFrequency="0.55" numOctaves="2" seed="9" result="fine"/>
-          <feColorMatrix in="fine" type="saturate" values="0" result="grayFine"/>
-          <feComponentTransfer in="grayFine" result="subtleFine">
-            <feFuncR type="linear" slope="0.04" intercept="0.96"/>
-            <feFuncG type="linear" slope="0.04" intercept="0.96"/>
-            <feFuncB type="linear" slope="0.04" intercept="0.96"/>
-          </feComponentTransfer>
-          <!-- Apply coarse warm aging, then fine neutral grain, both via multiply -->
-          <feBlend in="SourceGraphic" in2="warmCoarse" mode="multiply" result="aged"/>
-          <feBlend in="aged"          in2="subtleFine"  mode="multiply"/>
-        </filter>
-      </defs>
-
-      <!-- Land background — parchment texture applied via SVG filter -->
-      <rect width="800" height="600" fill="#ede9e4" rx="8" filter="url(#parchment)"/>
 
       <!-- River Avon -->
       <path d="M 800,385 C 680,380 580,368 500,360
