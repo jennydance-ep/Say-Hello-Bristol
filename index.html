@@ -669,6 +669,36 @@
     </div>
   </div>
 
+  <!-- Onboarding popup — must appear before the <script> block so getElementById finds it -->
+  <div id="onboarding-overlay" style="display:none">
+    <div id="onboarding-card">
+      <img src="icon.svg" id="ob-icon" alt="Say Hello Bristol">
+      <h2>Welcome to Say Hello Bristol!</h2>
+      <p class="ob-intro">
+        Tap a pin to hear how Bristol locals pronounce that place name.<br>
+        Listen, then record yourself and compare.
+      </p>
+      <div class="ob-legend">
+        <div class="ob-legend-item">
+          <span class="ob-dot" style="background:#E07850"></span>Districts
+        </div>
+        <div class="ob-legend-item">
+          <span class="ob-dot" style="background:#2E8B8B"></span>Destinations
+        </div>
+        <div class="ob-legend-item">
+          <span class="ob-dot" style="background:#D4922A"></span>Streets
+        </div>
+        <div class="ob-legend-item">
+          <span class="ob-dot" style="background:#3A7BC8"></span>Geography
+        </div>
+        <div class="ob-legend-item">
+          <span class="ob-dot" style="background:#7952A3"></span>Nearby Places
+        </div>
+      </div>
+      <button id="btn-lets-go">Let's go!</button>
+    </div>
+  </div>
+
   <script src="bristol-data.js"></script>
   <script>
     const places = PLACES;
@@ -963,34 +993,6 @@
     });
   </script>
 
-  <!-- Onboarding popup -->
-  <div id="onboarding-overlay" style="display:none">
-    <div id="onboarding-card">
-      <img src="icon.svg" id="ob-icon" alt="Say Hello Bristol">
-      <h2>Welcome to Say Hello Bristol!</h2>
-      <p class="ob-intro">
-        Tap a pin to hear how Bristol locals pronounce that place name.<br>
-        Listen, then record yourself and compare.
-      </p>
-      <div class="ob-legend">
-        <div class="ob-legend-item">
-          <span class="ob-dot" style="background:#E07850"></span>Districts
-        </div>
-        <div class="ob-legend-item">
-          <span class="ob-dot" style="background:#2E8B8B"></span>Destinations
-        </div>
-        <div class="ob-legend-item">
-          <span class="ob-dot" style="background:#D4922A"></span>Streets
-        </div>
-        <div class="ob-legend-item">
-          <span class="ob-dot" style="background:#3A7BC8"></span>Geography
-        </div>
-        <div class="ob-legend-item">
-          <span class="ob-dot" style="background:#7952A3"></span>Nearby Places
-        </div>
-      </div>
-      <button id="btn-lets-go">Let's go!</button>
-    </div>
-  </div>
+
 </body>
 </html>
