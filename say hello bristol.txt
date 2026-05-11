@@ -1,1 +1,27 @@
-Say Hello Bristol is a web-based interactive pronunciation app built around a static map of Bristol, aimed at two distinct markets with very different relationships to the product. For tourists and business visitors, it's a compelling nice-to-have — a way to get more out of a visit, navigate with confidence, and engage more naturally with locals. For workers relocating to Bristol — international medical staff at Southmead Hospital, engineers and professionals at EDF, and others moving to the city for work — it's a genuine necessity: a practical tool that reduces anxiety, prevents miscommunication, and supports professional integration from day one. This distinction matters for pricing and pitch: the tourist-facing product is a one-time impulse purchase at the £2.99–£4.99 range, while the workforce market is a B2B conversation with HR and relocation teams for whom the value proposition is measurable and the budget category is entirely different. Each card on the map shows the place name, IPA transcription, a plain-English teaching note with respelled pronunciation, and audio recorded by Jenny Dance; users can record themselves and compare to the model. The app will have a free tier of around 8 words and a one-time paid unlock for the full list of ~55 entries, hosted at sayhellobristol.co.uk with an about page linking back to Jenny's coaching site. The IPA transcriptions and audio for Bristol place names represent a genuinely original dataset not available through mainstream dictionary resources. For corporate clients, the app will be bundled with the existing Pronunciation Power online course. The build will use Claude Code, following the same architecture as the existing Phoneme Focus app, with Stripe added for the payment layer.
+Say Hello Bristol is a web-based interactive pronunciation app built around a static map of Bristol, aimed at two distinct markets with very different relationships to the product. 
+
+For tourists, international students and business visitors, it's a compelling nice-to-have — a way to get more out of time in Bristol, navigate with confidence, and engage more naturally with locals. 
+
+For workers relocating to Bristol — international medical staff at Southmead Hospital, engineers and professionals at EDF, and others moving to the city for work — it's a genuine necessity: a practical tool that reduces anxiety, prevents miscommunication, and supports professional integration from day one. 
+
+This distinction matters for pricing and pitch: the tourist-facing product is a one-time impulse purchase at the £2.99–£4.99 range, while the workforce market is a B2B conversation with HR and relocation teams for whom the value proposition is measurable and the budget category is entirely different. For corporate/organisational clients, the app would ideally be bundled with the existing Pronunciation Power online course.
+
+The IPA transcriptions and audio for Bristol place names represent a genuinely original dataset not available through mainstream dictionary resources.
+
+There is scope to create even more localised maps - e.g. of Southmead Hospital, or the UWE Filton campus. This concept is also replicable across other cities in the UK, other hospitals, other university campuses etc.
+
+
+
+How Say Hello Bristol works:
+Each card on the map shows a place name, IPA transcription, a plain-English teaching note with respelled pronunciation, and audio recorded by Jenny Dance; users can record themselves and compare to the model. 
+
+The app will have a free tier of around 9 words and a one-time paid unlock for the full list of ~55 entries, hosted at sayhellobristol.co.uk with an about page linking back to Jenny's coaching site.  
+
+Tap a coloured pin to open a pronunciation card. The cards that have content in this version are: Clifton, Gloucester Road, Cabot Circus, The Harbourside, Ashton Court, Ashton Gate, The Downs and The River Avon. Try the Listen button first, then Record yourself and compare. 
+
+I'd love to know: 
+Is it clear how to use this app? 
+Does anything feel confusing or missing? 
+Does the map feel like Bristol to you?
+Does it work well on your device (please let me know what device you're using)?
+Any other feedback...?

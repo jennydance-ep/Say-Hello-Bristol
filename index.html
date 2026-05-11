@@ -376,10 +376,9 @@
         padding: 0 12px;
       }
 
-      /* CSS font-size overrides SVG presentation attribute —
-         17 px renders at a readable size at mobile scale */
+      /* CSS font-size overrides SVG presentation attribute */
       .pin text {
-        font-size: 17px;
+        font-size: 14px;
       }
 
       /* Larger circle radius (SVG 2 geometry property) for a more
@@ -445,11 +444,6 @@
                C 140,344 70,348 0,350"
             fill="none" stroke="#7EC8E3" stroke-width="8"
             stroke-linecap="round" opacity="0.9"/>
-
-      <!-- River label -->
-      <text id="river-avon-label"
-            x="88" y="338" font-size="11" fill="#5a9cbb"
-            font-family="Georgia, serif" font-style="italic">River Avon</text>
 
       <!-- Clifton -->
       <g class="pin" data-place="Clifton">
@@ -653,23 +647,23 @@
   <div id="legend">
     <div class="legend-item">
       <span class="legend-dot" style="background:#E07850"></span>
-      <span class="legend-label">Districts &amp; Neighbourhoods</span>
+      <span class="legend-label">Districts</span>
     </div>
     <div class="legend-item">
       <span class="legend-dot" style="background:#2E8B8B"></span>
-      <span class="legend-label">Landmarks &amp; Destinations</span>
+      <span class="legend-label">Destinations</span>
     </div>
     <div class="legend-item">
       <span class="legend-dot" style="background:#D4922A"></span>
-      <span class="legend-label">Streets &amp; Roads</span>
+      <span class="legend-label">Streets</span>
     </div>
     <div class="legend-item">
       <span class="legend-dot" style="background:#3A7BC8"></span>
-      <span class="legend-label">River &amp; Geography</span>
+      <span class="legend-label">Geography</span>
     </div>
     <div class="legend-item">
       <span class="legend-dot" style="background:#7952A3"></span>
-      <span class="legend-label">Transport &amp; Surrounding Towns</span>
+      <span class="legend-label">Nearby Places</span>
     </div>
   </div>
 
@@ -788,6 +782,13 @@
     }
 
     // ── Pin interaction ─────────────────────────────────────────────────────
+
+    // Grey out pins with no completed entry (missing audio, IPA, or teaching note)
+    document.querySelectorAll('.pin').forEach(pin => {
+      const entry = places.find(p => p.name === pin.dataset.place);
+      const complete = entry && entry.audio && entry.ipa && entry.teachingNote;
+      if (!complete) pin.style.opacity = '0.4';
+    });
 
     document.querySelectorAll('.pin').forEach(pin => {
       pin.addEventListener('click', () => {
@@ -922,14 +923,12 @@
 
     function applyMobileLayout() {
       const isMobile   = window.innerWidth <= 768;
-      const mapSvg     = document.querySelector('#map-container svg');
-      const riverPath  = document.getElementById('river-avon-path');
-      const riverLabel = document.getElementById('river-avon-label');
+      const mapSvg    = document.querySelector('#map-container svg');
+      const riverPath = document.getElementById('river-avon-path');
 
       if (isMobile) {
         mapSvg.setAttribute('viewBox', '0 0 800 960');
         riverPath.setAttribute('transform', 'translate(0,115)');
-        riverLabel.setAttribute('transform', 'translate(0,115)');
         document.querySelectorAll('.pin').forEach(pin => {
           const delta = MOBILE_PIN_DELTAS[pin.dataset.place];
           if (delta !== undefined) pin.setAttribute('transform', `translate(0,${delta})`);
@@ -937,7 +936,6 @@
       } else {
         mapSvg.setAttribute('viewBox', '0 0 800 600');
         riverPath.removeAttribute('transform');
-        riverLabel.removeAttribute('transform');
         document.querySelectorAll('.pin').forEach(pin => pin.removeAttribute('transform'));
       }
     }
@@ -974,19 +972,19 @@
       </p>
       <div class="ob-legend">
         <div class="ob-legend-item">
-          <span class="ob-dot" style="background:#E07850"></span>Districts &amp; Neighbourhoods
+          <span class="ob-dot" style="background:#E07850"></span>Districts
         </div>
         <div class="ob-legend-item">
-          <span class="ob-dot" style="background:#2E8B8B"></span>Landmarks &amp; Destinations
+          <span class="ob-dot" style="background:#2E8B8B"></span>Destinations
         </div>
         <div class="ob-legend-item">
-          <span class="ob-dot" style="background:#D4922A"></span>Streets &amp; Roads
+          <span class="ob-dot" style="background:#D4922A"></span>Streets
         </div>
         <div class="ob-legend-item">
-          <span class="ob-dot" style="background:#3A7BC8"></span>River &amp; Geography
+          <span class="ob-dot" style="background:#3A7BC8"></span>Geography
         </div>
         <div class="ob-legend-item">
-          <span class="ob-dot" style="background:#7952A3"></span>Transport &amp; Surrounding Towns
+          <span class="ob-dot" style="background:#7952A3"></span>Nearby Places
         </div>
       </div>
       <div class="ob-footer">
