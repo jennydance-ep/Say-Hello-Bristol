@@ -269,7 +269,7 @@
     #onboarding-overlay {
       position: fixed;
       inset: 0;
-      background: rgba(0, 0, 0, 0.48);
+      background: rgba(60, 40, 20, 0.55);
       z-index: 200;
       display: flex;
       align-items: center;
@@ -278,57 +278,59 @@
     }
 
     #onboarding-card {
-      background: #fff;
-      border-radius: 16px;
-      padding: 32px 28px 26px;
-      max-width: 380px;
+      background: #faf7f2;
+      border: 1px solid #e0d8cc;
+      border-radius: 18px;
+      padding: 28px 28px 26px;
+      max-width: 360px;
       width: 100%;
-      box-shadow: 0 8px 40px rgba(0, 0, 0, 0.22);
+      box-shadow: 0 10px 48px rgba(60, 40, 10, 0.28);
+      text-align: center;
+    }
+
+    #ob-icon {
+      width: 72px;
+      margin: 0 auto 16px;
+      display: block;
     }
 
     #onboarding-card h2 {
-      font-size: 1.35rem;
+      font-size: 1.3rem;
       font-weight: normal;
-      color: #222;
-      margin-bottom: 14px;
+      color: #2a1f14;
+      margin-bottom: 12px;
+      line-height: 1.3;
     }
 
     .ob-intro {
       font-size: 0.88rem;
-      color: #555;
-      line-height: 1.65;
+      color: #5a4a38;
+      line-height: 1.7;
       margin-bottom: 20px;
     }
 
     .ob-legend {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px 12px;
       margin-bottom: 24px;
+      text-align: left;
     }
 
     .ob-legend-item {
       display: flex;
       align-items: center;
-      gap: 10px;
-      font-family: sans-serif;
-      font-size: 0.8rem;
-      color: #555;
+      gap: 8px;
+      font-family: Georgia, serif;
+      font-size: 0.82rem;
+      color: #5a4a38;
     }
 
     .ob-dot {
-      width: 12px;
-      height: 12px;
+      width: 11px;
+      height: 11px;
       border-radius: 50%;
       flex-shrink: 0;
-    }
-
-    .ob-footer {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 12px;
     }
 
     #btn-lets-go {
@@ -336,25 +338,15 @@
       color: #fff;
       border: none;
       border-radius: 24px;
-      padding: 10px 30px;
-      font-size: 0.95rem;
+      padding: 11px 0;
+      width: 100%;
+      font-size: 1rem;
       font-family: Georgia, serif;
       cursor: pointer;
       transition: background 0.15s;
+      letter-spacing: 0.02em;
     }
     #btn-lets-go:hover { background: #c85e32; }
-
-    .ob-suppress {
-      display: flex;
-      align-items: center;
-      gap: 7px;
-      font-family: sans-serif;
-      font-size: 0.76rem;
-      color: #aaa;
-      cursor: pointer;
-      user-select: none;
-    }
-    .ob-suppress input { cursor: pointer; }
 
     /* ── Mobile layout ──────────────────────────────────────────────────── */
     @media (max-width: 768px) {
@@ -959,15 +951,14 @@
       .catch(() => {});
 
     // ── Onboarding popup ────────────────────────────────────────────────────
-    const obOverlay  = document.getElementById('onboarding-overlay');
-    const obSuppress = document.getElementById('chk-suppress');
+    const obOverlay = document.getElementById('onboarding-overlay');
 
     if (!localStorage.getItem('shb_onboarding_seen')) {
       obOverlay.style.display = 'flex';
     }
 
     document.getElementById('btn-lets-go').addEventListener('click', () => {
-      if (obSuppress.checked) localStorage.setItem('shb_onboarding_seen', '1');
+      localStorage.setItem('shb_onboarding_seen', '1');
       obOverlay.style.display = 'none';
     });
   </script>
@@ -975,10 +966,11 @@
   <!-- Onboarding popup -->
   <div id="onboarding-overlay" style="display:none">
     <div id="onboarding-card">
+      <img src="icon.svg" id="ob-icon" alt="Say Hello Bristol">
       <h2>Welcome to Say Hello Bristol!</h2>
       <p class="ob-intro">
-        Tap any pin on the map to hear how Bristol locals say that place name.<br>
-        Listen to the model pronunciation, record yourself, and compare — as many times as you like.
+        Tap a pin to hear how Bristol locals pronounce that place name.<br>
+        Listen, then record yourself and compare.
       </p>
       <div class="ob-legend">
         <div class="ob-legend-item">
@@ -997,12 +989,7 @@
           <span class="ob-dot" style="background:#7952A3"></span>Nearby Places
         </div>
       </div>
-      <div class="ob-footer">
-        <button id="btn-lets-go">Let's go!</button>
-        <label class="ob-suppress">
-          <input type="checkbox" id="chk-suppress"> Don't show this again
-        </label>
-      </div>
+      <button id="btn-lets-go">Let's go!</button>
     </div>
   </div>
 </body>
