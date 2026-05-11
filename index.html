@@ -255,8 +255,8 @@
     }
 
     .legend-label {
-      font-family: sans-serif;
-      font-size: 0.78rem;
+      font-family: Georgia, serif;
+      font-size: 13.5px;
       color: #666;
       letter-spacing: 0.01em;
     }
@@ -376,9 +376,15 @@
         padding: 0 12px;
       }
 
-      /* CSS font-size overrides SVG presentation attribute */
+      /* Preserve mobile legend at current size/family (desktop changed to Georgia 13.5px) */
+      .legend-label {
+        font-size: 0.78rem;
+        font-family: sans-serif;
+      }
+
+      /* !important ensures this overrides the SVG font-size presentation attribute */
       .pin text {
-        font-size: 16px;
+        font-size: 16px !important;
       }
 
       /* Larger circle radius (SVG 2 geometry property) for a more
