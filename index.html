@@ -976,6 +976,7 @@
         const renderedWidth = mapSvg.getBoundingClientRect().width || window.innerWidth;
         const scale = renderedWidth / 800;
         const mobileFontSize = (16 / scale).toFixed(1);
+        console.log('[SHB] scale:', scale.toFixed(4), '| mobileFontSize:', mobileFontSize, 'SVG user units | renderedWidth:', renderedWidth);
         document.querySelectorAll('.pin text').forEach(t => {
           t.setAttribute('font-size', mobileFontSize);
           t.style.fontSize = mobileFontSize + 'px';
@@ -994,7 +995,8 @@
       }
     }
 
-    applyMobileLayout();
+    requestAnimationFrame(applyMobileLayout);
+    setTimeout(applyMobileLayout, 300);
     window.addEventListener('resize', applyMobileLayout);
 
     // Warm up mic permission once on page load so the browser prompt never interrupts recording
