@@ -965,10 +965,21 @@
           const delta = MOBILE_PIN_DELTAS[pin.dataset.place];
           if (delta !== undefined) pin.setAttribute('transform', `translate(0,${delta})`);
         });
+        document.querySelectorAll('.pin text').forEach(t => {
+          t.setAttribute('font-size', '16');
+          t.style.fontSize = '16px';
+          t.setAttribute('font-family', 'Georgia, serif');
+          t.style.fontFamily = 'Georgia, serif';
+        });
       } else {
         mapSvg.setAttribute('viewBox', '0 0 800 600');
         riverPath.removeAttribute('transform');
         document.querySelectorAll('.pin').forEach(pin => pin.removeAttribute('transform'));
+        document.querySelectorAll('.pin text').forEach(t => {
+          t.setAttribute('font-size', '13.5');
+          t.style.fontSize = '';
+          t.style.fontFamily = '';
+        });
       }
     }
 
