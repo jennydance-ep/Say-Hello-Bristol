@@ -368,6 +368,11 @@
         aspect-ratio: 5 / 6;
       }
 
+      #map-container svg {
+        display: block;
+        width: 100%;
+      }
+
       #legend {
         padding: 0 12px;
       }
@@ -965,9 +970,15 @@
           const delta = MOBILE_PIN_DELTAS[pin.dataset.place];
           if (delta !== undefined) pin.setAttribute('transform', `translate(0,${delta})`);
         });
+        // Compute user-unit font size that produces 16 visual px after viewBox scaling.
+        // getBoundingClientRect().width is the actual rendered CSS px width of the SVG;
+        // dividing the 800-unit viewBox width by that gives the scale factor.
+        const renderedWidth = mapSvg.getBoundingClientRect().width || window.innerWidth;
+        const scale = renderedWidth / 800;
+        const mobileFontSize = (16 / scale).toFixed(1);
         document.querySelectorAll('.pin text').forEach(t => {
-          t.setAttribute('font-size', '16');
-          t.style.fontSize = '16px';
+          t.setAttribute('font-size', mobileFontSize);
+          t.style.fontSize = mobileFontSize + 'px';
           t.setAttribute('font-family', 'Georgia, serif');
           t.style.fontFamily = 'Georgia, serif';
         });
@@ -985,23 +996,6 @@
 
     applyMobileLayout();
     window.addEventListener('resize', applyMobileLayout);
-
-    // ── Temporary debug overlay (mobile only) ───────────────────────────────
-    if (window.innerWidth <= 768) {
-      const firstPinText = document.querySelector('.pin text');
-      const computed = firstPinText ? window.getComputedStyle(firstPinText).fontSize : 'no element';
-      const attrVal  = firstPinText ? firstPinText.getAttribute('font-size') : 'n/a';
-      const inlineVal = firstPinText ? firstPinText.style.fontSize : 'n/a';
-      const dbg = document.createElement('div');
-      dbg.id = 'debug-overlay';
-      dbg.style.cssText = [
-        'position:fixed', 'top:8px', 'right:8px', 'z-index:9999',
-        'background:rgba(0,0,0,0.75)', 'color:#fff', 'font:12px/1.5 monospace',
-        'padding:6px 10px', 'border-radius:6px', 'pointer-events:none'
-      ].join(';');
-      dbg.textContent = `computed: ${computed} | attr: ${attrVal} | inline: ${inlineVal}`;
-      document.body.appendChild(dbg);
-    }
 
     // Warm up mic permission once on page load so the browser prompt never interrupts recording
     navigator.mediaDevices?.getUserMedia({ audio: true })
