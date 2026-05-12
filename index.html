@@ -976,18 +976,22 @@
         const renderedWidth = mapSvg.getBoundingClientRect().width || window.innerWidth;
         const scale = renderedWidth / 800;
         const mobileFontSize = (16 / scale).toFixed(1);
-        console.log('[SHB] scale:', scale.toFixed(4), '| mobileFontSize:', mobileFontSize, 'SVG user units | renderedWidth:', renderedWidth);
-        const dbg = document.getElementById('debug-overlay') || document.createElement('div');
-        dbg.id = 'debug-overlay';
-        dbg.style.cssText = 'position:fixed;top:8px;right:8px;z-index:9999;background:rgba(0,0,0,0.75);color:#fff;font:12px/1.6 monospace;padding:6px 10px;border-radius:6px;pointer-events:none';
-        dbg.innerHTML = `renderedWidth: ${renderedWidth}px<br>scale: ${scale.toFixed(4)}<br>mobileFontSize: ${mobileFontSize} SVG units`;
-        document.body.appendChild(dbg);
-        document.querySelectorAll('.pin text').forEach(t => {
+        const pinTexts = document.querySelectorAll('.pin text');
+        console.log('[SHB] scale:', scale.toFixed(4), '| mobileFontSize:', mobileFontSize, '| renderedWidth:', renderedWidth, '| pinTexts found:', pinTexts.length);
+        pinTexts.forEach((t, i) => {
+          const place = t.closest('[data-place]')?.dataset.place || '?';
+          console.log(`[SHB]  [${i}] "${t.textContent.trim()}" (pin: ${place}) attr before: ${t.getAttribute('font-size')}`);
           t.setAttribute('font-size', mobileFontSize);
           t.style.fontSize = mobileFontSize + 'px';
           t.setAttribute('font-family', 'Georgia, serif');
           t.style.fontFamily = 'Georgia, serif';
+          console.log(`[SHB]  [${i}] attr after: ${t.getAttribute('font-size')} | inline: ${t.style.fontSize}`);
         });
+        const dbg = document.getElementById('debug-overlay') || document.createElement('div');
+        dbg.id = 'debug-overlay';
+        dbg.style.cssText = 'position:fixed;top:8px;right:8px;z-index:9999;background:rgba(0,0,0,0.75);color:#fff;font:12px/1.6 monospace;padding:6px 10px;border-radius:6px;pointer-events:none';
+        dbg.innerHTML = `renderedWidth: ${renderedWidth}px<br>scale: ${scale.toFixed(4)}<br>mobileFontSize: ${mobileFontSize} SVG units<br>pinTexts found: ${pinTexts.length}`;
+        document.body.appendChild(dbg);
       } else {
         mapSvg.setAttribute('viewBox', '0 0 800 600');
         riverPath.removeAttribute('transform');
