@@ -986,6 +986,23 @@
     applyMobileLayout();
     window.addEventListener('resize', applyMobileLayout);
 
+    // ── Temporary debug overlay (mobile only) ───────────────────────────────
+    if (window.innerWidth <= 768) {
+      const firstPinText = document.querySelector('.pin text');
+      const computed = firstPinText ? window.getComputedStyle(firstPinText).fontSize : 'no element';
+      const attrVal  = firstPinText ? firstPinText.getAttribute('font-size') : 'n/a';
+      const inlineVal = firstPinText ? firstPinText.style.fontSize : 'n/a';
+      const dbg = document.createElement('div');
+      dbg.id = 'debug-overlay';
+      dbg.style.cssText = [
+        'position:fixed', 'top:8px', 'right:8px', 'z-index:9999',
+        'background:rgba(0,0,0,0.75)', 'color:#fff', 'font:12px/1.5 monospace',
+        'padding:6px 10px', 'border-radius:6px', 'pointer-events:none'
+      ].join(';');
+      dbg.textContent = `computed: ${computed} | attr: ${attrVal} | inline: ${inlineVal}`;
+      document.body.appendChild(dbg);
+    }
+
     // Warm up mic permission once on page load so the browser prompt never interrupts recording
     navigator.mediaDevices?.getUserMedia({ audio: true })
       .then(stream => stream.getTracks().forEach(t => t.stop()))
