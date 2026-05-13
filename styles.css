@@ -53,6 +53,9 @@
       width: 88px;
       pointer-events: none;
       z-index: 5;
+      background: transparent;
+      border: none;
+      box-shadow: none;
     }
 
     /* Pin styles */
