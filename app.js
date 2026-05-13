@@ -15,13 +15,14 @@ const btnStopRec    = document.getElementById('btn-stop-rec');
 const btnPlayback   = document.getElementById('btn-playback');
 const btnRerecord   = document.getElementById('btn-rerecord');
 
-let activeMarker = null;
-let modelAudio   = null;
-let recorder     = null;
-let recChunks    = [];
-let recUrl       = null;
-let recAudio     = null;
-let recStream    = null;
+let activeMarker     = null;
+let suppressMapClick = false;   // prevents map click from closing a card we just opened
+let modelAudio       = null;
+let recorder         = null;
+let recChunks        = [];
+let recUrl           = null;
+let recAudio         = null;
+let recStream        = null;
 
 // ── Audio helpers ────────────────────────────────────────────────────────────
 
@@ -138,7 +139,12 @@ function closeCard() {
   }
 }
 
-leafletMap.on('click', closeCard);
+// When clicking the map background, close the card — but skip if a marker
+// click just fired (they share the same synchronous event dispatch).
+leafletMap.on('click', () => {
+  if (suppressMapClick) return;
+  closeCard();
+});
 
 fetch('bristol-pins.json')
   .then(r => r.json())
@@ -160,8 +166,22 @@ fetch('bristol-pins.json')
 
       marker._shbComplete = complete;
 
+      // Permanent place-name label to the right of each marker
+      marker.bindTooltip(pinData.name, {
+        permanent:   true,
+        direction:   'right',
+        offset:      [radius + 2, 0],
+        className:   'place-label' + (complete ? '' : ' place-label--dim'),
+        interactive: false,
+      });
+
       marker.on('click', e => {
-        e.originalEvent.stopPropagation();
+        console.log('marker clicked', pinData.name);
+
+        // Suppress the map's click handler for this event cycle so it does
+        // not immediately close the card we are about to open.
+        suppressMapClick = true;
+        setTimeout(() => { suppressMapClick = false; }, 0);
 
         if (activeMarker && activeMarker !== marker) {
           activeMarker.setStyle({

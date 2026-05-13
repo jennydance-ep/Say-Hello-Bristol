@@ -12,6 +12,22 @@
        map-icon (z-index:5) which are siblings in #map-container. -->
   <style>
     #map { position: absolute; inset: 0; z-index: 0; }
+
+    /* Permanent place-name labels — strip Leaflet's default tooltip chrome
+       and match the Georgia serif used across the rest of the page. */
+    .leaflet-tooltip.place-label {
+      background: transparent;
+      border: none;
+      box-shadow: none;
+      font-family: Georgia, serif;
+      font-size: 13.5px;
+      color: #333;
+      white-space: nowrap;
+      padding: 0 0 0 4px;
+      pointer-events: none;
+    }
+    .leaflet-tooltip.place-label::before { display: none; }
+    .leaflet-tooltip.place-label--dim    { opacity: 0.45; }
   </style>
 </head>
 <body>
