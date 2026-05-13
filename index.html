@@ -13,21 +13,32 @@
   <style>
     #map { position: absolute; inset: 0; z-index: 0; }
 
-    /* Permanent place-name labels — strip Leaflet's default tooltip chrome
-       and match the Georgia serif used across the rest of the page. */
-    .leaflet-tooltip.place-label {
+    /* Strip Leaflet's default divIcon white box. */
+    .pin-icon {
       background: transparent;
       border: none;
-      box-shadow: none;
-      font-family: Georgia, serif;
-      font-size: 13.5px;
-      color: #333;
-      white-space: nowrap;
-      padding: 0 0 0 4px;
-      pointer-events: none;
+      overflow: visible;
     }
-    .leaflet-tooltip.place-label::before { display: none; }
-    .leaflet-tooltip.place-label--dim    { opacity: 0.45; }
+
+    /* Pill/lozenge marker — centred on its lat/lng anchor point. */
+    .pin-lozenge {
+      position: absolute;
+      transform: translate(-50%, -50%);
+      white-space: nowrap;
+      padding: 4px 10px;
+      border-radius: 12px;
+      font-family: Georgia, serif;
+      font-size: 13px;
+      color: #fff;
+      cursor: pointer;
+      user-select: none;
+      line-height: 1.4;
+    }
+
+    /* Active state: white outline so the selected pin is obvious. */
+    .pin-icon--active .pin-lozenge {
+      box-shadow: 0 0 0 2.5px #fff, 0 0 0 4px rgba(0,0,0,0.25);
+    }
   </style>
 </head>
 <body>

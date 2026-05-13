@@ -131,10 +131,7 @@ function closeCard() {
   card.classList.remove('visible');
   resetAudio();
   if (activeMarker) {
-    activeMarker.setStyle({
-      fillOpacity: activeMarker._shbComplete ? 0.9 : 0.4,
-      weight: 2.5,
-    });
+    activeMarker.getElement()?.classList.remove('pin-icon--active');
     activeMarker = null;
   }
 }
@@ -146,6 +143,13 @@ leafletMap.on('click', () => {
   closeCard();
 });
 
+function hexToRgba(hex, alpha) {
+  const r = parseInt(hex.slice(1, 3), 16);
+  const g = parseInt(hex.slice(3, 5), 16);
+  const b = parseInt(hex.slice(5, 7), 16);
+  return `rgba(${r},${g},${b},${alpha})`;
+}
+
 fetch('bristol-pins.json')
   .then(r => r.json())
   .then(pins => {
@@ -153,30 +157,18 @@ fetch('bristol-pins.json')
       const entry    = places.find(p => p.name === pinData.name);
       const complete = !!(entry && entry.audio && entry.ipa && entry.teachingNote);
       const color    = CATEGORY_COLORS[pinData.category] || '#888';
-      const radius   = pinData.outsideCity ? 9 : 12;
+      const bg       = hexToRgba(color, complete ? 0.85 : 0.4);
 
-      const marker = L.circleMarker([pinData.lat, pinData.lng], {
-        radius,
-        fillColor:   color,
-        color:       '#fff',
-        weight:      2.5,
-        opacity:     1,
-        fillOpacity: complete ? 0.9 : 0.4,
-      }).addTo(leafletMap);
-
-      marker._shbComplete = complete;
-
-      // Permanent place-name label to the right of each marker
-      marker.bindTooltip(pinData.name, {
-        permanent:   true,
-        direction:   'right',
-        offset:      [radius + 2, 0],
-        className:   'place-label' + (complete ? '' : ' place-label--dim'),
-        interactive: false,
+      const icon = L.divIcon({
+        html:       `<div class="pin-lozenge" style="background-color:${bg};">${pinData.name}</div>`,
+        className:  'pin-icon',
+        iconSize:   [0, 0],
+        iconAnchor: [0, 0],
       });
 
-      // Shared click handler — used by both the visible marker and the
-      // invisible hit target below.
+      const marker = L.marker([pinData.lat, pinData.lng], { icon })
+        .addTo(leafletMap);
+
       function onPinClick() {
         console.log('marker clicked', pinData.name);
 
@@ -186,13 +178,10 @@ fetch('bristol-pins.json')
         setTimeout(() => { suppressMapClick = false; }, 0);
 
         if (activeMarker && activeMarker !== marker) {
-          activeMarker.setStyle({
-            fillOpacity: activeMarker._shbComplete ? 0.9 : 0.4,
-            weight: 2.5,
-          });
+          activeMarker.getElement()?.classList.remove('pin-icon--active');
         }
         activeMarker = marker;
-        marker.setStyle({ fillOpacity: complete ? 0.72 : 0.28, weight: 3.5 });
+        marker.getElement()?.classList.add('pin-icon--active');
 
         populateCard(entry, pinData.name);
 
@@ -205,16 +194,6 @@ fetch('bristol-pins.json')
       }
 
       marker.on('click', onPinClick);
-
-      // Invisible hit target — radius 20 transparent circle on top of each
-      // pin so the tap area is large enough on touchscreens.
-      L.circleMarker([pinData.lat, pinData.lng], {
-        radius:      20,
-        fillOpacity: 0,
-        opacity:     0,
-        weight:      0,
-        interactive: true,
-      }).addTo(leafletMap).on('click', onPinClick);
     });
   });
 
