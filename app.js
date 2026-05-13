@@ -132,7 +132,7 @@ function closeCard() {
   resetAudio();
   if (activeMarker) {
     activeMarker.setStyle({
-      fillOpacity: activeMarker._shbComplete ? 1 : 0.4,
+      fillOpacity: activeMarker._shbComplete ? 0.9 : 0.4,
       weight: 2.5,
     });
     activeMarker = null;
@@ -153,7 +153,7 @@ fetch('bristol-pins.json')
       const entry    = places.find(p => p.name === pinData.name);
       const complete = !!(entry && entry.audio && entry.ipa && entry.teachingNote);
       const color    = CATEGORY_COLORS[pinData.category] || '#888';
-      const radius   = pinData.outsideCity ? 7 : 10;
+      const radius   = pinData.outsideCity ? 9 : 12;
 
       const marker = L.circleMarker([pinData.lat, pinData.lng], {
         radius,
@@ -161,7 +161,7 @@ fetch('bristol-pins.json')
         color:       '#fff',
         weight:      2.5,
         opacity:     1,
-        fillOpacity: complete ? 1 : 0.4,
+        fillOpacity: complete ? 0.9 : 0.4,
       }).addTo(leafletMap);
 
       marker._shbComplete = complete;
@@ -175,7 +175,9 @@ fetch('bristol-pins.json')
         interactive: false,
       });
 
-      marker.on('click', e => {
+      // Shared click handler — used by both the visible marker and the
+      // invisible hit target below.
+      function onPinClick() {
         console.log('marker clicked', pinData.name);
 
         // Suppress the map's click handler for this event cycle so it does
@@ -185,7 +187,7 @@ fetch('bristol-pins.json')
 
         if (activeMarker && activeMarker !== marker) {
           activeMarker.setStyle({
-            fillOpacity: activeMarker._shbComplete ? 1 : 0.4,
+            fillOpacity: activeMarker._shbComplete ? 0.9 : 0.4,
             weight: 2.5,
           });
         }
@@ -200,7 +202,19 @@ fetch('bristol-pins.json')
         card.classList.add('visible');
         card.style.display    = '';
         card.style.visibility = '';
-      });
+      }
+
+      marker.on('click', onPinClick);
+
+      // Invisible hit target — radius 20 transparent circle on top of each
+      // pin so the tap area is large enough on touchscreens.
+      L.circleMarker([pinData.lat, pinData.lng], {
+        radius:      20,
+        fillOpacity: 0,
+        opacity:     0,
+        weight:      0,
+        interactive: true,
+      }).addTo(leafletMap).on('click', onPinClick);
     });
   });
 
