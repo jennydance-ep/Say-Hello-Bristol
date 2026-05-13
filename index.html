@@ -5,29 +5,27 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Say Hello Bristol</title>
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
   <link rel="stylesheet" href="styles.css">
+  <!-- #map fills its container and creates a stacking context so Leaflet's
+       internal z-indices (200–800) stay below the card (z-index:10) and
+       map-icon (z-index:5) which are siblings in #map-container. -->
+  <style>
+    #map { position: absolute; inset: 0; z-index: 0; }
+  </style>
 </head>
 <body>
   <h1>Say Hello Bristol</h1>
 
   <!--
-    Standalone SVG containing filter definitions.  Placing the filter here
-    (outside the map SVG) allows CSS to reference url(#parchment) from the
-    #map-container::before pseudo-element, so the texture covers the full
-    container — including the top/bottom strips on mobile.
+    Standalone SVG containing the parchment filter definition.
+    CSS references url(#parchment) from #map-container::before so the
+    texture covers the container while map tiles are loading.
   -->
   <svg aria-hidden="true" focusable="false"
        style="position:absolute;width:0;height:0;overflow:hidden">
     <defs>
-      <!--
-        Parchment texture: coarse fractalNoise for large aging blotches +
-        fine grain for paper texture.  feComponentTransfer widens the R–B
-        intercept gap so multiply-blending produces warm amber staining
-        rather than grey.  Lightest spots remain original cream; darkest
-        drop ~30% to aged amber.
-      -->
       <filter id="parchment" x="0%" y="0%" width="100%" height="100%" color-interpolation-filters="sRGB">
-        <!-- Coarse aging blotches -->
         <feTurbulence type="fractalNoise" baseFrequency="0.022 0.018" numOctaves="4" seed="3" result="coarse"/>
         <feColorMatrix in="coarse" type="saturate" values="0" result="grayCoarse"/>
         <feComponentTransfer in="grayCoarse" result="warmCoarse">
@@ -35,7 +33,6 @@
           <feFuncG type="linear" slope="0.20" intercept="0.80"/>
           <feFuncB type="linear" slope="0.32" intercept="0.68"/>
         </feComponentTransfer>
-        <!-- Fine paper grain -->
         <feTurbulence type="fractalNoise" baseFrequency="0.55" numOctaves="2" seed="9" result="fine"/>
         <feColorMatrix in="fine" type="saturate" values="0" result="grayFine"/>
         <feComponentTransfer in="grayFine" result="subtleFine">
@@ -43,7 +40,6 @@
           <feFuncG type="linear" slope="0.04" intercept="0.96"/>
           <feFuncB type="linear" slope="0.04" intercept="0.96"/>
         </feComponentTransfer>
-        <!-- Coarse warm aging first, then fine neutral grain -->
         <feBlend in="SourceGraphic" in2="warmCoarse" mode="multiply" result="aged"/>
         <feBlend in="aged"          in2="subtleFine"  mode="multiply"/>
       </filter>
@@ -52,191 +48,11 @@
 
   <div id="map-container">
 
-    <svg viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
-
-      <!-- River Avon -->
-      <path id="river-avon-path"
-            d="M 800,385 C 680,380 580,368 500,360
-               C 440,354 375,354 315,358
-               C 260,362 215,362 175,352
-               C 140,344 70,348 0,350"
-            fill="none" stroke="#7EC8E3" stroke-width="8"
-            stroke-linecap="round" opacity="0.9"/>
-
-      <!-- Clifton -->
-      <g class="pin" data-place="Clifton">
-        <circle cx="205" cy="228" r="11" fill="#E07850" stroke="#fff" stroke-width="2.5"/>
-        <text x="223" y="233" font-size="32" fill="#333" font-family="Georgia, serif">Clifton</text>
-      </g>
-
-      <!-- Hotwells -->
-      <g class="pin" data-place="Hotwells">
-        <circle cx="172" cy="308" r="11" fill="#E07850" stroke="#fff" stroke-width="2.5"/>
-        <text x="190" y="313" font-size="32" fill="#333" font-family="Georgia, serif">Hotwells</text>
-      </g>
-
-      <!-- Redland -->
-      <g class="pin" data-place="Redland">
-        <circle cx="318" cy="148" r="11" fill="#E07850" stroke="#fff" stroke-width="2.5"/>
-        <text x="336" y="153" font-size="32" fill="#333" font-family="Georgia, serif">Redland</text>
-      </g>
-
-      <!-- Cotham -->
-      <g class="pin" data-place="Cotham">
-        <circle cx="408" cy="196" r="11" fill="#E07850" stroke="#fff" stroke-width="2.5"/>
-        <text x="426" y="201" font-size="32" fill="#333" font-family="Georgia, serif">Cotham</text>
-      </g>
-
-      <!-- Stokes Croft (moved W/N to clear Cabot Circus) -->
-      <g class="pin" data-place="Stokes Croft">
-        <circle cx="415" cy="248" r="11" fill="#E07850" stroke="#fff" stroke-width="2.5"/>
-        <text x="433" y="253" font-size="32" fill="#333" font-family="Georgia, serif">Stokes Croft</text>
-      </g>
-
-      <!-- Bedminster -->
-      <g class="pin" data-place="Bedminster">
-        <circle cx="368" cy="448" r="11" fill="#E07850" stroke="#fff" stroke-width="2.5"/>
-        <text x="386" y="453" font-size="32" fill="#333" font-family="Georgia, serif">Bedminster</text>
-      </g>
-
-      <!-- Totterdown -->
-      <g class="pin" data-place="Totterdown">
-        <circle cx="493" cy="460" r="11" fill="#E07850" stroke="#fff" stroke-width="2.5"/>
-        <text x="511" y="465" font-size="32" fill="#333" font-family="Georgia, serif">Totterdown</text>
-      </g>
-
-      <!-- The Downs (NW of Clifton, open space at top of Whiteladies Rd) -->
-      <g class="pin" data-place="The Downs">
-        <circle cx="165" cy="178" r="11" fill="#E07850" stroke="#fff" stroke-width="2.5"/>
-        <text x="183" y="183" font-size="32" fill="#333" font-family="Georgia, serif">The Downs</text>
-      </g>
-
-      <!-- Gloucester Road (north Bristol, above Redland) — Streets & Roads amber -->
-      <g class="pin" data-place="Gloucester Road">
-        <circle cx="372" cy="82" r="11" fill="#D4922A" stroke="#fff" stroke-width="2.5"/>
-        <text x="390" y="87" font-size="32" fill="#333" font-family="Georgia, serif">Gloucester Road</text>
-      </g>
-
-      <!-- Cabot Circus (east city centre) — Landmarks teal -->
-      <g class="pin" data-place="Cabot Circus">
-        <circle cx="518" cy="272" r="11" fill="#2E8B8B" stroke="#fff" stroke-width="2.5"/>
-        <text x="536" y="277" font-size="32" fill="#333" font-family="Georgia, serif">Cabot Circus</text>
-      </g>
-
-      <!-- The Harbourside (directly above Bedminster) — Landmarks teal -->
-      <g class="pin" data-place="The Harbourside">
-        <circle cx="368" cy="334" r="11" fill="#2E8B8B" stroke="#fff" stroke-width="2.5"/>
-        <text x="386" y="339" font-size="32" fill="#333" font-family="Georgia, serif">The Harbourside</text>
-      </g>
-
-      <!-- Ashton Court (west, south of river / gorge) — Landmarks teal -->
-      <g class="pin" data-place="Ashton Court">
-        <circle cx="92" cy="402" r="11" fill="#2E8B8B" stroke="#fff" stroke-width="2.5"/>
-        <text x="110" y="407" font-size="32" fill="#333" font-family="Georgia, serif">Ashton Court</text>
-      </g>
-
-      <!-- Ashton Gate (SW, south of river) — Landmarks teal -->
-      <g class="pin" data-place="Ashton Gate">
-        <circle cx="262" cy="452" r="11" fill="#2E8B8B" stroke="#fff" stroke-width="2.5"/>
-        <text x="280" y="457" font-size="32" fill="#333" font-family="Georgia, serif">Ashton Gate</text>
-      </g>
-
-      <!-- The River Avon — River & Geography blue, pin sits on the river line -->
-      <g class="pin" data-place="The River Avon">
-        <circle cx="625" cy="372" r="11" fill="#3A7BC8" stroke="#fff" stroke-width="2.5"/>
-        <text x="643" y="377" font-size="32" fill="#333" font-family="Georgia, serif">The River Avon</text>
-      </g>
-
-      <!-- Bristol Parkway — Transport, NE of city above Gloucester Road -->
-      <g class="pin" data-place="Bristol Parkway">
-        <g transform="translate(520,38)">
-          <circle cx="0" cy="0" r="11" fill="none" stroke="none"/>
-          <!-- chimney (front/left) -->
-          <rect x="-9" y="-13" width="3" height="8" rx="1" fill="#7952A3" stroke="#fff" stroke-width="1.5"/>
-          <!-- boiler body -->
-          <rect x="-11" y="-8" width="16" height="8" rx="2" fill="#7952A3" stroke="#fff" stroke-width="1.5"/>
-          <!-- cab (back/right) -->
-          <rect x="5" y="-12" width="6" height="12" rx="1" fill="#7952A3" stroke="#fff" stroke-width="1.5"/>
-          <!-- cab window -->
-          <rect x="6" y="-10" width="3" height="4" rx="0.5" fill="rgba(255,255,255,0.7)"/>
-          <!-- running board -->
-          <rect x="-11" y="0" width="22" height="2" fill="#7952A3"/>
-          <!-- front wheel -->
-          <circle cx="-5" cy="6" r="3.5" fill="#7952A3" stroke="#fff" stroke-width="1.5"/>
-          <!-- rear wheel -->
-          <circle cx="7" cy="6" r="3.5" fill="#7952A3" stroke="#fff" stroke-width="1.5"/>
-        </g>
-        <text x="537" y="43" font-size="32" fill="#333" font-family="Georgia, serif">Bristol Parkway</text>
-      </g>
-
-      <!-- Bristol Temple Meads — Transport, SE of city centre near river -->
-      <g class="pin" data-place="Bristol Temple Meads">
-        <g transform="translate(548,352)">
-          <circle cx="0" cy="0" r="11" fill="none" stroke="none"/>
-          <!-- chimney (front/left) -->
-          <rect x="-9" y="-13" width="3" height="8" rx="1" fill="#7952A3" stroke="#fff" stroke-width="1.5"/>
-          <!-- boiler body -->
-          <rect x="-11" y="-8" width="16" height="8" rx="2" fill="#7952A3" stroke="#fff" stroke-width="1.5"/>
-          <!-- cab (back/right) -->
-          <rect x="5" y="-12" width="6" height="12" rx="1" fill="#7952A3" stroke="#fff" stroke-width="1.5"/>
-          <!-- cab window -->
-          <rect x="6" y="-10" width="3" height="4" rx="0.5" fill="rgba(255,255,255,0.7)"/>
-          <!-- running board -->
-          <rect x="-11" y="0" width="22" height="2" fill="#7952A3"/>
-          <!-- front wheel -->
-          <circle cx="-5" cy="6" r="3.5" fill="#7952A3" stroke="#fff" stroke-width="1.5"/>
-          <!-- rear wheel -->
-          <circle cx="7" cy="6" r="3.5" fill="#7952A3" stroke="#fff" stroke-width="1.5"/>
-        </g>
-        <text x="565" y="357" font-size="32" fill="#333" font-family="Georgia, serif">Bristol Temple Meads</text>
-      </g>
-
-      <!-- Clevedon — outsideCity, directional arrow at left edge pointing west -->
-      <g class="pin" data-place="Clevedon">
-        <polygon points="8,460 28,448 28,472" fill="#7952A3" stroke="#fff" stroke-width="2"/>
-        <circle cx="18" cy="460" r="1" fill="none" stroke="none"/>
-        <text x="33" y="465" font-size="32" fill="#333" font-family="Georgia, serif">Clevedon</text>
-        <text x="33" y="480" font-size="10.5" fill="#888" font-family="Georgia, serif" font-style="italic">outside Bristol</text>
-      </g>
-
-      <!-- Portishead — outsideCity, left edge, aligned horizontally with Clifton -->
-      <g class="pin" data-place="Portishead">
-        <polygon points="8,228 28,216 28,240" fill="#7952A3" stroke="#fff" stroke-width="2"/>
-        <circle cx="18" cy="228" r="1" fill="none" stroke="none"/>
-        <text x="33" y="233" font-size="32" fill="#333" font-family="Georgia, serif">Portishead</text>
-        <text x="33" y="248" font-size="10.5" fill="#888" font-family="Georgia, serif" font-style="italic">outside Bristol</text>
-      </g>
-
-      <!-- Bath — outsideCity, right edge pointing east -->
-      <g class="pin" data-place="Bath">
-        <polygon points="792,310 772,298 772,322" fill="#7952A3" stroke="#fff" stroke-width="2"/>
-        <circle cx="782" cy="310" r="1" fill="none" stroke="none"/>
-        <text text-anchor="end" x="767" y="306" font-size="32" fill="#333" font-family="Georgia, serif">Bath</text>
-        <text text-anchor="end" x="767" y="321" font-size="10.5" fill="#888" font-family="Georgia, serif" font-style="italic">outside Bristol</text>
-      </g>
-
-      <!-- Weston-super-Mare — outsideCity, left edge pointing west, below Clevedon -->
-      <g class="pin" data-place="Weston-super-Mare">
-        <polygon points="8,520 28,508 28,532" fill="#7952A3" stroke="#fff" stroke-width="2"/>
-        <circle cx="18" cy="520" r="1" fill="none" stroke="none"/>
-        <text x="33" y="525" font-size="32" fill="#333" font-family="Georgia, serif">Weston-super-Mare</text>
-        <text x="33" y="540" font-size="10.5" fill="#888" font-family="Georgia, serif" font-style="italic">outside Bristol</text>
-      </g>
-
-      <!-- Bristol Airport — outsideCity, bottom edge pointing south, east of Weston -->
-      <g class="pin" data-place="Bristol Airport">
-        <polygon points="360,592 348,572 372,572" fill="#7952A3" stroke="#fff" stroke-width="2"/>
-        <circle cx="360" cy="582" r="1" fill="none" stroke="none"/>
-        <text text-anchor="middle" x="360" y="553" font-size="32" fill="#333" font-family="Georgia, serif">Bristol Airport</text>
-        <text text-anchor="middle" x="360" y="567" font-size="10.5" fill="#888" font-family="Georgia, serif" font-style="italic">outside Bristol</text>
-      </g>
-
-
-    </svg>
+    <div id="map"></div>
 
     <img src="icon.svg" id="map-icon" alt="Say Hello Bristol">
 
-    <!-- Popup card lives inside the map so it's clipped to the map boundary -->
+    <!-- Popup card lives inside the map container so it clips to the map boundary -->
     <div id="card">
       <button id="card-close" aria-label="Close">&#215;</button>
       <h2 id="card-name"></h2>
@@ -315,6 +131,7 @@
     </div>
   </div>
 
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="bristol-data.js"></script>
   <script src="app.js"></script>
 

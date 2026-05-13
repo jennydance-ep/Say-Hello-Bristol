@@ -1,40 +1,23 @@
-Districts & Neighbourhoods
-
-Clifton: 51.4571, -2.6235
-The Downs: 51.4739, -2.6191
-Redland: 51.4739, -2.5985
-Cotham: 51.4679, -2.5971
-Hotwells: 51.4521, -2.6235
-Stokes Croft: 51.4641, -2.5879
-Bedminster: 51.4382, -2.5979
-Totterdown: 51.4382, -2.5771
-Bishopston: 51.4771, -2.5879
-
-Landmarks & Destinations
-
-Cabot Circus: 51.4591, -2.5771
-The Harbourside: 51.4501, -2.5979
-Ashton Court: 51.4441, -2.6479
-Ashton Gate: 51.4401, -2.6235
-Bristol Temple Meads: 51.4491, -2.5811
-Christmas Steps: 51.4579, -2.5951
-
-Streets & Roads
-
-Gloucester Road: 51.4841, -2.5879
-Whiteladies Road: 51.4679, -2.6091
-
-Transport & Surrounding Towns
-
-Bristol Parkway: 51.5091, -2.5411
-Bristol Temple Meads: 51.4491, -2.5811 (also a station)
-Clevedon: 51.4371, -2.8579 (outsideCity)
-Portishead: 51.4841, -2.7679 (outsideCity)
-Weston-super-Mare: 51.3461, -2.9779 (outsideCity)
-Bath: 51.3791, -2.3579 (outsideCity)
-Bristol Airport: 51.3827, -2.7191 (outsideCity)
-
-River & Geography
-
-The River Avon: 51.4501, -2.5711
-The Avon Gorge: 51.4571, -2.6391
+[
+  {"name": "Clifton",             "lat": 51.4571, "lng": -2.6235, "category": "Districts & Neighbourhoods"},
+  {"name": "Hotwells",            "lat": 51.4521, "lng": -2.6235, "category": "Districts & Neighbourhoods"},
+  {"name": "Redland",             "lat": 51.4739, "lng": -2.5985, "category": "Districts & Neighbourhoods"},
+  {"name": "Cotham",              "lat": 51.4679, "lng": -2.5971, "category": "Districts & Neighbourhoods"},
+  {"name": "Stokes Croft",        "lat": 51.4641, "lng": -2.5879, "category": "Districts & Neighbourhoods"},
+  {"name": "Bedminster",          "lat": 51.4382, "lng": -2.5979, "category": "Districts & Neighbourhoods"},
+  {"name": "Totterdown",          "lat": 51.4382, "lng": -2.5771, "category": "Districts & Neighbourhoods"},
+  {"name": "The Downs",           "lat": 51.4739, "lng": -2.6191, "category": "Districts & Neighbourhoods"},
+  {"name": "Gloucester Road",     "lat": 51.4841, "lng": -2.5879, "category": "Streets & Roads"},
+  {"name": "Cabot Circus",        "lat": 51.4591, "lng": -2.5771, "category": "Landmarks & Destinations"},
+  {"name": "The Harbourside",     "lat": 51.4501, "lng": -2.5979, "category": "Landmarks & Destinations"},
+  {"name": "Ashton Court",        "lat": 51.4441, "lng": -2.6479, "category": "Landmarks & Destinations"},
+  {"name": "Ashton Gate",         "lat": 51.4401, "lng": -2.6235, "category": "Landmarks & Destinations"},
+  {"name": "The River Avon",      "lat": 51.4501, "lng": -2.5711, "category": "River & Geography"},
+  {"name": "Bristol Parkway",     "lat": 51.5091, "lng": -2.5411, "category": "Transport & Surrounding Towns"},
+  {"name": "Bristol Temple Meads","lat": 51.4491, "lng": -2.5811, "category": "Transport & Surrounding Towns"},
+  {"name": "Clevedon",            "lat": 51.4371, "lng": -2.8579, "category": "Transport & Surrounding Towns", "outsideCity": true},
+  {"name": "Portishead",          "lat": 51.4841, "lng": -2.7679, "category": "Transport & Surrounding Towns", "outsideCity": true},
+  {"name": "Weston-super-Mare",   "lat": 51.3461, "lng": -2.9779, "category": "Transport & Surrounding Towns", "outsideCity": true},
+  {"name": "Bath",                "lat": 51.3791, "lng": -2.3579, "category": "Transport & Surrounding Towns", "outsideCity": true},
+  {"name": "Bristol Airport",     "lat": 51.3827, "lng": -2.7191, "category": "Transport & Surrounding Towns", "outsideCity": true}
+]
