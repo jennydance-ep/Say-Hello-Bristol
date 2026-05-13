@@ -1,14 +1,14 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 235">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 290">
   <defs>
     <!--
       Speech bubble with 7 o'clock tail.
       Ellipse: cx=100 cy=70 rx=90 ry=58.
       Exit  θ=115°: (62, 123) — lower-left of ellipse
       Entry θ=132°: (40, 113) — further lower-left
-      Tail tip: (78, 172) — aimed toward "Bristol" text below
+      Tail tip: (72, 228) — aimed toward "Bristol" text below
     -->
     <clipPath id="bubble-clip">
-      <path d="M 100,12 A 90,58 0 1 1 62,123 C 55,148 68,163 78,172 C 84,162 52,126 40,113 A 90,58 0 0 1 100,12 Z"/>
+      <path d="M 100,12 A 90,58 0 1 1 62,123 C 66,150 74,200 72,228 C 70,200 44,160 40,113 A 90,58 0 0 1 100,12 Z"/>
     </clipPath>
     <filter id="drop-shadow" x="-15%" y="-10%" width="140%" height="148%">
       <feDropShadow dx="0" dy="3" stdDeviation="5" flood-color="#00000022"/>
@@ -16,13 +16,13 @@
   </defs>
 
   <!-- Bubble white background + shadow -->
-  <path d="M 100,12 A 90,58 0 1 1 62,123 C 55,148 68,163 78,172 C 84,162 52,126 40,113 A 90,58 0 0 1 100,12 Z"
+  <path d="M 100,12 A 90,58 0 1 1 62,123 C 66,150 74,200 72,228 C 70,200 44,160 40,113 A 90,58 0 0 1 100,12 Z"
         fill="white" filter="url(#drop-shadow)"/>
 
   <!-- Union Jack, clipped to full bubble shape (including tail) -->
   <g clip-path="url(#bubble-clip)">
-    <!-- Blue field — tall enough to cover tail tip at y=172 -->
-    <rect x="0" y="0" width="200" height="180" fill="#012169"/>
+    <!-- Blue field — tall enough to cover tail tip at y=228 -->
+    <rect x="0" y="0" width="200" height="240" fill="#012169"/>
 
     <!-- St Andrew's cross: white diagonals, corner to corner of ellipse bbox -->
     <line x1="10"  y1="12" x2="190" y2="128" stroke="#FFFFFF" stroke-width="24"/>
@@ -34,15 +34,15 @@
 
     <!-- St George's cross: white horizontal + vertical (centred at 100,70) -->
     <rect x="0"  y="59" width="200" height="22" fill="#FFFFFF"/>
-    <rect x="89" y="0"  width="22"  height="180" fill="#FFFFFF"/>
+    <rect x="89" y="0"  width="22"  height="240" fill="#FFFFFF"/>
 
     <!-- St George's cross: red fimbriation (centred within white) -->
     <rect x="0"  y="63" width="200" height="14" fill="#C8102E"/>
-    <rect x="93" y="0"  width="14"  height="180" fill="#C8102E"/>
+    <rect x="93" y="0"  width="14"  height="240" fill="#C8102E"/>
   </g>
 
   <!-- Bubble outline — drawn last to crisp up the clipped edges -->
-  <path d="M 100,12 A 90,58 0 1 1 62,123 C 55,148 68,163 78,172 C 84,162 52,126 40,113 A 90,58 0 0 1 100,12 Z"
+  <path d="M 100,12 A 90,58 0 1 1 62,123 C 66,150 74,200 72,228 C 70,200 44,160 40,113 A 90,58 0 0 1 100,12 Z"
         fill="none" stroke="#aaaaaa" stroke-width="1.5"/>
 
   <!-- Three typing dots — white fill + navy stroke for contrast on any flag zone -->
@@ -51,7 +51,7 @@
   <circle cx="124" cy="70" r="7.5" fill="white" stroke="#012169" stroke-width="2"/>
 
   <!-- Place name -->
-  <text x="100" y="186"
+  <text x="100" y="260"
         text-anchor="middle"
         font-family="Georgia, 'Times New Roman', serif"
         font-size="29"
@@ -59,7 +59,7 @@
         letter-spacing="0.04em">Bristol</text>
 
   <!-- IPA transcription -->
-  <text x="100" y="210"
+  <text x="100" y="281"
         text-anchor="middle"
         font-family="Georgia, 'Times New Roman', serif"
         font-size="15"
