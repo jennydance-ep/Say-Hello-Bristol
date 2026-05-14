@@ -1,14 +1,14 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 235">
   <defs>
     <!--
-      Speech bubble with 5 o'clock tail (emoji style).
+      Speech bubble with 7 o'clock tail (emoji style, mirrored from 5 o'clock).
       Ellipse: cx=100 cy=70 rx=90 ry=58.
-      Exit  θ=56°: (150, 118) — lower-right of ellipse
-      Entry θ=72°: (128, 125) — further lower-right
-      Tail tip: (175, 158) — aimed toward "Bristol" text below
+      Entry θ=108°: (72, 125) — lower-left of ellipse (first junction clockwise)
+      Exit  θ=124°: (50, 118) — further lower-left (second junction clockwise)
+      Tail tip: (25, 158) — aimed toward "Bristol" text below
     -->
     <clipPath id="bubble-clip">
-      <path d="M 100,12 A 90,58 0 0 1 150,118 Q 182,130 175,158 Q 148,140 128,125 A 90,58 0 1 1 100,12 Z"/>
+      <path d="M 100,12 A 90,58 0 1 1 72,125 Q 52,140 25,158 Q 18,130 50,118 A 90,58 0 0 1 100,12 Z"/>
     </clipPath>
     <filter id="drop-shadow" x="-15%" y="-10%" width="140%" height="148%">
       <feDropShadow dx="0" dy="3" stdDeviation="5" flood-color="#00000022"/>
@@ -16,7 +16,7 @@
   </defs>
 
   <!-- Bubble white background + shadow -->
-  <path d="M 100,12 A 90,58 0 0 1 150,118 Q 182,130 175,158 Q 148,140 128,125 A 90,58 0 1 1 100,12 Z"
+  <path d="M 100,12 A 90,58 0 1 1 72,125 Q 52,140 25,158 Q 18,130 50,118 A 90,58 0 0 1 100,12 Z"
         fill="white" filter="url(#drop-shadow)"/>
 
   <!-- Union Jack, clipped to full bubble shape (including tail) -->
@@ -42,7 +42,7 @@
   </g>
 
   <!-- Bubble outline — drawn last to crisp up the clipped edges -->
-  <path d="M 100,12 A 90,58 0 0 1 150,118 Q 182,130 175,158 Q 148,140 128,125 A 90,58 0 1 1 100,12 Z"
+  <path d="M 100,12 A 90,58 0 1 1 72,125 Q 52,140 25,158 Q 18,130 50,118 A 90,58 0 0 1 100,12 Z"
         fill="none" stroke="#aaaaaa" stroke-width="1.5"/>
 
   <!-- Three typing dots — white fill + navy stroke for contrast on any flag zone -->
