@@ -188,5 +188,50 @@ const PLACES = [
     "teachingNote": "The stress is on the word 'Road' - say: WITE-lay-deez RODE",
     "extraNote": "Connects Clifton to the city centre, lined with restaurants, cafes, bars and independent shops - one of Bristol's most popular streets for eating out and socialising.",
     "audio": "audio/whiteladies-road.mp4"
+  },
+  {
+    "id": "cribbs-causeway",
+    "name": "Cribbs Causeway",
+    "category": "Landmarks & Destinations",
+    "ipa": "ˌkrɪbz ˈkɔːz.weɪ",
+    "teachingNote": "Stress the first syllable of 'Causeway' - say: kribs KAWZ-way. The 'au' in Causeway sounds like the word 'or'.",
+    "extraNote": "Large out-of-town shopping centre north of Bristol, near junction 17 of the M5 - home to over 130 shops, free parking.",
+    "audio": "audio/cribbs-causeway.mp4"
+  },
+  {
+    "id": "the-hippodrome",
+    "name": "The Hippodrome",
+    "category": "Landmarks & Destinations",
+    "ipa": "ðə ˈhɪp.ə.drəʊm",
+    "teachingNote": "Say: thə HIP-ə-drohm. The final syllable rhymes with 'home'.",
+    "extraNote": "Well known Bristol theatre venue, opened in 1912 - hosts West End touring productions, opera, ballet and pantomime.",
+    "audio": "audio/the-hippodrome.mp4"
+  },
+  {
+    "id": "uwe",
+    "name": "UWE",
+    "category": "Landmarks & Destinations",
+    "ipa": "ˈjuː.wiː",
+    "teachingNote": "This acronym of The University of the West of England is shortened to UWE and pronounced YOU-wee.",
+    "extraNote": "One of Bristol's two universities, with campuses in the north and south of the city - home to around 30,000 students.",
+    "audio": "audio/uwe.mp4"
+  },
+  {
+    "id": "the-university-of-bristol",
+    "name": "The University of Bristol",
+    "category": "Landmarks & Destinations",
+    "ipa": "ðə ˌjuː.nɪˈvɜː.sə.ti əv ˈbrɪs.təl",
+    "teachingNote": "This phrase has two stressed syllables - say: thə uni-VER-si-tee əv BRIS-təl",
+    "extraNote": "A Russell Group university founded in 1909, with a beautiful campus in Clifton - consistently ranked in the UK top 10.",
+    "audio": "audio/the-university-of-bristol.mp4"
+  },
+  {
+    "id": "christmas-steps",
+    "name": "Christmas Steps",
+    "category": "Streets & Roads",
+    "ipa": "ˌkrɪs.məs ˈsteps",
+    "teachingNote": "The main stress is on Steps - say: kris-məs STEPS",
+    "extraNote": "One of Bristol's most historic streets - a medieval stepped lane dating from 1669, lined with antique shops and independent traders.",
+    "audio": "audio/christmas-steps.mp4"
   }
 ];
