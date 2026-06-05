@@ -125,5 +125,68 @@ const PLACES = [
     "extraNote": "",
     "audio": "audio/bristol-airport.mp4",
     "outsideCity": true
+  },
+  {
+    "id": "bristol-beacon",
+    "name": "Bristol Beacon",
+    "category": "Landmarks & Destinations",
+    "ipa": "",
+    "teachingNote": "Stress the first syllable of 'Beacon' - say: bris-təl BEE-kən",
+    "extraNote": "Bristol's main concert hall, a mix of Victorian and modern architecture - hosts classical, modern music and comedy performances.",
+    "audio": "audio/bristol-beacon.mp4"
+  },
+  {
+    "id": "clifton-suspension-bridge",
+    "name": "Clifton Suspension Bridge",
+    "category": "Landmarks & Destinations",
+    "ipa": "",
+    "teachingNote": "The strongest beat is on the second syllable of 'suspension' - say: klɪf-tən səs-PEN-shən bridge",
+    "extraNote": "Iconic Bristol landmark, designed by Isambard Kingdom Brunel, finished in 1864 - sits across the Avon Gorge.",
+    "audio": "audio/clifton-suspension-bridge.mp4"
+  },
+  {
+    "id": "the-wills-memorial-building",
+    "name": "The Wills Memorial Building",
+    "category": "Landmarks & Destinations",
+    "ipa": "",
+    "teachingNote": "'Memorial' has the strongest beat in this phrase - say: thə wɪlz mə-MAW-ri-əl BIL-dɪŋ",
+    "extraNote": "The centrepiece building of the University of Bristol campus - a magnificent 1925 neo-Gothic tower.",
+    "audio": "audio/the-wills-memorial-building.mp4"
+  },
+  {
+    "id": "millennium-square",
+    "name": "Millennium Square",
+    "category": "Landmarks & Destinations",
+    "ipa": "",
+    "teachingNote": "In this phrase, SQUARE is the stressed syllable - say: mɪl-en-i-əm SKWAIR, with the /eə/ diphthong at the end",
+    "extraNote": "Large open public space in the Harbourside area, with cafes, bars and the We The Curious science museum - hosts outdoor events, markets and festivals.",
+    "audio": "audio/millennium-square.mp4"
+  },
+  {
+    "id": "brandon-hill",
+    "name": "Brandon Hill",
+    "category": "Landmarks & Destinations",
+    "ipa": "",
+    "teachingNote": "Make HILL the strongest part of this phrase - say: bran-dən HILL",
+    "extraNote": "One of Bristol's oldest public parks, home to Cabot Tower - a Victorian monument with panoramic views over the city. Free to visit and a great spot for a picnic.",
+    "audio": "audio/brandon-hill.mp4"
+  },
+  {
+    "id": "ss-great-britain",
+    "name": "SS Great Britain",
+    "category": "Landmarks & Destinations",
+    "ipa": "",
+    "teachingNote": "Say each of the first letters separately: ESS-ESS, with the main stress on the first syllable of 'Britain': ess-ess GRAYT BRI-tən",
+    "extraNote": "The world's first ocean-going propeller-driven iron ship, designed by Brunel and launched in 1843 - now restored and on permanent display in the Great Western Dockyard where she was built.",
+    "audio": "audio/ss-great-britain.mp4"
+  },
+  {
+    "id": "whiteladies-road",
+    "name": "Whiteladies Road",
+    "category": "Streets & Roads",
+    "ipa": "",
+    "teachingNote": "The stress is on the word 'Road' - say: WITE-lay-deez RODE",
+    "extraNote": "Connects Clifton to the city centre, lined with restaurants, cafes, bars and independent shops - one of Bristol's most popular streets for eating out and socialising.",
+    "audio": "audio/whiteladies-road.mp4"
   }
 ];
