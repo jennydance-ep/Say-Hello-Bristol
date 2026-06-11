@@ -19,5 +19,17 @@
   {"name": "Portishead",          "lat": 51.4841, "lng": -2.7679, "category": "Transport & Surrounding Towns", "outsideCity": true},
   {"name": "Weston-super-Mare",   "lat": 51.3461, "lng": -2.9779, "category": "Transport & Surrounding Towns", "outsideCity": true},
   {"name": "Bath",                "lat": 51.3791, "lng": -2.3579, "category": "Transport & Surrounding Towns", "outsideCity": true},
-  {"name": "Bristol Airport",     "lat": 51.3827, "lng": -2.7191, "category": "Transport & Surrounding Towns", "outsideCity": true}
+  {"name": "Bristol Airport",          "lat": 51.3827, "lng": -2.7191, "category": "Transport & Surrounding Towns", "outsideCity": true},
+  {"name": "Cribbs Causeway",          "lat": 51.5231, "lng": -2.5902, "category": "Landmarks & Destinations",          "outsideCity": false},
+  {"name": "The Hippodrome",           "lat": 51.4558, "lng": -2.5932, "category": "Music & Arts",                      "outsideCity": false},
+  {"name": "UWE",                      "lat": 51.4996, "lng": -2.5493, "category": "Landmarks & Destinations",          "outsideCity": false},
+  {"name": "The University of Bristol","lat": 51.4584, "lng": -2.6031, "category": "Landmarks & Destinations",          "outsideCity": false},
+  {"name": "Christmas Steps",          "lat": 51.4574, "lng": -2.5962, "category": "Streets & Roads",                   "outsideCity": false},
+  {"name": "Bristol Beacon",           "lat": 51.4556, "lng": -2.5958, "category": "Landmarks & Destinations",          "outsideCity": false},
+  {"name": "Clifton Suspension Bridge","lat": 51.4549, "lng": -2.6275, "category": "Landmarks & Destinations",          "outsideCity": false},
+  {"name": "The Wills Memorial Building","lat": 51.4579, "lng": -2.6032, "category": "Landmarks & Destinations",        "outsideCity": false},
+  {"name": "Millennium Square",        "lat": 51.4503, "lng": -2.6006, "category": "Landmarks & Destinations",          "outsideCity": false},
+  {"name": "Brandon Hill",             "lat": 51.4536, "lng": -2.6018, "category": "Landmarks & Destinations",          "outsideCity": false},
+  {"name": "SS Great Britain",         "lat": 51.4493, "lng": -2.6198, "category": "Landmarks & Destinations",          "outsideCity": false},
+  {"name": "Whiteladies Road",         "lat": 51.4674, "lng": -2.6079, "category": "Streets & Roads",                   "outsideCity": false}
 ]
