@@ -155,9 +155,11 @@ fetch('bristol-pins.json')
   .then(pins => {
     pins.forEach(pinData => {
       const entry    = places.find(p => p.name === pinData.name);
-      const complete = !!(entry && entry.audio && entry.ipa && entry.teachingNote);
+      // TESTING: completeness check disabled — re-enable for free/paid tier
+      // const complete = !!(entry && entry.audio && entry.ipa && entry.teachingNote);
       const color    = CATEGORY_COLORS[pinData.category] || '#888';
-      const bg       = hexToRgba(color, complete ? 0.85 : 0.4);
+      // const bg    = hexToRgba(color, complete ? 0.85 : 0.4);
+      const bg       = hexToRgba(color, 0.85);
 
       const icon = L.divIcon({
         html:       `<div class="pin-lozenge" style="background-color:${bg};">${pinData.name}</div>`,
