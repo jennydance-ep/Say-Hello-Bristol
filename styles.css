@@ -122,12 +122,57 @@
 
     /* ── About tab ──────────────────────────────────────────────────────────── */
 
-    .about-placeholder {
+    .about-content {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 28px 0 56px;
+    }
+
+    .about-photo {
+      display: block;
+      width: 220px;
+      border-radius: 12px;
+      margin: 0 auto 28px;
+      box-shadow: 0 2px 14px rgba(60, 40, 20, 0.14);
+    }
+
+    .about-heading {
       font-family: Georgia, serif;
-      font-style: italic;
-      color: #aaa;
-      text-align: center;
-      padding: 60px 20px;
+      font-size: 1.3rem;
+      font-weight: normal;
+      color: #2a1f14;
+      margin-bottom: 14px;
+      letter-spacing: 0.01em;
+    }
+
+    .about-heading--section {
+      margin-top: 36px;
+    }
+
+    .about-content p {
+      font-family: Georgia, serif;
+      font-size: 0.92rem;
+      color: #5a4a38;
+      line-height: 1.8;
+      margin-bottom: 14px;
+    }
+
+    .about-ipa {
+      background: #f3f1ee;
+      border-radius: 4px;
+      padding: 1px 6px;
+      font-size: 0.88rem;
+      color: #444;
+      letter-spacing: 0.03em;
+    }
+
+    .about-link {
+      color: #E07850;
+      text-decoration: none;
+    }
+
+    .about-link:hover {
+      text-decoration: underline;
     }
 
     #map-container {
@@ -507,6 +552,10 @@
 
       #index-list {
         padding: 16px 12px 40px;
+      }
+
+      .about-content {
+        padding: 20px 12px 48px;
       }
 
       /* Preserve mobile legend at current size/family (desktop changed to Georgia 13.5px) */
