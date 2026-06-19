@@ -8,8 +8,7 @@
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
   <link rel="stylesheet" href="styles.css">
   <!-- #map fills its container and creates a stacking context so Leaflet's
-       internal z-indices (200–800) stay below the card (z-index:10) and
-       map-icon (z-index:5) which are siblings in #map-container. -->
+       internal z-indices (200–800) stay below the card (z-index:100) -->
   <style>
     #map { position: absolute; inset: 0; z-index: 0; }
 
@@ -42,7 +41,15 @@
   </style>
 </head>
 <body>
-  <h1>Say Hello Bristol</h1>
+
+  <header id="site-header">
+    <h1>Say Hello Bristol</h1>
+    <nav id="tab-nav">
+      <button class="tab-btn active" data-tab="map">Map</button>
+      <button class="tab-btn" data-tab="index">Index</button>
+      <button class="tab-btn" data-tab="about">About</button>
+    </nav>
+  </header>
 
   <!--
     Standalone SVG containing the parchment filter definition.
@@ -73,59 +80,73 @@
     </defs>
   </svg>
 
-  <div id="map-container">
+  <!-- Map tab -->
+  <div id="tab-map" class="tab-panel active">
 
-    <div id="map"></div>
+    <div id="map-container">
+      <div id="map"></div>
+      <img src="icon.svg" id="map-icon" alt="Say Hello Bristol">
+    </div>
 
-    <img src="icon.svg" id="map-icon" alt="Say Hello Bristol">
-
-    <!-- Popup card lives inside the map container so it clips to the map boundary -->
-    <div id="card">
-      <button id="card-close" aria-label="Close">&#215;</button>
-      <h2 id="card-name"></h2>
-      <div id="card-ipa"></div>
-
-      <div id="card-audio" style="display:none">
-        <div class="audio-row">
-          <button class="audio-btn" id="btn-listen">▶ Listen</button>
-        </div>
-        <div class="audio-row">
-          <button class="audio-btn" id="btn-record">● Record</button>
-          <button class="audio-btn" id="btn-stop-rec"  style="display:none">■ Stop</button>
-          <button class="audio-btn" id="btn-playback"  style="display:none">▶ My recording</button>
-          <button class="audio-btn" id="btn-rerecord"  style="display:none">↺ Try again</button>
-        </div>
+    <div id="legend">
+      <div class="legend-item">
+        <span class="legend-dot" style="background:#E07850"></span>
+        <span class="legend-label">Districts</span>
       </div>
-
-      <p class="card-label" id="label-teaching">How to say it</p>
-      <p class="card-text" id="card-teaching"></p>
-      <p class="card-label" id="label-extra">About this place</p>
-      <p class="card-text" id="card-extra"></p>
+      <div class="legend-item">
+        <span class="legend-dot" style="background:#2E8B8B"></span>
+        <span class="legend-label">Destinations</span>
+      </div>
+      <div class="legend-item">
+        <span class="legend-dot" style="background:#D4922A"></span>
+        <span class="legend-label">Streets</span>
+      </div>
+      <div class="legend-item">
+        <span class="legend-dot" style="background:#3A7BC8"></span>
+        <span class="legend-label">Geography</span>
+      </div>
+      <div class="legend-item">
+        <span class="legend-dot" style="background:#7952A3"></span>
+        <span class="legend-label">Nearby Places</span>
+      </div>
     </div>
 
   </div>
 
-  <div id="legend">
-    <div class="legend-item">
-      <span class="legend-dot" style="background:#E07850"></span>
-      <span class="legend-label">Districts</span>
+  <!-- Index tab -->
+  <div id="tab-index" class="tab-panel">
+    <div id="index-list"></div>
+  </div>
+
+  <!-- About tab -->
+  <div id="tab-about" class="tab-panel">
+    <p class="about-placeholder">Coming soon</p>
+  </div>
+
+  <!-- Card — fixed overlay, usable from both Map and Index tabs.
+       Backdrop only shown when opened from Index. -->
+  <div id="card-backdrop"></div>
+  <div id="card">
+    <button id="card-close" aria-label="Close">&#215;</button>
+    <h2 id="card-name"></h2>
+    <div id="card-ipa"></div>
+
+    <div id="card-audio" style="display:none">
+      <div class="audio-row">
+        <button class="audio-btn" id="btn-listen">▶ Listen</button>
+      </div>
+      <div class="audio-row">
+        <button class="audio-btn" id="btn-record">● Record</button>
+        <button class="audio-btn" id="btn-stop-rec"  style="display:none">■ Stop</button>
+        <button class="audio-btn" id="btn-playback"  style="display:none">▶ My recording</button>
+        <button class="audio-btn" id="btn-rerecord"  style="display:none">↺ Try again</button>
+      </div>
     </div>
-    <div class="legend-item">
-      <span class="legend-dot" style="background:#2E8B8B"></span>
-      <span class="legend-label">Destinations</span>
-    </div>
-    <div class="legend-item">
-      <span class="legend-dot" style="background:#D4922A"></span>
-      <span class="legend-label">Streets</span>
-    </div>
-    <div class="legend-item">
-      <span class="legend-dot" style="background:#3A7BC8"></span>
-      <span class="legend-label">Geography</span>
-    </div>
-    <div class="legend-item">
-      <span class="legend-dot" style="background:#7952A3"></span>
-      <span class="legend-label">Nearby Places</span>
-    </div>
+
+    <p class="card-label" id="label-teaching">How to say it</p>
+    <p class="card-text" id="card-teaching"></p>
+    <p class="card-label" id="label-extra">About this place</p>
+    <p class="card-text" id="card-extra"></p>
   </div>
 
   <!-- Onboarding popup — must appear before the <script> block so getElementById finds it -->

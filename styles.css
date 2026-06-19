@@ -10,7 +10,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 40px 20px;
+      padding: 24px 20px 40px;
       min-height: 100vh;
     }
 
@@ -18,8 +18,116 @@
       font-size: 2rem;
       font-weight: normal;
       color: #222;
-      margin-bottom: 32px;
+      margin-bottom: 12px;
       letter-spacing: 0.02em;
+    }
+
+    /* ── Site header & tab nav ──────────────────────────────────────────────── */
+
+    #site-header {
+      width: 100%;
+      max-width: 800px;
+    }
+
+    #tab-nav {
+      display: flex;
+      border-bottom: 1.5px solid #d4c9b8;
+      margin-bottom: 20px;
+    }
+
+    .tab-btn {
+      font-family: Georgia, serif;
+      font-size: 0.95rem;
+      color: #999;
+      background: none;
+      border: none;
+      border-bottom: 2.5px solid transparent;
+      margin-bottom: -1.5px;
+      padding: 10px 22px;
+      cursor: pointer;
+      letter-spacing: 0.02em;
+      transition: color 0.15s;
+    }
+
+    .tab-btn:hover { color: #444; }
+
+    .tab-btn.active {
+      color: #222;
+      border-bottom-color: #E07850;
+    }
+
+    /* ── Tab panels ─────────────────────────────────────────────────────────── */
+
+    .tab-panel {
+      display: none;
+      width: 100%;
+      max-width: 800px;
+    }
+
+    .tab-panel.active {
+      display: block;
+    }
+
+    /* ── Index tab ──────────────────────────────────────────────────────────── */
+
+    #index-list {
+      padding: 20px 0 40px;
+    }
+
+    .index-category {
+      margin-bottom: 28px;
+    }
+
+    .index-category-heading {
+      font-family: Georgia, serif;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #aaa;
+      margin-bottom: 8px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid #ede8e1;
+    }
+
+    .index-entry {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 4px;
+      cursor: pointer;
+      border-bottom: 1px solid #f5f1eb;
+    }
+
+    .index-entry:hover {
+      background: #faf7f2;
+    }
+
+    .index-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .index-entry-name {
+      font-family: Georgia, serif;
+      font-size: 0.95rem;
+      color: #333;
+      transition: color 0.15s;
+    }
+
+    .index-entry:hover .index-entry-name {
+      color: #E07850;
+    }
+
+    /* ── About tab ──────────────────────────────────────────────────────────── */
+
+    .about-placeholder {
+      font-family: Georgia, serif;
+      font-style: italic;
+      color: #aaa;
+      text-align: center;
+      padding: 60px 20px;
     }
 
     #map-container {
@@ -85,15 +193,28 @@
       font-size: 13.5px;
     }
 
-    /* Popup card — positioned by JS */
+    /* Semi-transparent backdrop — only shown when card is opened from Index tab */
+    #card-backdrop {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(60, 40, 20, 0.45);
+      z-index: 99;
+    }
+
+    #card-backdrop.visible {
+      display: block;
+    }
+
+    /* Popup card — fixed overlay, positioned by JS (near pin) or centred (index) */
     #card {
-      position: absolute;
+      position: fixed;
       width: 256px;
       background: #fff;
       border-radius: 12px;
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.18);
       padding: 20px 18px 18px;
-      z-index: 10;
+      z-index: 100;
       visibility: hidden;
     }
 
@@ -346,13 +467,25 @@
     /* ── Mobile layout ──────────────────────────────────────────────────── */
     @media (max-width: 768px) {
       body {
-        padding: 16px 0;
+        padding: 16px 0 40px;
+      }
+
+      #site-header {
+        padding: 0 12px;
       }
 
       h1 {
         font-size: 1.5rem;
-        margin-bottom: 16px;
-        padding: 0 12px;
+        margin-bottom: 10px;
+      }
+
+      .tab-btn {
+        padding: 10px 16px;
+        font-size: 0.9rem;
+      }
+
+      #tab-nav {
+        margin-bottom: 0;
       }
 
       /* Full-bleed map, portrait-leaning aspect ratio so the map fills
@@ -370,6 +503,10 @@
 
       #legend {
         padding: 0 12px;
+      }
+
+      #index-list {
+        padding: 16px 12px 40px;
       }
 
       /* Preserve mobile legend at current size/family (desktop changed to Georgia 13.5px) */

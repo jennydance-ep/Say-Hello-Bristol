@@ -166,7 +166,7 @@ const PLACES = [
     "id": "brandon-hill",
     "name": "Brandon Hill",
     "category": "Landmarks & Destinations",
-    "ipa": "",
+    "ipa": "ˌbræn.dən ˈhɪl",
     "teachingNote": "Make HILL the strongest part of this phrase - say: bran-dən HILL",
     "extraNote": "One of Bristol's oldest public parks, home to Cabot Tower - a Victorian monument with panoramic views over the city. Free to visit and a great spot for a picnic.",
     "audio": "audio/brandon-hill.mp4"

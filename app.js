@@ -2,6 +2,7 @@ const places = PLACES;
 
 const mapContainer  = document.getElementById('map-container');
 const card          = document.getElementById('card');
+const cardBackdrop  = document.getElementById('card-backdrop');
 const cardName      = document.getElementById('card-name');
 const cardIpa       = document.getElementById('card-ipa');
 const cardTeaching  = document.getElementById('card-teaching');
@@ -88,9 +89,11 @@ function populateCard(entry, name) {
 }
 
 function positionCard(latlng) {
-  const point = leafletMap.latLngToContainerPoint(latlng);
-  const pinX  = point.x;
-  const pinY  = point.y;
+  const point   = leafletMap.latLngToContainerPoint(latlng);
+  const mapRect = mapContainer.getBoundingClientRect();
+
+  const pinX = mapRect.left + point.x;
+  const pinY = mapRect.top  + point.y;
 
   const gap   = 16;
   const pad   = 10;
@@ -100,12 +103,22 @@ function positionCard(latlng) {
   let left = pinX + gap;
   let top  = pinY - cardH / 2;
 
-  if (left + cardW > mapContainer.offsetWidth  - pad) left = pinX - cardW - gap;
-  top  = Math.max(pad, Math.min(top, mapContainer.offsetHeight - cardH - pad));
+  const vpW = window.innerWidth;
+  const vpH = window.innerHeight;
+
+  if (left + cardW > vpW - pad) left = pinX - cardW - gap;
+  top  = Math.max(pad, Math.min(top, vpH - cardH - pad));
   left = Math.max(pad, left);
 
-  card.style.left = left + 'px';
-  card.style.top  = top  + 'px';
+  card.style.left      = left + 'px';
+  card.style.top       = top  + 'px';
+  card.style.transform = '';
+}
+
+function showCardCentered() {
+  card.style.left      = '50%';
+  card.style.top       = '50%';
+  card.style.transform = 'translate(-50%, -50%)';
 }
 
 // ── Map ───────────────────────────────────────────────────────────────────────
@@ -129,6 +142,7 @@ window.addEventListener('resize', () => leafletMap.invalidateSize());
 
 function closeCard() {
   card.classList.remove('visible');
+  cardBackdrop.classList.remove('visible');
   resetAudio();
   if (activeMarker) {
     activeMarker.getElement()?.classList.remove('pin-icon--active');
@@ -269,6 +283,79 @@ btnRerecord.addEventListener('click', () => {
 navigator.mediaDevices?.getUserMedia({ audio: true })
   .then(stream => stream.getTracks().forEach(t => t.stop()))
   .catch(() => {});
+
+cardBackdrop.addEventListener('click', closeCard);
+
+// ── Tab navigation ────────────────────────────────────────────────────────────
+
+const tabBtns   = document.querySelectorAll('.tab-btn');
+const tabPanels = document.querySelectorAll('.tab-panel');
+
+tabBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    const target = btn.dataset.tab;
+    tabBtns.forEach(b   => b.classList.toggle('active', b === btn));
+    tabPanels.forEach(p => p.classList.toggle('active', p.id === 'tab-' + target));
+    closeCard();
+    if (target === 'map') leafletMap.invalidateSize();
+  });
+});
+
+// ── Index tab ─────────────────────────────────────────────────────────────────
+
+function buildIndex() {
+  const byCategory = {};
+  places.forEach(entry => {
+    const cat = entry.category || 'Other';
+    if (!byCategory[cat]) byCategory[cat] = [];
+    byCategory[cat].push(entry);
+  });
+
+  const indexList = document.getElementById('index-list');
+  const sortedCats = Object.keys(byCategory).sort();
+
+  sortedCats.forEach(cat => {
+    const entries = byCategory[cat].slice().sort((a, b) => a.name.localeCompare(b.name));
+    const color   = CATEGORY_COLORS[cat] || '#888';
+
+    const section = document.createElement('div');
+    section.className = 'index-category';
+
+    const heading = document.createElement('h3');
+    heading.className = 'index-category-heading';
+    heading.textContent = cat;
+    section.appendChild(heading);
+
+    entries.forEach(entry => {
+      const row = document.createElement('div');
+      row.className = 'index-entry';
+
+      const dot = document.createElement('span');
+      dot.className = 'index-dot';
+      dot.style.background = color;
+
+      const name = document.createElement('span');
+      name.className = 'index-entry-name';
+      name.textContent = entry.name;
+
+      row.appendChild(dot);
+      row.appendChild(name);
+
+      row.addEventListener('click', () => {
+        populateCard(entry, entry.name);
+        showCardCentered();
+        cardBackdrop.classList.add('visible');
+        card.classList.add('visible');
+      });
+
+      section.appendChild(row);
+    });
+
+    indexList.appendChild(section);
+  });
+}
+
+buildIndex();
 
 // ── Onboarding ────────────────────────────────────────────────────────────────
 
