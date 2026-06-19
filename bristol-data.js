@@ -130,7 +130,7 @@ const PLACES = [
     "id": "bristol-beacon",
     "name": "Bristol Beacon",
     "category": "Landmarks & Destinations",
-    "ipa": "",
+    "ipa": "ˌbrɪs.təl ˈbiː.kən",
     "teachingNote": "Stress the first syllable of 'Beacon' - say: bris-təl BEE-kən",
     "extraNote": "Bristol's main concert hall, a mix of Victorian and modern architecture - hosts classical, modern music and comedy performances.",
     "audio": "audio/bristol-beacon.mp4"
@@ -139,7 +139,7 @@ const PLACES = [
     "id": "clifton-suspension-bridge",
     "name": "Clifton Suspension Bridge",
     "category": "Landmarks & Destinations",
-    "ipa": "",
+    "ipa": "ˈklɪf.tən səˈspen.ʃən ˌbrɪdʒ",
     "teachingNote": "The strongest beat is on the second syllable of 'suspension' - say: klɪf-tən səs-PEN-shən bridge",
     "extraNote": "Iconic Bristol landmark, designed by Isambard Kingdom Brunel, finished in 1864 - sits across the Avon Gorge.",
     "audio": "audio/clifton-suspension-bridge.mp4"
@@ -148,7 +148,7 @@ const PLACES = [
     "id": "the-wills-memorial-building",
     "name": "The Wills Memorial Building",
     "category": "Landmarks & Destinations",
-    "ipa": "",
+    "ipa": "ðə ˈwɪlz məˈmɔː.ri.əl ˌbɪl.dɪŋ",
     "teachingNote": "'Memorial' has the strongest beat in this phrase - say: thə wɪlz mə-MAW-ri-əl BIL-dɪŋ",
     "extraNote": "The centrepiece building of the University of Bristol campus - a magnificent 1925 neo-Gothic tower.",
     "audio": "audio/the-wills-memorial-building.mp4"
@@ -175,7 +175,7 @@ const PLACES = [
     "id": "ss-great-britain",
     "name": "SS Great Britain",
     "category": "Landmarks & Destinations",
-    "ipa": "",
+    "ipa": "ˌes.es ˈɡreɪt ˈbrɪt.ən",
     "teachingNote": "Say each of the first letters separately: ESS-ESS, with the main stress on the first syllable of 'Britain': ess-ess GRAYT BRI-tən",
     "extraNote": "The world's first ocean-going propeller-driven iron ship, designed by Brunel and launched in 1843 - now restored and on permanent display in the Great Western Dockyard where she was built.",
     "audio": "audio/ss-great-britain.mp4"
