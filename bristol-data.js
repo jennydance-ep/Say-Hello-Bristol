@@ -90,9 +90,9 @@ const PLACES = [
     "id": "bath",
     "name": "Bath",
     "category": "Transport & Surrounding Towns",
-    "ipa": "",
-    "teachingNote": "",
-    "extraNote": "",
+    "ipa": "bɑːθ",
+    "teachingNote": "A single syllable with a long vowel, rhymes with 'path', 'car' and 'far'.",
+    "extraNote": "Beautiful Georgian city just 15 minutes from Bristol by train - famous for its Roman Baths and stunning honey-coloured stone architecture. A UNESCO World Heritage Site.",
     "audio": "audio/bath.mp4",
     "outsideCity": true
   },
@@ -100,9 +100,9 @@ const PLACES = [
     "id": "weston-super-mare",
     "name": "Weston-super-Mare",
     "category": "Transport & Surrounding Towns",
-    "ipa": "",
-    "teachingNote": "",
-    "extraNote": "",
+    "ipa": "ˌwes.tən ˈsuː.pə meə",
+    "teachingNote": "This place name is stressed on the first syllable of 'super', say: wes-tən SOO-pə mair. 'Super-Mare' is Latin meaning 'on sea'.",
+    "extraNote": "Traditional English seaside town about 40 minutes from Bristol - famous for its sandy beach, Grand Pier and as the birthplace of Banksy. A popular day trip destination.",
     "audio": "audio/weston-super-mare.mp4",
     "outsideCity": true
   },
@@ -110,9 +110,9 @@ const PLACES = [
     "id": "portishead",
     "name": "Portishead",
     "category": "Transport & Surrounding Towns",
-    "ipa": "",
-    "teachingNote": "",
-    "extraNote": "",
+    "ipa": "ˈpɔːt.ɪs.hed",
+    "teachingNote": "Say PORT-is-hed - although there is an 'sh' in the spelling, we say these sounds separately here.",
+    "extraNote": "Coastal town 12 miles west of Bristol, famous as the birthplace of the trip-hop band of the same name - has a lovely waterfront with restaurants and a marina.",
     "audio": "audio/portishead.mp4",
     "outsideCity": true
   },
@@ -120,9 +120,9 @@ const PLACES = [
     "id": "bristol-airport",
     "name": "Bristol Airport",
     "category": "Transport & Surrounding Towns",
-    "ipa": "",
-    "teachingNote": "",
-    "extraNote": "",
+    "ipa": "ˌbrɪs.təl ˈeə.pɔːt",
+    "teachingNote": "Stress the second word here, say: bris-təl AIR-port.",
+    "extraNote": "Bristol's international airport, located south of the city - serves over 100 destinations across Europe and beyond.",
     "audio": "audio/bristol-airport.mp4",
     "outsideCity": true
   },
@@ -233,5 +233,86 @@ const PLACES = [
     "teachingNote": "The main stress is on Steps - say: kris-məs STEPS",
     "extraNote": "One of Bristol's most historic streets - a medieval stepped lane dating from 1669, lined with antique shops and independent traders.",
     "audio": "audio/christmas-steps.mp4"
+  },
+  {
+    "id": "cheltenham-road",
+    "name": "Cheltenham Road",
+    "category": "Streets & Roads",
+    "ipa": "ˌtʃelt.nəm ˈrəʊd",
+    "teachingNote": "The first word has just two syllables, and the main stress is on Road: chelt-nəm ROAD",
+    "extraNote": "Continuation of Gloucester Road, heading into town; a lively stretch with independent shops, cafes and music venues, popular with students and young professionals.",
+    "audio": "audio/cheltenham-road.mp4"
+  },
+  {
+    "id": "bristol-parkway",
+    "name": "Bristol Parkway",
+    "category": "Transport & Surrounding Towns",
+    "ipa": "ˌbrɪs.təl ˈpɑːk.weɪ",
+    "teachingNote": "Stress falls on the first syllable of Parkway, say: bris-təl PARK-way",
+    "extraNote": "Bristol's second mainline railway station in the north of the city, with direct services to London Paddington - often quicker than from Temple Meads.",
+    "audio": "audio/bristol-parkway.mp4"
+  },
+  {
+    "id": "bristol-temple-meads",
+    "name": "Bristol Temple Meads",
+    "category": "Transport & Surrounding Towns",
+    "ipa": "ˌbrɪs.təl ˌtem.pəl ˈmiːdz",
+    "teachingNote": "The stress is on the final word here, say: bris-təl tem-pəl MEEDZ.",
+    "extraNote": "Bristol's main railway station and one of the oldest in the world - features the beautiful Brunel-designed original terminus building.",
+    "audio": "audio/bristol-temple-meads.mp4"
+  },
+  {
+    "id": "the-avon-gorge",
+    "name": "The Avon Gorge",
+    "category": "River & Geography",
+    "ipa": "ði ˌeɪ.vən ˈɡɔːdʒ",
+    "teachingNote": "The is pronounced 'thee' here, because the next word starts with a vowel, say: thee ay-vən GORJ.",
+    "extraNote": "The dramatic limestone gorge carved by the River Avon - home to the Clifton Suspension Bridge and Leigh Woods, with stunning walking trails and views.",
+    "audio": "audio/the-avon-gorge.mp4"
+  },
+  {
+    "id": "leigh-woods",
+    "name": "Leigh Woods",
+    "category": "Landmarks & Destinations",
+    "ipa": "ˌliː ˈwʊdz",
+    "teachingNote": "'Leigh' is pronounced lee (the 'gh' is completely silent), and it rhymes with 'me'. Say lee WOODZ - the vowel in 'woods' is the same short vowel as in 'put'.",
+    "extraNote": "Ancient woodland on the Somerset side of the Avon Gorge, managed by the National Trust - a beautiful escape from the city with miles of walking and cycling trails.",
+    "audio": "audio/leigh-woods.mp4"
+  },
+  {
+    "id": "stokes-croft",
+    "name": "Stokes Croft",
+    "category": "Districts & Neighbourhoods",
+    "ipa": "ˌstəʊks ˈkrɒft",
+    "teachingNote": "Say: stokes CROFT, with the stress on the second word. The vowel in Croft is like the short vowel in 'hot'.",
+    "extraNote": "Vibrant, creative neighbourhood known as Bristol's 'cultural quarter' - famous for street art, independent shops, cafes and nightlife. A hub of Bristol's alternative scene.",
+    "audio": "audio/stokes-croft.mp4"
+  },
+  {
+    "id": "tourist-information-centre",
+    "name": "Tourist Information Centre",
+    "category": "Landmarks & Destinations",
+    "ipa": "ˌtʊər.ɪst ˌɪn.fəˈmeɪ.ʃən ˌsen.tə",
+    "teachingNote": "This phrase has secondary stresses on words one and three, but the main stress is on syllable three of in-fə-MAY-shən.",
+    "extraNote": "Bristol's official visitor information point - staff can help with maps, accommodation, tours and everything you need to make the most of your visit.",
+    "audio": "audio/tourist-information-centre.mp4"
+  },
+  {
+    "id": "bristol-museum-and-art-gallery",
+    "name": "Bristol Museum & Art Gallery",
+    "category": "Landmarks & Destinations",
+    "ipa": "ˌbrɪs.təl mjuːˌzi.əm ənd ˈɑːt ˌɡæl.ər.i",
+    "teachingNote": "'Museum' has three syllables - with stress on the middle syllable. The first syllable rhymes with 'new', and the s is pronounced /z/ here: myoo-ZEE-əm",
+    "extraNote": "Free to visit and right in the heart of the city - collections include dinosaur skeletons, ancient Egyptian artefacts, local art and a world-famous Banksy piece.",
+    "audio": "audio/bristol-museum-and-art-gallery.mp4"
+  },
+  {
+    "id": "m-shed",
+    "name": "M Shed",
+    "category": "Landmarks & Destinations",
+    "ipa": "ˈem ˌʃed",
+    "teachingNote": "Say the letter M as 'em' - that is where the main stress is in this name, so we say: EM-shed.",
+    "extraNote": "Bristol's free museum of local life and history, right on the harbourside - explore the city's past through fascinating objects, photographs, film and personal stories.",
+    "audio": "audio/m-shed.mp4"
   }
 ];
