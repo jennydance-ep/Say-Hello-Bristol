@@ -397,6 +397,17 @@
     }
     #btn-rerecord:hover { color: #666; border-color: #bbb; }
 
+    #card-map-row {
+      margin-top: 10px;
+    }
+
+    #btn-find-on-map {
+      background: #f5f5f5;
+      border-color: #ddd;
+      color: #444;
+    }
+    #btn-find-on-map:hover { background: #eaeaea; }
+
     #legend {
       display: flex;
       flex-wrap: wrap;

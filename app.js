@@ -15,6 +15,8 @@ const btnRecord     = document.getElementById('btn-record');
 const btnStopRec    = document.getElementById('btn-stop-rec');
 const btnPlayback   = document.getElementById('btn-playback');
 const btnRerecord   = document.getElementById('btn-rerecord');
+const btnFindOnMap  = document.getElementById('btn-find-on-map');
+const cardMapRow    = document.getElementById('card-map-row');
 
 let activeMarker     = null;
 let suppressMapClick = false;   // prevents map click from closing a card we just opened
@@ -24,6 +26,8 @@ let recChunks        = [];
 let recUrl           = null;
 let recAudio         = null;
 let recStream        = null;
+let pinsData         = [];
+const markersByName  = {};
 
 // ── Audio helpers ────────────────────────────────────────────────────────────
 
@@ -59,10 +63,11 @@ function resetAudio() {
 
 // ── Card content ─────────────────────────────────────────────────────────────
 
-function populateCard(entry, name) {
+function populateCard(entry, name, fromIndex = false) {
   cardName.textContent = name;
   cardTeaching.classList.remove('coming-soon');
   resetAudio();
+  cardMapRow.style.display = fromIndex ? '' : 'none';
 
   if (entry) {
     cardIpa.textContent          = entry.ipa;
@@ -167,6 +172,7 @@ function hexToRgba(hex, alpha) {
 fetch('bristol-pins.json')
   .then(r => r.json())
   .then(pins => {
+    pinsData = pins;
     pins.forEach(pinData => {
       const entry    = places.find(p => p.name === pinData.name);
       // TESTING: completeness check disabled — re-enable for free/paid tier
@@ -210,6 +216,7 @@ fetch('bristol-pins.json')
       }
 
       marker.on('click', onPinClick);
+      markersByName[pinData.name] = onPinClick;
     });
   });
 
@@ -301,6 +308,19 @@ tabBtns.forEach(btn => {
   });
 });
 
+btnFindOnMap.addEventListener('click', () => {
+  const name = cardName.textContent;
+  const pin  = pinsData.find(p => p.name === name);
+  closeCard();
+  tabBtns.forEach(b => b.classList.toggle('active', b.dataset.tab === 'map'));
+  tabPanels.forEach(p => p.classList.toggle('active', p.id === 'tab-map'));
+  leafletMap.invalidateSize();
+  if (!pin) return;
+  leafletMap.setView([pin.lat, pin.lng], 15, { animate: false });
+  const onPinClick = markersByName[pin.name];
+  if (onPinClick) setTimeout(onPinClick, 0);
+});
+
 // ── Index tab ─────────────────────────────────────────────────────────────────
 
 function buildIndex() {
@@ -342,7 +362,7 @@ function buildIndex() {
       row.appendChild(name);
 
       row.addEventListener('click', () => {
-        populateCard(entry, entry.name);
+        populateCard(entry, entry.name, true);
         showCardCentered();
         cardBackdrop.classList.add('visible');
         card.classList.add('visible');
