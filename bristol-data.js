@@ -184,7 +184,7 @@ const PLACES = [
     "id": "whiteladies-road",
     "name": "Whiteladies Road",
     "category": "Streets & Roads",
-    "ipa": "",
+    "ipa": "ˌwaɪt.leɪ.diz ˈrəʊd",
     "teachingNote": "The stress is on the word 'Road' - say: WITE-lay-deez RODE",
     "extraNote": "Connects Clifton to the city centre, lined with restaurants, cafes, bars and independent shops - one of Bristol's most popular streets for eating out and socialising.",
     "audio": "audio/whiteladies-road.mp4"
