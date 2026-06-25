@@ -314,5 +314,86 @@ const PLACES = [
     "teachingNote": "Say the letter M as 'em' - that is where the main stress is in this name, so we say: EM-shed.",
     "extraNote": "Bristol's free museum of local life and history, right on the harbourside - explore the city's past through fascinating objects, photographs, film and personal stories.",
     "audio": "audio/m-shed.mp4"
+  },
+  {
+    "id": "park-street",
+    "name": "Park Street",
+    "category": "Streets & Roads",
+    "ipa": "ˈpɑːk ˈstriːt",
+    "teachingNote": "Stress on 'Park' - say: PARK street. The vowel in 'park' is a long /ɑː/, like the vowel in 'car'.",
+    "extraNote": "One of Bristol's most famous streets - a steep hill lined with independent shops, cafes and restaurants connecting the city centre to Clifton. Great views from the top.",
+    "audio": "audio/park-street.mp4"
+  },
+  {
+    "id": "king-street",
+    "name": "King Street",
+    "category": "Streets & Roads",
+    "ipa": "ˈkɪŋ ˈstriːt",
+    "teachingNote": "The stress on 'King' - say: KING street. The short /ɪ/ vowel in 'King' is the same as in the word 'sit'. The /ɪ/ vowel represents over 8% of all sounds in English!",
+    "extraNote": "Historic street in the Old City, dating from the 17th century - home to the famous Llandoger Trow pub, the Bristol Old Vic theatre and several characterful bars and restaurants.",
+    "audio": "audio/king-street.mp4"
+  },
+  {
+    "id": "the-arnolfini",
+    "name": "The Arnolfini",
+    "category": "Landmarks & Destinations",
+    "ipa": "ði ˌɑː.nɒlˈfɪ.ni",
+    "teachingNote": "'The' is pronounced 'thee' here because the next word starts with a vowel. Stress on the third syllable of Arnolfini. Say: thee ah-nol-FEE-nee",
+    "extraNote": "Bristol's internationally acclaimed contemporary arts centre on the Harbourside - galleries, cinema, performance space and a great cafe/bar. Named after the famous Van Eyck painting.",
+    "audio": "audio/the-arnolfini.mp4"
+  },
+  {
+    "id": "st-nicholas-market",
+    "name": "St Nicholas Market",
+    "category": "Landmarks & Destinations",
+    "ipa": "ˌsənt ˈnɪk.ə.ləs ˈmɑː.kɪt",
+    "teachingNote": "'Saint' is reduced to 'sənt' in natural speech - say: sənt nic-ə-ləs MAH-kət.",
+    "extraNote": "Bristol's oldest and most characterful covered market, trading since 1743 in the heart of the Old City - a wonderful mix of street food, vintage goods, crafts and local produce.",
+    "audio": "audio/st-nicholas-market.mp4"
+  },
+  {
+    "id": "the-llandoger-trow",
+    "name": "The Llandoger Trow",
+    "category": "Landmarks & Destinations",
+    "ipa": "ðə ˌɬæn.dɒ.ɡə ˈtraʊ",
+    "teachingNote": "This Welsh-origin name is notoriously tricky - say thə lan-dog-ə TROW, (Trow rhymes with 'cow').",
+    "extraNote": "One of Bristol's most historic pubs, dating from 1664 - reputedly the inspiration for the Admiral Benbow inn in Robert Louis Stevenson's Treasure Island.",
+    "audio": "audio/the-llandoger-trow.mp4"
+  },
+  {
+    "id": "the-avon-gorge-hotel",
+    "name": "The Avon Gorge Hotel",
+    "category": "Landmarks & Destinations",
+    "ipa": "ði ˈeɪ.vən ɡɔːdʒ həʊˈtel",
+    "teachingNote": "Note the stress in 'hotel' - say: hoh-TEL, with stress on the second syllable.",
+    "extraNote": "Perched right on the edge of the Avon Gorge with breathtaking views of the Clifton Suspension Bridge - the bar and terrace are worth a visit even if you're not staying.",
+    "audio": "audio/the-avon-gorge-hotel.mp4"
+  },
+  {
+    "id": "the-coronation-tap",
+    "name": "The Coronation Tap",
+    "category": "Landmarks & Destinations",
+    "ipa": "ðə ˌkɒr.əˈneɪ.ʃən ˈtæp",
+    "teachingNote": "Four syllables in 'Coronation' - say kor-ə-NAY-shən, with the stress on the third syllable. This pub is known locally as 'The Cori (KO-ree) Tap'.",
+    "extraNote": "A Clifton institution and one of Bristol's most celebrated cider pubs - famous for its 'Exhibition' cider, which is considerably stronger than it tastes. Approach with caution!",
+    "audio": "audio/the-coronation-tap.mp4"
+  },
+  {
+    "id": "the-rummer",
+    "name": "The Rummer",
+    "category": "Landmarks & Destinations",
+    "ipa": "ðə ˈrʌm.ə",
+    "teachingNote": "Say thə RU-mə - the vowel in 'Rummer' is the same as in 'cup'. The final 'er' is a schwa.",
+    "extraNote": "One of Bristol's oldest pubs, on a site licensed since 1241 in the heart of the Old City - a characterful historic pub well worth seeking out.",
+    "audio": "audio/the-rummer.mp4"
+  },
+  {
+    "id": "the-mall",
+    "name": "The Mall",
+    "category": "Landmarks & Destinations",
+    "ipa": "ðə ˈmɔːl",
+    "teachingNote": "The pub is pronounced: thə MAWL - the long /ɔː/ is the same as the vowel in 'ball' or 'call'. Some people say thə MAL, with an open /æ/ like in 'cat'.",
+    "extraNote": "A classic Clifton pub on The Mall in Clifton Village - a great spot for a pint or some food after visiting the Suspension Bridge or exploring Clifton's shops and restaurants.",
+    "audio": "audio/the-mall.mp4"
   }
 ];
