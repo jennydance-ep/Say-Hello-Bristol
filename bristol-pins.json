@@ -31,5 +31,21 @@
   {"name": "Millennium Square",        "lat": 51.4503, "lng": -2.6006, "category": "Landmarks & Destinations",          "outsideCity": false},
   {"name": "Brandon Hill",             "lat": 51.4536, "lng": -2.6018, "category": "Landmarks & Destinations",          "outsideCity": false},
   {"name": "SS Great Britain",         "lat": 51.4493, "lng": -2.6198, "category": "Landmarks & Destinations",          "outsideCity": false},
-  {"name": "Whiteladies Road",         "lat": 51.4674, "lng": -2.6079, "category": "Streets & Roads",                   "outsideCity": false}
+  {"name": "Whiteladies Road",         "lat": 51.4674, "lng": -2.6079, "category": "Streets & Roads",                   "outsideCity": false},
+  {"name": "Park Street",              "lat": 51.4558, "lng": -2.5998, "category": "Streets & Roads",                   "outsideCity": false},
+  {"name": "King Street",              "lat": 51.4508, "lng": -2.5932, "category": "Streets & Roads",                   "outsideCity": false},
+  {"name": "Cheltenham Road",          "lat": 51.4871, "lng": -2.5891, "category": "Streets & Roads",                   "outsideCity": false},
+  {"name": "St Nicholas Market",       "lat": 51.4556, "lng": -2.5932, "category": "Landmarks & Destinations",          "outsideCity": false},
+  {"name": "Tourist Information Centre","lat": 51.4541, "lng": -2.5921, "category": "Landmarks & Destinations",         "outsideCity": false},
+  {"name": "The Arnolfini",            "lat": 51.4498, "lng": -2.5971, "category": "Music & Arts",                      "outsideCity": false},
+  {"name": "Bristol Museum & Art Gallery","lat": 51.4579, "lng": -2.6031, "category": "Music & Arts",                   "outsideCity": false},
+  {"name": "M Shed",                   "lat": 51.4493, "lng": -2.5971, "category": "Music & Arts",                      "outsideCity": false},
+  {"name": "The Llandoger Trow",       "lat": 51.4508, "lng": -2.5935, "category": "Pubs",                              "outsideCity": false},
+  {"name": "The Avon Gorge Hotel",     "lat": 51.4558, "lng": -2.6278, "category": "Pubs",                              "outsideCity": false},
+  {"name": "The Coronation Tap",       "lat": 51.4601, "lng": -2.6198, "category": "Pubs",                              "outsideCity": false},
+  {"name": "The Rummer",               "lat": 51.4538, "lng": -2.5941, "category": "Pubs",                              "outsideCity": false},
+  {"name": "The Mall",                 "lat": 51.4591, "lng": -2.6201, "category": "Pubs",                              "outsideCity": false},
+  {"name": "Redcliffe",                "lat": 51.4488, "lng": -2.5841, "category": "Districts & Neighbourhoods",        "outsideCity": false},
+  {"name": "Leigh Woods",              "lat": 51.4521, "lng": -2.6398, "category": "River & Geography",                 "outsideCity": false},
+  {"name": "The Avon Gorge",           "lat": 51.4549, "lng": -2.6321, "category": "River & Geography",                 "outsideCity": false}
 ]
