@@ -152,6 +152,9 @@
 
       <p>Get in touch: <a href="mailto:jenny@jdenglishpronunciation.co.uk" class="about-link">jenny@jdenglishpronunciation.co.uk</a></p>
 
+      <p id="about-unlock-status" class="about-unlock-status" style="display:none"></p>
+      <p class="about-access-para"><button class="about-access-btn" id="btn-open-subscribe">Enter access code</button></p>
+
     </div>
   </div>
 
@@ -173,6 +176,10 @@
         <button class="audio-btn" id="btn-playback"  style="display:none">▶ My recording</button>
         <button class="audio-btn" id="btn-rerecord"  style="display:none">↺ Try again</button>
       </div>
+    </div>
+
+    <div id="card-locked-audio" style="display:none">
+      <p class="card-locked-msg">Audio available — <button class="card-unlock-link" id="btn-card-unlock">enter access code</button></p>
     </div>
 
     <p class="card-label" id="label-teaching">How to say it</p>
@@ -217,6 +224,21 @@
         </div>
       </div>
       <button id="btn-lets-go">Let's go!</button>
+    </div>
+  </div>
+
+  <!-- Subscribe sheet -->
+  <div id="subscribe-backdrop"></div>
+  <div id="subscribe-sheet">
+    <div id="subscribe-inner">
+      <button id="subscribe-close" aria-label="Close">&#215;</button>
+      <h2>Unlock 50 places</h2>
+      <p class="subscribe-desc">Enter your access code to unlock audio for all 50 places — listen, then record yourself to compare.</p>
+      <div class="subscribe-input-row">
+        <input type="text" id="subscribe-code" placeholder="Enter code" autocomplete="off" spellcheck="false" autocapitalize="characters">
+        <button id="subscribe-submit">Unlock</button>
+      </div>
+      <p id="subscribe-status"></p>
     </div>
   </div>
 

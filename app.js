@@ -15,8 +15,9 @@ const btnRecord     = document.getElementById('btn-record');
 const btnStopRec    = document.getElementById('btn-stop-rec');
 const btnPlayback   = document.getElementById('btn-playback');
 const btnRerecord   = document.getElementById('btn-rerecord');
-const btnFindOnMap  = document.getElementById('btn-find-on-map');
-const cardMapRow    = document.getElementById('card-map-row');
+const btnFindOnMap    = document.getElementById('btn-find-on-map');
+const cardMapRow      = document.getElementById('card-map-row');
+const cardLockedAudio = document.getElementById('card-locked-audio');
 
 let activeMarker     = null;
 let suppressMapClick = false;   // prevents map click from closing a card we just opened
@@ -26,8 +27,11 @@ let recChunks        = [];
 let recUrl           = null;
 let recAudio         = null;
 let recStream        = null;
-let pinsData         = [];
-const markersByName  = {};
+let pinsData             = [];
+const markersByName      = {};
+let currentCardEntry     = null;
+let currentCardName      = '';
+let currentCardFromIndex = false;
 
 // ── Audio helpers ────────────────────────────────────────────────────────────
 
@@ -64,6 +68,10 @@ function resetAudio() {
 // ── Card content ─────────────────────────────────────────────────────────────
 
 function populateCard(entry, name, fromIndex = false) {
+  currentCardEntry     = entry;
+  currentCardName      = name;
+  currentCardFromIndex = fromIndex;
+
   cardName.textContent = name;
   cardTeaching.classList.remove('coming-soon');
   resetAudio();
@@ -77,19 +85,27 @@ function populateCard(entry, name, fromIndex = false) {
     labelTeaching.style.display  = 'block';
     labelExtra.style.display     = 'block';
     if (entry.audio) {
-      cardAudio.style.display = '';
-      btnListen.dataset.src   = entry.audio;
+      if (isUnlocked()) {
+        cardAudio.style.display       = '';
+        cardLockedAudio.style.display = 'none';
+        btnListen.dataset.src         = entry.audio;
+      } else {
+        cardAudio.style.display       = 'none';
+        cardLockedAudio.style.display = '';
+      }
     } else {
-      cardAudio.style.display = 'none';
+      cardAudio.style.display       = 'none';
+      cardLockedAudio.style.display = 'none';
     }
   } else {
-    cardIpa.style.display        = 'none';
-    cardTeaching.textContent     = 'Pronunciation guide coming soon.';
+    cardIpa.style.display         = 'none';
+    cardTeaching.textContent      = 'Pronunciation guide coming soon.';
     cardTeaching.classList.add('coming-soon');
-    cardExtra.textContent        = '';
-    labelTeaching.style.display  = 'none';
-    labelExtra.style.display     = 'none';
-    cardAudio.style.display      = 'none';
+    cardExtra.textContent         = '';
+    labelTeaching.style.display   = 'none';
+    labelExtra.style.display      = 'none';
+    cardAudio.style.display       = 'none';
+    cardLockedAudio.style.display = 'none';
   }
 }
 
@@ -391,3 +407,73 @@ document.getElementById('btn-lets-go').addEventListener('click', () => {
   localStorage.setItem('shb_onboarding_seen', '1');
   obOverlay.style.display = 'none';
 });
+
+// ── Tier / unlock ─────────────────────────────────────────────────────────────
+
+const VALID_CODES = { 'BRISTOL2026': 30, 'REFUGEE2026': 30 };
+const UNLOCK_KEY  = 'shb_unlock_expiry';
+
+function isUnlocked() {
+  const exp = localStorage.getItem(UNLOCK_KEY);
+  return !!(exp && Date.now() < parseInt(exp, 10));
+}
+
+function applyTier() {
+  const statusEl = document.getElementById('about-unlock-status');
+  if (isUnlocked()) {
+    const d = new Date(parseInt(localStorage.getItem(UNLOCK_KEY), 10));
+    statusEl.textContent   = 'Access unlocked until ' + d.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+    statusEl.style.display = '';
+  } else {
+    statusEl.style.display = 'none';
+  }
+}
+
+const subBackdrop = document.getElementById('subscribe-backdrop');
+const subSheet    = document.getElementById('subscribe-sheet');
+const subCode     = document.getElementById('subscribe-code');
+const subStatus   = document.getElementById('subscribe-status');
+
+function openSubscribeSheet() {
+  subBackdrop.classList.add('open');
+  subSheet.classList.add('open');
+  subCode.value         = '';
+  subStatus.textContent = '';
+  subStatus.className   = '';
+  setTimeout(() => subCode.focus(), 50);
+}
+
+function closeSubscribeSheet() {
+  subBackdrop.classList.remove('open');
+  subSheet.classList.remove('open');
+}
+
+document.getElementById('btn-open-subscribe').addEventListener('click', openSubscribeSheet);
+document.getElementById('subscribe-close').addEventListener('click', closeSubscribeSheet);
+document.getElementById('btn-card-unlock').addEventListener('click', openSubscribeSheet);
+subBackdrop.addEventListener('click', closeSubscribeSheet);
+
+document.getElementById('subscribe-submit').addEventListener('click', () => {
+  const code = subCode.value.trim().toUpperCase();
+  if (VALID_CODES[code]) {
+    const expiry = Date.now() + VALID_CODES[code] * 24 * 60 * 60 * 1000;
+    localStorage.setItem(UNLOCK_KEY, String(expiry));
+    subStatus.textContent = '✓ Unlocked for 30 days.';
+    subStatus.className   = 'subscribe-status--ok';
+    applyTier();
+    if (card.classList.contains('visible') && currentCardEntry) {
+      populateCard(currentCardEntry, currentCardName, currentCardFromIndex);
+    }
+    setTimeout(closeSubscribeSheet, 1400);
+  } else {
+    subStatus.textContent = 'Code not recognised — please try again.';
+    subStatus.className   = 'subscribe-status--err';
+    subCode.select();
+  }
+});
+
+subCode.addEventListener('keydown', e => {
+  if (e.key === 'Enter') document.getElementById('subscribe-submit').click();
+});
+
+applyTier();

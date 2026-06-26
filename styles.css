@@ -520,6 +520,173 @@
     }
     #btn-lets-go:hover { background: #c85e32; }
 
+    /* ── Subscribe sheet ────────────────────────────────────────────────── */
+
+    #subscribe-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(60, 40, 20, 0.45);
+      z-index: 300;
+      display: none;
+    }
+
+    #subscribe-backdrop.open { display: block; }
+
+    #subscribe-sheet {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 301;
+      transform: translateY(100%);
+      transition: transform 0.28s ease;
+    }
+
+    #subscribe-sheet.open { transform: translateY(0); }
+
+    #subscribe-inner {
+      background: #faf7f2;
+      border-radius: 18px 18px 0 0;
+      border: 1px solid #e0d8cc;
+      border-bottom: none;
+      padding: 28px 24px 40px;
+      max-width: 480px;
+      margin: 0 auto;
+      position: relative;
+      box-shadow: 0 -6px 32px rgba(60, 40, 10, 0.16);
+    }
+
+    #subscribe-close {
+      position: absolute;
+      top: 14px;
+      right: 16px;
+      background: none;
+      border: none;
+      font-size: 1.3rem;
+      color: #bbb;
+      cursor: pointer;
+      line-height: 1;
+      padding: 2px 4px;
+    }
+
+    #subscribe-close:hover { color: #444; }
+
+    #subscribe-inner h2 {
+      font-family: Georgia, serif;
+      font-size: 1.15rem;
+      font-weight: normal;
+      color: #2a1f14;
+      margin-bottom: 10px;
+    }
+
+    .subscribe-desc {
+      font-family: Georgia, serif;
+      font-size: 0.88rem;
+      color: #5a4a38;
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+
+    .subscribe-input-row {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    #subscribe-code {
+      flex: 1;
+      font-family: Georgia, serif;
+      font-size: 0.95rem;
+      padding: 9px 12px;
+      border: 1.5px solid #d4c9b8;
+      border-radius: 8px;
+      background: #fff;
+      color: #222;
+      outline: none;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    #subscribe-code:focus { border-color: #E07850; }
+
+    #subscribe-submit {
+      font-family: Georgia, serif;
+      font-size: 0.9rem;
+      background: #E07850;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 9px 18px;
+      cursor: pointer;
+      transition: background 0.15s;
+      white-space: nowrap;
+    }
+
+    #subscribe-submit:hover { background: #c85e32; }
+
+    #subscribe-status {
+      font-family: Georgia, serif;
+      font-size: 0.84rem;
+      min-height: 1.2em;
+    }
+
+    .subscribe-status--ok  { color: #2e7d52; }
+    .subscribe-status--err { color: #b03020; }
+
+    /* ── Card locked audio ───────────────────────────────────────────────── */
+
+    #card-locked-audio {
+      margin-bottom: 14px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid #efefef;
+    }
+
+    .card-locked-msg {
+      font-size: 0.82rem;
+      color: #bbb;
+      line-height: 1.5;
+      margin: 0;
+    }
+
+    .card-unlock-link {
+      background: none;
+      border: none;
+      color: #E07850;
+      font-size: 0.82rem;
+      font-family: Georgia, serif;
+      cursor: pointer;
+      padding: 0;
+      text-decoration: underline;
+    }
+
+    .card-unlock-link:hover { color: #c85e32; }
+
+    /* ── About tab unlock status ─────────────────────────────────────────── */
+
+    .about-unlock-status {
+      font-size: 0.82rem;
+      color: #aaa;
+      font-style: italic;
+      margin-top: 24px;
+      margin-bottom: 0;
+    }
+
+    .about-access-para { margin-top: 14px; margin-bottom: 0; }
+
+    .about-access-btn {
+      background: none;
+      border: 1.5px solid #d4c9b8;
+      border-radius: 20px;
+      padding: 8px 20px;
+      font-family: Georgia, serif;
+      font-size: 0.85rem;
+      color: #888;
+      cursor: pointer;
+      transition: color 0.15s, border-color 0.15s;
+    }
+
+    .about-access-btn:hover { color: #E07850; border-color: #E07850; }
+
     /* ── Mobile layout ──────────────────────────────────────────────────── */
     @media (max-width: 768px) {
       body {
