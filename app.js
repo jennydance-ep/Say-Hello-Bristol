@@ -17,7 +17,7 @@ const btnPlayback   = document.getElementById('btn-playback');
 const btnRerecord   = document.getElementById('btn-rerecord');
 const btnFindOnMap    = document.getElementById('btn-find-on-map');
 const cardMapRow      = document.getElementById('card-map-row');
-const cardLockedAudio = document.getElementById('card-locked-audio');
+const cardLockedBody  = document.getElementById('card-locked-body');
 
 let activeMarker     = null;
 let suppressMapClick = false;   // prevents map click from closing a card we just opened
@@ -77,6 +77,19 @@ function populateCard(entry, name, fromIndex = false) {
   resetAudio();
   cardMapRow.style.display = fromIndex ? '' : 'none';
 
+  if (!hasAccess(name)) {
+    cardIpa.style.display        = 'none';
+    labelTeaching.style.display  = 'none';
+    cardTeaching.textContent     = '';
+    labelExtra.style.display     = 'none';
+    cardExtra.textContent        = '';
+    cardAudio.style.display      = 'none';
+    cardLockedBody.style.display = '';
+    return;
+  }
+
+  cardLockedBody.style.display = 'none';
+
   if (entry) {
     cardIpa.textContent          = entry.ipa;
     cardIpa.style.display        = 'inline-block';
@@ -85,27 +98,19 @@ function populateCard(entry, name, fromIndex = false) {
     labelTeaching.style.display  = 'block';
     labelExtra.style.display     = 'block';
     if (entry.audio) {
-      if (isUnlocked()) {
-        cardAudio.style.display       = '';
-        cardLockedAudio.style.display = 'none';
-        btnListen.dataset.src         = entry.audio;
-      } else {
-        cardAudio.style.display       = 'none';
-        cardLockedAudio.style.display = '';
-      }
+      cardAudio.style.display  = '';
+      btnListen.dataset.src    = entry.audio;
     } else {
-      cardAudio.style.display       = 'none';
-      cardLockedAudio.style.display = 'none';
+      cardAudio.style.display  = 'none';
     }
   } else {
-    cardIpa.style.display         = 'none';
-    cardTeaching.textContent      = 'Pronunciation guide coming soon.';
+    cardIpa.style.display        = 'none';
+    cardTeaching.textContent     = 'Pronunciation guide coming soon.';
     cardTeaching.classList.add('coming-soon');
-    cardExtra.textContent         = '';
-    labelTeaching.style.display   = 'none';
-    labelExtra.style.display      = 'none';
-    cardAudio.style.display       = 'none';
-    cardLockedAudio.style.display = 'none';
+    cardExtra.textContent        = '';
+    labelTeaching.style.display  = 'none';
+    labelExtra.style.display     = 'none';
+    cardAudio.style.display      = 'none';
   }
 }
 
@@ -410,12 +415,26 @@ document.getElementById('btn-lets-go').addEventListener('click', () => {
 
 // ── Tier / unlock ─────────────────────────────────────────────────────────────
 
+const FREE_PINS = new Set([
+  'Clifton',
+  'Gloucester Road',
+  'Cabot Circus',
+  'The Harbourside',
+  'Bristol Temple Meads',
+  'The Avon Gorge',
+  'The Llandoger Trow',
+]);
+
 const VALID_CODES = { 'BRISTOL2026': 30, 'REFUGEE2026': 30 };
 const UNLOCK_KEY  = 'shb_unlock_expiry';
 
 function isUnlocked() {
   const exp = localStorage.getItem(UNLOCK_KEY);
   return !!(exp && Date.now() < parseInt(exp, 10));
+}
+
+function hasAccess(name) {
+  return FREE_PINS.has(name) || isUnlocked();
 }
 
 function applyTier() {

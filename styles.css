@@ -633,26 +633,27 @@
     .subscribe-status--ok  { color: #2e7d52; }
     .subscribe-status--err { color: #b03020; }
 
-    /* ── Card locked audio ───────────────────────────────────────────────── */
+    /* ── Card locked state ───────────────────────────────────────────────── */
 
-    #card-locked-audio {
-      margin-bottom: 14px;
-      padding-bottom: 12px;
-      border-bottom: 1px solid #efefef;
+    #card-locked-body {
+      margin-top: 8px;
+      margin-bottom: 6px;
     }
 
     .card-locked-msg {
-      font-size: 0.82rem;
-      color: #bbb;
-      line-height: 1.5;
-      margin: 0;
+      font-size: 0.88rem;
+      color: #888;
+      line-height: 1.6;
+      margin: 0 0 10px;
     }
+
+    .card-locked-link-row { margin: 0; }
 
     .card-unlock-link {
       background: none;
       border: none;
       color: #E07850;
-      font-size: 0.82rem;
+      font-size: 0.84rem;
       font-family: Georgia, serif;
       cursor: pointer;
       padding: 0;
