@@ -129,7 +129,7 @@ const PLACES = [
   {
     "id": "bristol-beacon",
     "name": "Bristol Beacon",
-    "category": "Landmarks & Destinations",
+    "category": "Music & Arts",
     "ipa": "ˌbrɪs.təl ˈbiː.kən",
     "teachingNote": "Stress the first syllable of 'Beacon' - say: bris-təl BEE-kən",
     "extraNote": "Bristol's main concert hall, a mix of Victorian and modern architecture - hosts classical, modern music and comedy performances.",
@@ -300,7 +300,7 @@ const PLACES = [
   {
     "id": "bristol-museum-and-art-gallery",
     "name": "Bristol Museum & Art Gallery",
-    "category": "Landmarks & Destinations",
+    "category": "Music & Arts",
     "ipa": "ˌbrɪs.təl mjuːˌzi.əm ənd ˈɑːt ˌɡæl.ər.i",
     "teachingNote": "'Museum' has three syllables - with stress on the middle syllable. The first syllable rhymes with 'new', and the s is pronounced /z/ here: myoo-ZEE-əm",
     "extraNote": "Free to visit and right in the heart of the city - collections include dinosaur skeletons, ancient Egyptian artefacts, local art and a world-famous Banksy piece.",
@@ -309,7 +309,7 @@ const PLACES = [
   {
     "id": "m-shed",
     "name": "M Shed",
-    "category": "Landmarks & Destinations",
+    "category": "Music & Arts",
     "ipa": "ˈem ˌʃed",
     "teachingNote": "Say the letter M as 'em' - that is where the main stress is in this name, so we say: EM-shed.",
     "extraNote": "Bristol's free museum of local life and history, right on the harbourside - explore the city's past through fascinating objects, photographs, film and personal stories.",
@@ -336,7 +336,7 @@ const PLACES = [
   {
     "id": "the-arnolfini",
     "name": "The Arnolfini",
-    "category": "Landmarks & Destinations",
+    "category": "Music & Arts",
     "ipa": "ði ˌɑː.nɒlˈfɪ.ni",
     "teachingNote": "'The' is pronounced 'thee' here because the next word starts with a vowel. Stress on the third syllable of Arnolfini. Say: thee ah-nol-FEE-nee",
     "extraNote": "Bristol's internationally acclaimed contemporary arts centre on the Harbourside - galleries, cinema, performance space and a great cafe/bar. Named after the famous Van Eyck painting.",
@@ -354,7 +354,7 @@ const PLACES = [
   {
     "id": "the-llandoger-trow",
     "name": "The Llandoger Trow",
-    "category": "Landmarks & Destinations",
+    "category": "Pubs",
     "ipa": "ðə ˌɬæn.dɒ.ɡə ˈtraʊ",
     "teachingNote": "This Welsh-origin name is notoriously tricky - say thə lan-dog-ə TROW, (Trow rhymes with 'cow').",
     "extraNote": "One of Bristol's most historic pubs, dating from 1664 - reputedly the inspiration for the Admiral Benbow inn in Robert Louis Stevenson's Treasure Island.",
@@ -363,7 +363,7 @@ const PLACES = [
   {
     "id": "the-avon-gorge-hotel",
     "name": "The Avon Gorge Hotel",
-    "category": "Landmarks & Destinations",
+    "category": "Pubs",
     "ipa": "ði ˈeɪ.vən ɡɔːdʒ həʊˈtel",
     "teachingNote": "Note the stress in 'hotel' - say: hoh-TEL, with stress on the second syllable.",
     "extraNote": "Perched right on the edge of the Avon Gorge with breathtaking views of the Clifton Suspension Bridge - the bar and terrace are worth a visit even if you're not staying.",
@@ -372,7 +372,7 @@ const PLACES = [
   {
     "id": "the-coronation-tap",
     "name": "The Coronation Tap",
-    "category": "Landmarks & Destinations",
+    "category": "Pubs",
     "ipa": "ðə ˌkɒr.əˈneɪ.ʃən ˈtæp",
     "teachingNote": "Four syllables in 'Coronation' - say kor-ə-NAY-shən, with the stress on the third syllable. This pub is known locally as 'The Cori (KO-ree) Tap'.",
     "extraNote": "A Clifton institution and one of Bristol's most celebrated cider pubs - famous for its 'Exhibition' cider, which is considerably stronger than it tastes. Approach with caution!",
@@ -381,7 +381,7 @@ const PLACES = [
   {
     "id": "the-rummer",
     "name": "The Rummer",
-    "category": "Landmarks & Destinations",
+    "category": "Pubs",
     "ipa": "ðə ˈrʌm.ə",
     "teachingNote": "Say thə RU-mə - the vowel in 'Rummer' is the same as in 'cup'. The final 'er' is a schwa.",
     "extraNote": "One of Bristol's oldest pubs, on a site licensed since 1241 in the heart of the Old City - a characterful historic pub well worth seeking out.",
@@ -390,7 +390,7 @@ const PLACES = [
   {
     "id": "the-mall",
     "name": "The Mall",
-    "category": "Landmarks & Destinations",
+    "category": "Pubs",
     "ipa": "ðə ˈmɔːl",
     "teachingNote": "The pub is pronounced: thə MAWL - the long /ɔː/ is the same as the vowel in 'ball' or 'call'. Some people say thə MAL, with an open /æ/ like in 'cat'.",
     "extraNote": "A classic Clifton pub on The Mall in Clifton Village - a great spot for a pint or some food after visiting the Suspension Bridge or exploring Clifton's shops and restaurants.",
