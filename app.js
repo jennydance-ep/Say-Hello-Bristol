@@ -129,11 +129,13 @@ function showCardCentered() {
 // ── Map ───────────────────────────────────────────────────────────────────────
 
 const CATEGORY_COLORS = {
-  'Districts & Neighbourhoods':    '#E07850',
+  'Districts & Neighbourhoods':    '#4CAF7D',
   'Landmarks & Destinations':      '#2E8B8B',
   'Streets & Roads':               '#D4922A',
   'River & Geography':             '#3A7BC8',
   'Transport & Surrounding Towns': '#7952A3',
+  'Music & Arts':                  '#E8C135',
+  'Pubs':                          '#E07850',
 };
 
 const leafletMap = L.map('map').setView([51.4545, -2.5879], 13);
