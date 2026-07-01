@@ -232,27 +232,46 @@ function playPill(segEls, pillEl) {
   stopPhonemes();
   pillEl.classList.add('playing');
 
+  // Pre-create all Audio objects synchronously inside the user-gesture handler.
+  // On iOS Safari, audio unlocking only happens in the direct gesture call stack —
+  // creating Audio objects inside setTimeout breaks autoplay permission.
+  const audios = segEls.map(({ file }) => {
+    console.log('[IPA] preparing:', file);
+    return new Audio(file);
+  });
+
   let i = 0;
+
   function playNext() {
     if (i >= segEls.length) {
       pillEl.classList.remove('playing');
+      phonemeAudio = null;
       return;
     }
     const { el, file } = segEls[i];
+    const audio = audios[i];
     segEls.forEach(s => s.el.classList.remove('active'));
     el.classList.add('active');
-    phonemeAudio = new Audio(file);
-    phonemeAudio.play().catch(() => {});
-    phonemeAudio.onended = () => {
+    phonemeAudio = audio;
+    console.log('[IPA] playing:', file);
+
+    function onDone() {
+      // Bail if stopPhonemes() was called externally (phonemeAudio will no longer be this audio)
+      if (phonemeAudio !== audio) return;
       el.classList.remove('active');
       i++;
       setTimeout(playNext, 150);
+    }
+
+    audio.onended = onDone;
+    audio.onerror = (e) => {
+      console.warn('[IPA] audio error for:', file, e);
+      onDone();
     };
-    phonemeAudio.onerror = () => {
-      el.classList.remove('active');
-      i++;
-      setTimeout(playNext, 150);
-    };
+    audio.play().catch(err => {
+      console.warn('[IPA] play() rejected for:', file, err);
+      onDone();
+    });
   }
 
   playNext();

@@ -690,40 +690,40 @@
 
     /* ── Clickable IPA pills ────────────────────────────────────────────── */
 
+    /* The existing #card-ipa background box becomes the shared container.
+       Only override display so it spans the full card width. */
     #card-ipa.has-pills {
-      background: none;
-      padding: 0;
-      border-radius: 0;
       display: block;
-      margin-bottom: 16px;
     }
 
     .ipa-pills-container {
       display: flex;
       flex-wrap: wrap;
-      gap: 6px;
+      align-items: center;
+      gap: 5px;
     }
 
+    /* Pills are typographic — transparent bg, thin border, no heavy button look */
     .ipa-pill {
       display: inline-flex;
       align-items: center;
-      gap: 4px;
-      padding: 4px 10px;
-      background: #f3f1ee;
-      border: 1.5px solid #d0c9c0;
-      border-radius: 6px;
+      gap: 3px;
+      padding: 0 5px;
+      background: transparent;
+      border: 1px solid rgba(0, 0, 0, 0.22);
+      border-radius: 3px;
       font-family: Georgia, serif;
       font-size: 1rem;
-      color: #444;
+      color: inherit;
       letter-spacing: 0.03em;
       cursor: pointer;
-      transition: background 0.15s, border-color 0.15s;
+      line-height: 1.6;
+      transition: border-color 0.12s;
       user-select: none;
     }
 
     .ipa-pill:hover {
-      background: #ede8e0;
-      border-color: #b8b0a6;
+      border-color: rgba(0, 0, 0, 0.45);
     }
 
     .ipa-pill.playing {
@@ -731,13 +731,12 @@
     }
 
     .ipa-pill-speaker {
-      font-size: 0.65rem;
-      opacity: 0.45;
-      margin-right: 2px;
+      font-size: 0.52rem;
+      opacity: 0.28;
     }
 
     .ipa-deco {
-      color: #999;
+      color: #aaa;
     }
 
     .ipa-seg {
