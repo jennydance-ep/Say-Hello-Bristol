@@ -688,6 +688,69 @@
 
     .about-access-btn:hover { color: #E07850; border-color: #E07850; }
 
+    /* ── Clickable IPA pills ────────────────────────────────────────────── */
+
+    #card-ipa.has-pills {
+      background: none;
+      padding: 0;
+      border-radius: 0;
+      display: block;
+      margin-bottom: 16px;
+    }
+
+    .ipa-pills-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .ipa-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 4px 10px;
+      background: #f3f1ee;
+      border: 1.5px solid #d0c9c0;
+      border-radius: 6px;
+      font-family: Georgia, serif;
+      font-size: 1rem;
+      color: #444;
+      letter-spacing: 0.03em;
+      cursor: pointer;
+      transition: background 0.15s, border-color 0.15s;
+      user-select: none;
+    }
+
+    .ipa-pill:hover {
+      background: #ede8e0;
+      border-color: #b8b0a6;
+    }
+
+    .ipa-pill.playing {
+      border-color: #E07850;
+    }
+
+    .ipa-pill-speaker {
+      font-size: 0.65rem;
+      opacity: 0.45;
+      margin-right: 2px;
+    }
+
+    .ipa-deco {
+      color: #999;
+    }
+
+    .ipa-seg {
+      border-radius: 2px;
+      padding: 0 1px;
+      transition: background 0.06s, color 0.06s;
+    }
+
+    .ipa-seg.active {
+      background: #E07850;
+      color: #fff;
+    }
+
     /* ── Mobile layout ──────────────────────────────────────────────────── */
     @media (max-width: 768px) {
       body {

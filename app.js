@@ -22,6 +22,7 @@ const cardLockedBody  = document.getElementById('card-locked-body');
 let activeMarker     = null;
 let suppressMapClick = false;   // prevents map click from closing a card we just opened
 let modelAudio       = null;
+let phonemeAudio     = null;
 let recorder         = null;
 let recChunks        = [];
 let recUrl           = null;
@@ -54,6 +55,7 @@ function stopStream() {
 function resetAudio() {
   stopModel();
   stopPlayback();
+  stopPhonemes();
   stopStream();
   if (recorder && recorder.state !== 'inactive') recorder.stop();
   recorder  = null;
@@ -65,7 +67,74 @@ function resetAudio() {
   btnRerecord.style.display = 'none';
 }
 
+function stopPhonemes() {
+  if (phonemeAudio) { phonemeAudio.pause(); phonemeAudio = null; }
+  document.querySelectorAll('.ipa-seg.active').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.ipa-pill.playing').forEach(p => p.classList.remove('playing'));
+}
+
 // ── Card content ─────────────────────────────────────────────────────────────
+
+// ── Interactive IPA pills — proof of concept for three test entries ───────────
+
+const IPA_PILLS_DATA = {
+  'clifton': [
+    { segments: [
+      { text: 'ˈ', deco: true },
+      { text: 'k', file: 'audio/phonemes/phon_k.mp3' },
+      { text: 'l', file: 'audio/phonemes/phon_l.mp3' },
+      { text: 'ɪ', file: 'audio/phonemes/phon_i.mp3' },
+      { text: 'f', file: 'audio/phonemes/phon_f.mp3' },
+      { text: '.', deco: true },
+      { text: 't', file: 'audio/phonemes/phon_t.mp3' },
+      { text: 'ə', file: 'audio/phonemes/phon_schwa.mp3' },
+      { text: 'n', deco: true },
+    ]}
+  ],
+  'the-downs': [
+    { segments: [
+      { text: 'ð', file: 'audio/phonemes/phon_th_voiced.mp3' },
+      { text: 'ə', file: 'audio/phonemes/phon_schwa.mp3' },
+    ]},
+    { segments: [
+      { text: 'ˈ', deco: true },
+      { text: 'd', file: 'audio/phonemes/phon_d.mp3' },
+      { text: 'aʊ', file: 'audio/phonemes/phon_ow.mp3' },
+      { text: 'n', file: 'audio/phonemes/phon_n.mp3' },
+      { text: 'z', file: 'audio/phonemes/phon_z.mp3' },
+    ]}
+  ],
+  'bristol-temple-meads': [
+    { segments: [
+      { text: 'ˌ', deco: true },
+      { text: 'b', file: 'audio/phonemes/phon_b.mp3' },
+      { text: 'r', file: 'audio/phonemes/phon_r.mp3' },
+      { text: 'ɪ', file: 'audio/phonemes/phon_i.mp3' },
+      { text: 's', file: 'audio/phonemes/phon_s.mp3' },
+      { text: '.', deco: true },
+      { text: 't', file: 'audio/phonemes/phon_t.mp3' },
+      { text: 'ə', file: 'audio/phonemes/phon_schwa.mp3' },
+      { text: 'l', file: 'audio/phonemes/phon_l.mp3' },
+    ]},
+    { segments: [
+      { text: 'ˌ', deco: true },
+      { text: 't', file: 'audio/phonemes/phon_t.mp3' },
+      { text: 'e', file: 'audio/phonemes/phon_e.mp4' },
+      { text: 'm', file: 'audio/phonemes/phon_m.mp3' },
+      { text: '.', deco: true },
+      { text: 'p', file: 'audio/phonemes/phon_p.mp3' },
+      { text: 'ə', file: 'audio/phonemes/phon_schwa.mp3' },
+      { text: 'l', file: 'audio/phonemes/phon_l.mp3' },
+    ]},
+    { segments: [
+      { text: 'ˈ', deco: true },
+      { text: 'm', file: 'audio/phonemes/phon_m.mp3' },
+      { text: 'iː', file: 'audio/phonemes/phon_ee.mp3' },
+      { text: 'd', file: 'audio/phonemes/phon_d.mp3' },
+      { text: 'z', file: 'audio/phonemes/phon_z.mp3' },
+    ]}
+  ]
+};
 
 function populateCard(entry, name, fromIndex = false) {
   currentCardEntry     = entry;
@@ -75,6 +144,8 @@ function populateCard(entry, name, fromIndex = false) {
   cardName.textContent = name;
   cardTeaching.classList.remove('coming-soon');
   resetAudio();
+  cardIpa.innerHTML = '';
+  cardIpa.classList.remove('has-pills');
   cardMapRow.style.display = fromIndex ? '' : 'none';
 
   if (!hasAccess(name)) {
@@ -91,8 +162,12 @@ function populateCard(entry, name, fromIndex = false) {
   cardLockedBody.style.display = 'none';
 
   if (entry) {
-    cardIpa.textContent          = entry.ipa;
-    cardIpa.style.display        = 'inline-block';
+    if (IPA_PILLS_DATA[entry.id]) {
+      renderIpaPills(entry);
+    } else {
+      cardIpa.textContent          = entry.ipa;
+      cardIpa.style.display        = 'inline-block';
+    }
     cardTeaching.textContent     = entry.teachingNote;
     cardExtra.textContent        = entry.extraNote;
     labelTeaching.style.display  = 'block';
@@ -112,6 +187,75 @@ function populateCard(entry, name, fromIndex = false) {
     labelExtra.style.display     = 'none';
     cardAudio.style.display      = 'none';
   }
+}
+
+function renderIpaPills(entry) {
+  const words = IPA_PILLS_DATA[entry.id];
+  cardIpa.classList.add('has-pills');
+  cardIpa.style.display = 'block';
+
+  const container = document.createElement('div');
+  container.className = 'ipa-pills-container';
+
+  words.forEach(word => {
+    const pill = document.createElement('button');
+    pill.className = 'ipa-pill';
+    pill.type = 'button';
+
+    const speaker = document.createElement('span');
+    speaker.className = 'ipa-pill-speaker';
+    speaker.setAttribute('aria-hidden', 'true');
+    speaker.textContent = '🔊';
+    pill.appendChild(speaker);
+
+    const segEls = [];
+    word.segments.forEach(seg => {
+      const span = document.createElement('span');
+      span.textContent = seg.text;
+      if (seg.deco) {
+        span.className = 'ipa-deco';
+      } else {
+        span.className = 'ipa-seg';
+        segEls.push({ el: span, file: seg.file });
+      }
+      pill.appendChild(span);
+    });
+
+    pill.addEventListener('click', () => playPill(segEls, pill));
+    container.appendChild(pill);
+  });
+
+  cardIpa.appendChild(container);
+}
+
+function playPill(segEls, pillEl) {
+  stopPhonemes();
+  pillEl.classList.add('playing');
+
+  let i = 0;
+  function playNext() {
+    if (i >= segEls.length) {
+      pillEl.classList.remove('playing');
+      return;
+    }
+    const { el, file } = segEls[i];
+    segEls.forEach(s => s.el.classList.remove('active'));
+    el.classList.add('active');
+    phonemeAudio = new Audio(file);
+    phonemeAudio.play().catch(() => {});
+    phonemeAudio.onended = () => {
+      el.classList.remove('active');
+      i++;
+      setTimeout(playNext, 150);
+    };
+    phonemeAudio.onerror = () => {
+      el.classList.remove('active');
+      i++;
+      setTimeout(playNext, 150);
+    };
+  }
+
+  playNext();
 }
 
 function positionCard(latlng) {
