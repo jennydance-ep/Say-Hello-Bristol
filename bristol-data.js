@@ -176,7 +176,7 @@ const PLACES = [
     "name": "SS Great Britain",
     "category": "Landmarks & Destinations",
     "ipa": "ˌes.es ˈɡreɪt ˈbrɪt.ən",
-    "teachingNote": "Say each of the first letters separately: ESS-ESS, with the main stress on the first syllable of 'Britain': ess-ess GRAYT BRI-tən",
+    "teachingNote": "Say each of the first letters separately: ess-ess, and the main stress on the first syllable of 'Britain': ess-ess grayt BRI-tən",
     "extraNote": "The world's first ocean-going propeller-driven iron ship, designed by Brunel and launched in 1843 - now restored and on permanent display in the Great Western Dockyard where she was built.",
     "audio": "audio/ss-great-britain.mp4"
   },
