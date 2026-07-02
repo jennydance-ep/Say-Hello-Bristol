@@ -376,13 +376,17 @@ function hexToRgba(hex, alpha) {
 // lat and lng) are considered overlapping — their lozenge labels would sit on
 // top of one another at any zoom level, since marker positions are fixed in
 // lat/lng rather than screen pixels.
-const PIN_OVERLAP_THRESHOLD = 0.001;
-const PIN_OVERLAP_NUDGE     = 0.0006;
+const PIN_OVERLAP_THRESHOLD  = 0.001;
+// Cap on how far a pin may be nudged from its true location — kept small so
+// pins separate just enough to stop label overlap without drifting away
+// from their real geographic position.
+const PIN_OVERLAP_MAX_SPREAD = 0.0002;
+const PIN_OVERLAP_DIRECTIONS = 8;
 
-// Nudges pins apart (in place) so no two sit within PIN_OVERLAP_THRESHOLD
-// degrees of each other. Each colliding pin is pushed outward along a circle
-// around its original location, growing the radius until it clears every
-// pin already placed.
+// Nudges pins apart (in place) so overlapping pins don't sit on top of each
+// other. Each colliding pin is tried at up to PIN_OVERLAP_DIRECTIONS points
+// around a fixed circle of radius PIN_OVERLAP_MAX_SPREAD centred on its true
+// location — the radius never grows beyond that cap.
 function spreadOverlappingPins(pins) {
   const placed = [];
 
@@ -391,19 +395,21 @@ function spreadOverlappingPins(pins) {
     const originalLng = pin.lng;
     let lat = originalLat;
     let lng = originalLng;
-    let attempt = 0;
 
     const overlapsPlaced = (lat, lng) => placed.some(p =>
       Math.abs(p.lat - lat) < PIN_OVERLAP_THRESHOLD &&
       Math.abs(p.lng - lng) < PIN_OVERLAP_THRESHOLD
     );
 
-    while (overlapsPlaced(lat, lng)) {
-      attempt++;
-      const angle  = attempt * (Math.PI / 4); // 8 directions around the point
-      const radius = PIN_OVERLAP_NUDGE * Math.ceil(attempt / 8);
-      lat = originalLat + radius * Math.sin(angle);
-      lng = originalLng + radius * Math.cos(angle);
+    if (overlapsPlaced(lat, lng)) {
+      for (let attempt = 1; attempt <= PIN_OVERLAP_DIRECTIONS; attempt++) {
+        const angle = attempt * (2 * Math.PI / PIN_OVERLAP_DIRECTIONS);
+        const candidateLat = originalLat + PIN_OVERLAP_MAX_SPREAD * Math.sin(angle);
+        const candidateLng = originalLng + PIN_OVERLAP_MAX_SPREAD * Math.cos(angle);
+        lat = candidateLat;
+        lng = candidateLng;
+        if (!overlapsPlaced(candidateLat, candidateLng)) break;
+      }
     }
 
     pin.lat = lat;
