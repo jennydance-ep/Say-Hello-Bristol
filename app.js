@@ -372,9 +372,52 @@ function hexToRgba(hex, alpha) {
   return `rgba(${r},${g},${b},${alpha})`;
 }
 
+// Pins whose coordinates are within this many degrees of each other (in both
+// lat and lng) are considered overlapping — their lozenge labels would sit on
+// top of one another at any zoom level, since marker positions are fixed in
+// lat/lng rather than screen pixels.
+const PIN_OVERLAP_THRESHOLD = 0.001;
+const PIN_OVERLAP_NUDGE     = 0.0006;
+
+// Nudges pins apart (in place) so no two sit within PIN_OVERLAP_THRESHOLD
+// degrees of each other. Each colliding pin is pushed outward along a circle
+// around its original location, growing the radius until it clears every
+// pin already placed.
+function spreadOverlappingPins(pins) {
+  const placed = [];
+
+  pins.forEach(pin => {
+    const originalLat = pin.lat;
+    const originalLng = pin.lng;
+    let lat = originalLat;
+    let lng = originalLng;
+    let attempt = 0;
+
+    const overlapsPlaced = (lat, lng) => placed.some(p =>
+      Math.abs(p.lat - lat) < PIN_OVERLAP_THRESHOLD &&
+      Math.abs(p.lng - lng) < PIN_OVERLAP_THRESHOLD
+    );
+
+    while (overlapsPlaced(lat, lng)) {
+      attempt++;
+      const angle  = attempt * (Math.PI / 4); // 8 directions around the point
+      const radius = PIN_OVERLAP_NUDGE * Math.ceil(attempt / 8);
+      lat = originalLat + radius * Math.sin(angle);
+      lng = originalLng + radius * Math.cos(angle);
+    }
+
+    pin.lat = lat;
+    pin.lng = lng;
+    placed.push({ lat, lng });
+  });
+
+  return pins;
+}
+
 fetch('bristol-pins.json')
   .then(r => r.json())
   .then(pins => {
+    pins = spreadOverlappingPins(pins);
     pinsData = pins;
     pins.forEach(pinData => {
       const entry    = places.find(p => p.name === pinData.name);
