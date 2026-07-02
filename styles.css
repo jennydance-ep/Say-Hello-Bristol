@@ -774,12 +774,12 @@
         margin-bottom: 0;
       }
 
-      /* Full-bleed map, portrait-leaning aspect ratio so the map fills
-         more vertical screen space; SVG centres within the taller container
-         with warm parchment background framing it above and below */
+      /* Full-bleed map, sized directly off viewport height so it fills
+         roughly 65-70% of the screen on mobile regardless of width */
       #map-container {
         border-radius: 0;
-        aspect-ratio: 5 / 6;
+        aspect-ratio: auto;
+        height: 68vh;
       }
 
       #map-container svg {
