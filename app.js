@@ -232,49 +232,66 @@ function playPill(segEls, pillEl) {
   stopPhonemes();
   pillEl.classList.add('playing');
 
-  // Pre-create all Audio objects synchronously inside the user-gesture handler.
-  // On iOS Safari, audio unlocking only happens in the direct gesture call stack —
-  // creating Audio objects inside setTimeout breaks autoplay permission.
-  const audios = segEls.map(({ file }) => {
-    console.log('[IPA] preparing:', file);
-    return new Audio(file);
-  });
-
-  let i = 0;
-
-  function playNext() {
-    if (i >= segEls.length) {
+  function playSegment(index) {
+    if (index >= segEls.length) {
       pillEl.classList.remove('playing');
       phonemeAudio = null;
       return;
     }
-    const { el, file } = segEls[i];
-    const audio = audios[i];
+
+    const { el, file } = segEls[index];
+    const base = file.replace(/\.(mp3|mp4)$/i, '');
+
     segEls.forEach(s => s.el.classList.remove('active'));
     el.classList.add('active');
-    phonemeAudio = audio;
-    console.log('[IPA] playing:', file);
 
-    function onDone() {
-      // Bail if stopPhonemes() was called externally (phonemeAudio will no longer be this audio)
-      if (phonemeAudio !== audio) return;
+    function advance() {
       el.classList.remove('active');
-      i++;
-      setTimeout(playNext, 150);
+      setTimeout(() => playSegment(index + 1), 150);
     }
 
-    audio.onended = onDone;
-    audio.onerror = (e) => {
-      console.warn('[IPA] audio error for:', file, e);
-      onDone();
-    };
-    audio.play().catch(err => {
-      console.warn('[IPA] play() rejected for:', file, err);
-      onDone();
-    });
+    tryExtension(base, ['mp3', 'mp4'], 0, advance);
   }
 
-  playNext();
+  // Attempt to play <base>.mp3 first; on error, fall back to <base>.mp4.
+  function tryExtension(base, exts, extIndex, advance) {
+    if (extIndex >= exts.length) {
+      console.warn('[IPA] all extensions failed for:', base);
+      advance();
+      return;
+    }
+
+    const path = `${base}.${exts[extIndex]}`;
+    console.log('[IPA] attempting:', path);
+    const audio = new Audio(path);
+    phonemeAudio = audio;
+    let settled = false;
+
+    function onFail(err) {
+      if (settled) return;
+      settled = true;
+      console.warn('[IPA] failed:', path, err);
+      // Bail if stopPhonemes() was called externally (phonemeAudio will no longer be this audio)
+      if (phonemeAudio !== audio) return;
+      tryExtension(base, exts, extIndex + 1, advance);
+    }
+
+    function onSuccess() {
+      if (settled) return;
+      settled = true;
+      console.log('[IPA] succeeded:', path);
+      if (phonemeAudio !== audio) return;
+      advance();
+    }
+
+    audio.onended = onSuccess;
+    audio.onerror = (e) => onFail(e);
+    audio.play()
+      .then(() => console.log('[IPA] playing:', path))
+      .catch(err => onFail(err));
+  }
+
+  playSegment(0);
 }
 
 function positionCard(latlng) {
