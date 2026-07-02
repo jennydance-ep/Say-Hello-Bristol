@@ -339,7 +339,7 @@ const CATEGORY_COLORS = {
   'Pubs':                          '#E07850',
 };
 
-const leafletMap = L.map('map').setView([51.4545, -2.5879], 13);
+const leafletMap = L.map('map').setView([51.4600, -2.6000], 12);
 
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
