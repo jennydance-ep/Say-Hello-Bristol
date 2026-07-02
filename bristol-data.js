@@ -395,5 +395,23 @@ const PLACES = [
     "teachingNote": "The pub is pronounced: thə MAWL - the long /ɔː/ is the same as the vowel in 'ball' or 'call'. Some people say thə MAL, with an open /æ/ like in 'cat'.",
     "extraNote": "A classic Clifton pub on The Mall in Clifton Village - a great spot for a pint or some food after visiting the Suspension Bridge or exploring Clifton's shops and restaurants.",
     "audio": "audio/the-mall.mp4"
+  },
+  {
+    "id": "we-the-curious",
+    "name": "We The Curious",
+    "category": "Music & Arts",
+    "ipa": "wiː ðə ˈkjʊər.i.əs",
+    "teachingNote": "Stress the first syllable of 'curious' - say: wee thə KYOOR-ee-əs.",
+    "extraNote": "Bristol's hands-on science museum and planetarium on Anchor Road, overlooking Millennium Square - packed with interactive exhibits for all ages.",
+    "audio": "audio/we-the-curious.mp4"
+  },
+  {
+    "id": "watershed",
+    "name": "Watershed",
+    "category": "Music & Arts",
+    "ipa": "ˈwɔː.tə.ʃed",
+    "teachingNote": "Stress the first syllable - say: WOR-tə-shed.",
+    "extraNote": "Independent cinema and digital media centre on the Harbourside - screens arthouse and international films, with a popular café bar overlooking the water.",
+    "audio": "audio/watershed.mp4"
   }
 ];
