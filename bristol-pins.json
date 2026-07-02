@@ -45,7 +45,6 @@
   {"name": "The Coronation Tap",       "lat": 51.4601, "lng": -2.6198, "category": "Pubs",                              "outsideCity": false},
   {"name": "The Rummer",               "lat": 51.4538, "lng": -2.5941, "category": "Pubs",                              "outsideCity": false},
   {"name": "The Mall",                 "lat": 51.4591, "lng": -2.6201, "category": "Pubs",                              "outsideCity": false},
-  {"name": "Redcliffe",                "lat": 51.4488, "lng": -2.5841, "category": "Districts & Neighbourhoods",        "outsideCity": false},
   {"name": "Leigh Woods",              "lat": 51.4521, "lng": -2.6398, "category": "River & Geography",                 "outsideCity": false},
   {"name": "The Avon Gorge",           "lat": 51.4549, "lng": -2.6321, "category": "River & Geography",                 "outsideCity": false},
   {"name": "We The Curious",           "lat": 51.4502, "lng": -2.6009, "category": "Music & Arts",                      "outsideCity": false},
