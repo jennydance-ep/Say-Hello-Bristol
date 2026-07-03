@@ -449,5 +449,32 @@ const PLACES = [
     "teachingNote": "Three syllables - say TOT-ə-down. Stress firmly on the first syllable.",
     "extraNote": "Colourful hillside neighbourhood south of the river, known for its painted Victorian terraces and independent shops.",
     "audio": "audio/totterdown.mp4"
+  },
+  {
+    "id": "bishopston",
+    "name": "Bishopston",
+    "category": "Districts & Neighbourhoods",
+    "ipa": "ˈbɪʃ.əp.stən",
+    "teachingNote": "Two schwa sounds in this district - say: BISH-əp-stən.",
+    "extraNote": "Residential area close to Gloucester Road - two great parks nearby, St Andrew's and Horfield Common.",
+    "audio": "audio/bishopston.mp4"
+  },
+  {
+    "id": "southville",
+    "name": "Southville",
+    "category": "Districts & Neighbourhoods",
+    "ipa": "ˈsaʊθ.vɪl",
+    "teachingNote": "Say SOUTH-vil with the stress on syllable 1. The first syllable has the same vowel as in the word 'now'.",
+    "extraNote": "South Bristol neighbourhood popular with professionals and families - has colourfully painted Victorian houses.",
+    "audio": "audio/southville.mp4"
+  },
+  {
+    "id": "temple-quay",
+    "name": "Temple Quay",
+    "category": "Landmarks & Destinations",
+    "ipa": "ˌtem.pəl ˈkiː",
+    "teachingNote": "'Quay' is pronounced like the object, 'key' - say: tem-pəl KEE.",
+    "extraNote": "Modern business district close to Temple Meads station - home to many of Bristol's major employers.",
+    "audio": "audio/temple-quay.mp4"
   }
 ];

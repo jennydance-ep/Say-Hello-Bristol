@@ -47,5 +47,8 @@
   {"name": "Leigh Woods",              "lat": 51.4521, "lng": -2.6398, "category": "River & Geography",                 "outsideCity": false},
   {"name": "The Avon Gorge",           "lat": 51.4549, "lng": -2.6321, "category": "River & Geography",                 "outsideCity": false},
   {"name": "We The Curious",           "lat": 51.4502, "lng": -2.6009, "category": "Music & Arts",                      "outsideCity": false},
-  {"name": "Watershed",                "lat": 51.4499, "lng": -2.5985, "category": "Music & Arts",                      "outsideCity": false}
+  {"name": "Watershed",                "lat": 51.4499, "lng": -2.5985, "category": "Music & Arts",                      "outsideCity": false},
+  {"name": "Bishopston",               "lat": 51.4771, "lng": -2.5879, "category": "Districts & Neighbourhoods",        "outsideCity": false},
+  {"name": "Southville",               "lat": 51.4382, "lng": -2.5979, "category": "Districts & Neighbourhoods",        "outsideCity": false},
+  {"name": "Temple Quay",              "lat": 51.4510, "lng": -2.5756, "category": "Landmarks & Destinations",          "outsideCity": false}
 ]
