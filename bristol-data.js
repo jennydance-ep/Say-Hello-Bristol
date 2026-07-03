@@ -44,7 +44,7 @@ const PLACES = [
   {
     "id": "ashton-court",
     "name": "Ashton Court",
-    "category": "Landmarks & Destinations",
+    "category": "River & Geography",
     "ipa": "ˌæʃt.ən ˈkɔːt",
     "teachingNote": "The strongest beat falls on COURT - say ash-tən COURT",
     "extraNote": "Great place for an open-air walk, also has deer park.",
@@ -165,7 +165,7 @@ const PLACES = [
   {
     "id": "brandon-hill",
     "name": "Brandon Hill",
-    "category": "Landmarks & Destinations",
+    "category": "River & Geography",
     "ipa": "ˌbræn.dən ˈhɪl",
     "teachingNote": "Make HILL the strongest part of this phrase - say: bran-dən HILL",
     "extraNote": "One of Bristol's oldest public parks, home to Cabot Tower - a Victorian monument with panoramic views over the city. Free to visit and a great spot for a picnic.",
@@ -273,7 +273,7 @@ const PLACES = [
   {
     "id": "leigh-woods",
     "name": "Leigh Woods",
-    "category": "Landmarks & Destinations",
+    "category": "River & Geography",
     "ipa": "ˌliː ˈwʊdz",
     "teachingNote": "'Leigh' is pronounced lee (the 'gh' is completely silent), and it rhymes with 'me'. Say lee WOODZ - the vowel in 'woods' is the same short vowel as in 'put'.",
     "extraNote": "Ancient woodland on the Somerset side of the Avon Gorge, managed by the National Trust - a beautiful escape from the city with miles of walking and cycling trails.",
