@@ -442,15 +442,6 @@ const PLACES = [
     "audio": "audio/redland.mp4"
   },
   {
-    "id": "hotwells",
-    "name": "Hotwells",
-    "category": "Districts & Neighbourhoods",
-    "ipa": "ˈhɒt.wɛlz",
-    "teachingNote": "Two clear syllables - say HOT-wellz. Both syllables are strong here, don't reduce the second one.",
-    "extraNote": "Historic area at the foot of the Avon Gorge, close to the SS Great Britain and the harbourside.",
-    "audio": "audio/hotwells.mp4"
-  },
-  {
     "id": "totterdown",
     "name": "Totterdown",
     "category": "Districts & Neighbourhoods",

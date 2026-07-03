@@ -1,6 +1,5 @@
 [
   {"name": "Clifton",             "lat": 51.4571, "lng": -2.6235, "category": "Districts & Neighbourhoods"},
-  {"name": "Hotwells",            "lat": 51.4521, "lng": -2.6235, "category": "Districts & Neighbourhoods"},
   {"name": "Redland",             "lat": 51.4739, "lng": -2.5985, "category": "Districts & Neighbourhoods"},
   {"name": "Cotham",              "lat": 51.4679, "lng": -2.5971, "category": "Districts & Neighbourhoods"},
   {"name": "Stokes Croft",        "lat": 51.4641, "lng": -2.5879, "category": "Districts & Neighbourhoods"},
