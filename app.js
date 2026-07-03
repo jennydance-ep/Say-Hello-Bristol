@@ -247,7 +247,7 @@ function playPill(segEls, pillEl) {
 
     function advance() {
       el.classList.remove('active');
-      setTimeout(() => playSegment(index + 1), 150);
+      setTimeout(() => playSegment(index + 1), 50);
     }
 
     tryExtension(base, ['mp3', 'mp4'], 0, advance);

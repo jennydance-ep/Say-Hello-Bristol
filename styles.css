@@ -700,34 +700,24 @@
       display: flex;
       flex-wrap: wrap;
       align-items: center;
-      gap: 5px;
+      gap: 0.4em;
     }
 
-    /* Pills are typographic — transparent bg, thin border, no heavy button look */
+    /* Pills sit inline in the shared lozenge — no own background/border/padding,
+       so they read as plain text except for the active-phoneme highlight. */
     .ipa-pill {
       display: inline-flex;
       align-items: center;
       gap: 3px;
-      padding: 0 5px;
+      padding: 0;
       background: transparent;
-      border: 1px solid rgba(0, 0, 0, 0.22);
-      border-radius: 3px;
-      font-family: Georgia, serif;
-      font-size: 1rem;
+      border: none;
+      font: inherit;
       color: inherit;
-      letter-spacing: 0.03em;
+      letter-spacing: inherit;
       cursor: pointer;
-      line-height: 1.6;
-      transition: border-color 0.12s;
+      line-height: inherit;
       user-select: none;
-    }
-
-    .ipa-pill:hover {
-      border-color: rgba(0, 0, 0, 0.45);
-    }
-
-    .ipa-pill.playing {
-      border-color: #E07850;
     }
 
     .ipa-pill-speaker {
