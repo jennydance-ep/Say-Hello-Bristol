@@ -27,7 +27,7 @@
   {"name": "Bristol Beacon",           "lat": 51.4556, "lng": -2.5958, "category": "Music & Arts",                      "outsideCity": false},
   {"name": "Clifton Suspension Bridge","lat": 51.4549, "lng": -2.6275, "category": "Landmarks & Destinations",          "outsideCity": false},
   {"name": "The Wills Memorial Building","lat": 51.4579, "lng": -2.6032, "category": "Landmarks & Destinations",        "outsideCity": false},
-  {"name": "Millennium Square",        "lat": 51.4503, "lng": -2.6006, "category": "Landmarks & Destinations",          "outsideCity": false},
+  {"name": "Millennium Square",        "lat": 51.4490, "lng": -2.6010, "category": "Landmarks & Destinations",          "outsideCity": false},
   {"name": "Brandon Hill",             "lat": 51.4536, "lng": -2.6048, "category": "River & Geography",                 "outsideCity": false},
   {"name": "SS Great Britain",         "lat": 51.4493, "lng": -2.6198, "category": "Landmarks & Destinations",          "outsideCity": false},
   {"name": "Whiteladies Road",         "lat": 51.4674, "lng": -2.6079, "category": "Streets & Roads",                   "outsideCity": false},
