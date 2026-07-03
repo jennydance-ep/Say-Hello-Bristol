@@ -157,7 +157,7 @@ const PLACES = [
     "id": "millennium-square",
     "name": "Millennium Square",
     "category": "Landmarks & Destinations",
-    "ipa": "",
+    "ipa": "mɪˈlen.i.əm ˈskweə",
     "teachingNote": "In this phrase, SQUARE is the stressed syllable - say: mɪl-en-i-əm SKWAIR, with the /eə/ diphthong at the end",
     "extraNote": "Large open public space in the Harbourside area, with cafes, bars and the We The Curious science museum - hosts outdoor events, markets and festivals.",
     "audio": "audio/millennium-square.mp4"
@@ -413,5 +413,50 @@ const PLACES = [
     "teachingNote": "Stress the first syllable - say: WOR-tə-shed.",
     "extraNote": "Independent cinema and digital media centre on the Harbourside - screens arthouse and international films, with a popular café bar overlooking the water.",
     "audio": "audio/watershed.mp4"
+  },
+  {
+    "id": "cotham",
+    "name": "Cotham",
+    "category": "Districts & Neighbourhoods",
+    "ipa": "ˈkɒt.əm",
+    "teachingNote": "Say KOT-əm - although there is a 'th' in the spelling, it's not pronounced that way.",
+    "extraNote": "Residential area with smart Georgian and Victorian architecture - has a small high street with cafes and restaurants.",
+    "audio": "audio/cotham.mp4"
+  },
+  {
+    "id": "bedminster",
+    "name": "Bedminster",
+    "category": "Districts & Neighbourhoods",
+    "ipa": "ˈbed.mɪn.stə",
+    "teachingNote": "Stress is on syllable 1 - say BED-min-stə, with a schwa at the end of the word, and a silent 'r'.",
+    "extraNote": "Home to Upfest, Europe's largest street art festival - North Street is a busy high street with lots of independent cafes and shops.",
+    "audio": "audio/bedminster.mp4"
+  },
+  {
+    "id": "redland",
+    "name": "Redland",
+    "category": "Districts & Neighbourhoods",
+    "ipa": "ˈred.lənd",
+    "teachingNote": "Stress is on syllable 1 - say RED-lənd, with a schwa in the second, unstressed syllable.",
+    "extraNote": "Residential area with smart Georgian and Victorian architecture - has a small high street with cafes and restaurants.",
+    "audio": "audio/redland.mp4"
+  },
+  {
+    "id": "hotwells",
+    "name": "Hotwells",
+    "category": "Districts & Neighbourhoods",
+    "ipa": "ˈhɒt.wɛlz",
+    "teachingNote": "Two clear syllables - say HOT-wellz. Both syllables are strong here, don't reduce the second one.",
+    "extraNote": "Historic area at the foot of the Avon Gorge, close to the SS Great Britain and the harbourside.",
+    "audio": "audio/hotwells.mp4"
+  },
+  {
+    "id": "totterdown",
+    "name": "Totterdown",
+    "category": "Districts & Neighbourhoods",
+    "ipa": "ˈtɒt.ə.daʊn",
+    "teachingNote": "Three syllables - say TOT-ə-down. Stress firmly on the first syllable.",
+    "extraNote": "Colourful hillside neighbourhood south of the river, known for its painted Victorian terraces and independent shops.",
+    "audio": "audio/totterdown.mp4"
   }
 ];
