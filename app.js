@@ -29,7 +29,91 @@ let recUrl           = null;
 let recAudio         = null;
 let recStream        = null;
 let pinsData             = [];
+let rawPinsData          = [];
 const markersByName      = {};
+
+// ── Edit mode (hidden, ?editmode=true) ─────────────────────────────────────
+// Not surfaced anywhere in the UI — only reachable via the URL param, and
+// none of its markup/CSS/behaviour is created unless that param is present.
+const EDIT_MODE = new URLSearchParams(window.location.search).get('editmode') === 'true';
+
+function initEditMode() {
+  const style = document.createElement('style');
+  style.textContent = `
+    #edit-mode-banner {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 9999;
+      background: #E07850;
+      color: #fff;
+      font-family: Georgia, serif;
+      font-size: 0.9rem;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+    }
+    #edit-mode-save {
+      font-family: Georgia, serif;
+      font-size: 0.85rem;
+      background: #fff;
+      color: #E07850;
+      border: none;
+      border-radius: 4px;
+      padding: 6px 14px;
+      cursor: pointer;
+    }
+    #edit-mode-save:hover { background: #f4e9e2; }
+  `;
+  document.head.appendChild(style);
+
+  const banner = document.createElement('div');
+  banner.id = 'edit-mode-banner';
+
+  const label = document.createElement('span');
+  label.textContent = 'Edit mode — drag pins to reposition them';
+
+  const saveBtn = document.createElement('button');
+  saveBtn.type = 'button';
+  saveBtn.id = 'edit-mode-save';
+  saveBtn.textContent = 'Save positions';
+  saveBtn.addEventListener('click', saveEditedPositions);
+
+  banner.appendChild(label);
+  banner.appendChild(saveBtn);
+  document.body.appendChild(banner);
+  document.body.style.marginTop = banner.offsetHeight + 'px';
+}
+
+function saveEditedPositions() {
+  const blob = new Blob([JSON.stringify(rawPinsData, null, 2)], { type: 'application/json' });
+  const url  = URL.createObjectURL(blob);
+  const a    = document.createElement('a');
+  a.href     = url;
+  a.download = 'bristol-pins.json';
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  URL.revokeObjectURL(url);
+}
+
+function onPinDragEnd(marker, pinData) {
+  const { lat, lng } = marker.getLatLng();
+  pinData.lat = lat;
+  pinData.lng = lng;
+
+  const rawPin = rawPinsData.find(p => p.name === pinData.name);
+  if (rawPin) { rawPin.lat = lat; rawPin.lng = lng; }
+
+  marker.bindTooltip(`lat: ${lat.toFixed(4)}, lng: ${lng.toFixed(4)}`, {
+    direction: 'top',
+    offset: [0, -12],
+  }).openTooltip();
+  setTimeout(() => marker.closeTooltip(), 2000);
+}
+
 let currentCardEntry     = null;
 let currentCardName      = '';
 let currentCardFromIndex = false;
@@ -423,6 +507,7 @@ function spreadOverlappingPins(pins) {
 fetch('bristol-pins.json')
   .then(r => r.json())
   .then(pins => {
+    rawPinsData = pins.map(p => ({ ...p }));
     pins = spreadOverlappingPins(pins);
     pinsData = pins;
     pins.forEach(pinData => {
@@ -440,8 +525,12 @@ fetch('bristol-pins.json')
         iconAnchor: [0, 0],
       });
 
-      const marker = L.marker([pinData.lat, pinData.lng], { icon })
+      const marker = L.marker([pinData.lat, pinData.lng], { icon, draggable: EDIT_MODE })
         .addTo(leafletMap);
+
+      if (EDIT_MODE) {
+        marker.on('dragend', () => onPinDragEnd(marker, pinData));
+      }
 
       function onPinClick() {
         console.log('marker clicked', pinData.name);
@@ -470,6 +559,8 @@ fetch('bristol-pins.json')
       marker.on('click', onPinClick);
       markersByName[pinData.name] = onPinClick;
     });
+
+    if (EDIT_MODE) initEditMode();
   });
 
 document.getElementById('card-close').addEventListener('click', closeCard);
