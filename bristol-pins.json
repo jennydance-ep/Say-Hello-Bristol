@@ -19,8 +19,8 @@
   },
   {
     "name": "Stokes Croft",
-    "lat": 51.463579678846656,
-    "lng": -2.5888252258300786,
+    "lat": 51.462296295670214,
+    "lng": -2.58903980255127,
     "category": "Districts & Neighbourhoods"
   },
   {
@@ -49,14 +49,14 @@
   },
   {
     "name": "Cabot Circus",
-    "lat": 51.45780417032595,
-    "lng": -2.58354663848877,
+    "lat": 51.458131736076474,
+    "lng": -2.5854563713073735,
     "category": "Landmarks & Destinations"
   },
   {
     "name": "The Harbourside",
-    "lat": 51.45036980126148,
-    "lng": -2.5989103317260747,
+    "lat": 51.45030962606904,
+    "lng": -2.597923278808594,
     "category": "Landmarks & Destinations"
   },
   {
@@ -73,8 +73,8 @@
   },
   {
     "name": "The River Avon",
-    "lat": 51.4501,
-    "lng": -2.5551,
+    "lat": 51.443763428806044,
+    "lng": -2.573976516723633,
     "category": "River & Geography"
   },
   {
@@ -85,8 +85,8 @@
   },
   {
     "name": "Bristol Temple Meads",
-    "lat": 51.4441,
-    "lng": -2.5811,
+    "lat": 51.44598349055138,
+    "lng": -2.5793838500976567,
     "category": "Transport & Surrounding Towns"
   },
   {
@@ -119,8 +119,8 @@
   },
   {
     "name": "Bristol Airport",
-    "lat": 51.3827,
-    "lng": -2.7191,
+    "lat": 51.383566688771346,
+    "lng": -2.7178716659545903,
     "category": "Transport & Surrounding Towns",
     "outsideCity": true
   },
@@ -133,8 +133,8 @@
   },
   {
     "name": "The Hippodrome",
-    "lat": 51.453338345620416,
-    "lng": -2.5980949401855473,
+    "lat": 51.45317454583948,
+    "lng": -2.598427534103394,
     "category": "Music & Arts",
     "outsideCity": false
   },
@@ -147,43 +147,43 @@
   },
   {
     "name": "The University of Bristol",
-    "lat": 51.4579646109873,
-    "lng": -2.6018285751342773,
+    "lat": 51.457195827695266,
+    "lng": -2.6019144058227544,
     "category": "Landmarks & Destinations",
     "outsideCity": false
   },
   {
     "name": "Christmas Steps",
-    "lat": 51.4574,
-    "lng": -2.5962,
+    "lat": 51.45698524566484,
+    "lng": -2.5966411828994755,
     "category": "Streets & Roads",
     "outsideCity": false
   },
   {
     "name": "Bristol Beacon",
-    "lat": 51.454488270393476,
-    "lng": -2.59878158569336,
+    "lat": 51.45465206546068,
+    "lng": -2.5986635684967045,
     "category": "Music & Arts",
     "outsideCity": false
   },
   {
     "name": "Clifton Suspension Bridge",
-    "lat": 51.455237043045855,
-    "lng": -2.6234579086303715,
+    "lat": 51.455210301376916,
+    "lng": -2.6254534721374516,
     "category": "Landmarks & Destinations",
     "outsideCity": false
   },
   {
     "name": "The Wills Memorial Building",
-    "lat": 51.456199732694806,
-    "lng": -2.6008415222167973,
+    "lat": 51.45591895031111,
+    "lng": -2.6027405261993413,
     "category": "Landmarks & Destinations",
     "outsideCity": false
   },
   {
     "name": "Millennium Square",
-    "lat": 51.44921977274672,
-    "lng": -2.600626945495606,
+    "lat": 51.44944710626186,
+    "lng": -2.600229978561402,
     "category": "Landmarks & Destinations",
     "outsideCity": false
   },
@@ -217,8 +217,8 @@
   },
   {
     "name": "King Street",
-    "lat": 51.4508,
-    "lng": -2.5932,
+    "lat": 51.45196775790964,
+    "lng": -2.5939428806304936,
     "category": "Streets & Roads",
     "outsideCity": false
   },
@@ -231,8 +231,8 @@
   },
   {
     "name": "St Nicholas Market",
-    "lat": 51.45539749273061,
-    "lng": -2.589898109436035,
+    "lat": 51.454050366409504,
+    "lng": -2.5930416584014897,
     "category": "Landmarks & Destinations",
     "outsideCity": false
   },
@@ -245,15 +245,15 @@
   },
   {
     "name": "The Arnolfini",
-    "lat": 51.449834907881154,
-    "lng": -2.594962120056153,
+    "lat": 51.4493735573073,
+    "lng": -2.5969147682189946,
     "category": "Music & Arts",
     "outsideCity": false
   },
   {
     "name": "Bristol Museum & Art Gallery",
-    "lat": 51.45694847727419,
-    "lng": -2.6024723052978516,
+    "lat": 51.45667438470146,
+    "lng": -2.604843378067017,
     "category": "Music & Arts",
     "outsideCity": false
   },
@@ -266,8 +266,8 @@
   },
   {
     "name": "The Llandoger Trow",
-    "lat": 51.4508,
-    "lng": -2.5935,
+    "lat": 51.4517939243328,
+    "lng": -2.592215538024903,
     "category": "Pubs",
     "outsideCity": false
   },
@@ -280,22 +280,22 @@
   },
   {
     "name": "The Coronation Tap",
-    "lat": 51.46018398227573,
-    "lng": -2.618050575256348,
+    "lat": 51.45534400956504,
+    "lng": -2.6213550567626958,
     "category": "Pubs",
     "outsideCity": false
   },
   {
     "name": "The Rummer",
-    "lat": 51.45470220669028,
-    "lng": -2.5915288925170903,
+    "lat": 51.45442141509511,
+    "lng": -2.5927680730819707,
     "category": "Pubs",
     "outsideCity": false
   },
   {
     "name": "The Mall",
-    "lat": 51.4591,
-    "lng": -2.6201,
+    "lat": 51.45639360523746,
+    "lng": -2.6213335990905766,
     "category": "Pubs",
     "outsideCity": false
   },
@@ -315,15 +315,15 @@
   },
   {
     "name": "We The Curious",
-    "lat": 51.44999537655326,
-    "lng": -2.6037597656250004,
+    "lat": 51.450530268053605,
+    "lng": -2.6006054878234868,
     "category": "Music & Arts",
     "outsideCity": false
   },
   {
     "name": "Watershed",
-    "lat": 51.45122561763559,
-    "lng": -2.60002613067627,
+    "lat": 51.45195438611951,
+    "lng": -2.5983953475952153,
     "category": "Music & Arts",
     "outsideCity": false
   },
@@ -343,8 +343,8 @@
   },
   {
     "name": "Temple Quay",
-    "lat": 51.45181398208697,
-    "lng": -2.580327987670899,
+    "lat": 51.45138608141977,
+    "lng": -2.579877376556397,
     "category": "Landmarks & Destinations",
     "outsideCity": false
   }
