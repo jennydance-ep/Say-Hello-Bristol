@@ -708,7 +708,7 @@
     .ipa-pill {
       display: inline-flex;
       align-items: center;
-      gap: 3px;
+      gap: 0;
       padding: 0;
       background: transparent;
       border: none;
@@ -718,11 +718,6 @@
       cursor: pointer;
       line-height: inherit;
       user-select: none;
-    }
-
-    .ipa-pill-speaker {
-      font-size: 0.52rem;
-      opacity: 0.28;
     }
 
     .ipa-deco {

@@ -286,12 +286,6 @@ function renderIpaPills(entry) {
     pill.className = 'ipa-pill';
     pill.type = 'button';
 
-    const speaker = document.createElement('span');
-    speaker.className = 'ipa-pill-speaker';
-    speaker.setAttribute('aria-hidden', 'true');
-    speaker.textContent = '🔊';
-    pill.appendChild(speaker);
-
     const segEls = [];
     word.segments.forEach(seg => {
       const span = document.createElement('span');
@@ -325,19 +319,23 @@ function playPill(segEls, pillEl) {
 
     const { el, file } = segEls[index];
     const base = file.replace(/\.(mp3|mp4)$/i, '');
+    const realExtMatch = file.match(/\.(mp3|mp4)$/i);
+    const realExt = realExtMatch ? realExtMatch[1].toLowerCase() : 'mp3';
+    const otherExt = realExt === 'mp3' ? 'mp4' : 'mp3';
 
     segEls.forEach(s => s.el.classList.remove('active'));
     el.classList.add('active');
 
     function advance() {
       el.classList.remove('active');
-      setTimeout(() => playSegment(index + 1), 50);
+      setTimeout(() => playSegment(index + 1), 15);
     }
 
-    tryExtension(base, ['mp3', 'mp4'], 0, advance);
+    tryExtension(base, [realExt, otherExt], 0, advance);
   }
 
-  // Attempt to play <base>.mp3 first; on error, fall back to <base>.mp4.
+  // Attempt to play <base>.<realExt> first (the extension the segment's file actually uses);
+  // on error, fall back to the other extension.
   function tryExtension(base, exts, extIndex, advance) {
     if (extIndex >= exts.length) {
       console.warn('[IPA] all extensions failed for:', base);
