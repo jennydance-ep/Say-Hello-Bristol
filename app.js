@@ -161,6 +161,25 @@ function stopPhonemes() {
 
 // ── Interactive IPA pills — proof of concept for three test entries ───────────
 
+const phonemeAudioCache = {};
+function getCachedAudio(path) {
+  if (!phonemeAudioCache[path]) {
+    const audio = new Audio(path);
+    audio.preload = 'auto';
+    phonemeAudioCache[path] = audio;
+  }
+  return phonemeAudioCache[path];
+}
+
+// Given a segment's file path, returns [likelyExt, fallbackExt] — the extension
+// the file actually uses tried first, then the other supported extension.
+function getExtOrder(file) {
+  const match = file.match(/\.(mp3|mp4)$/i);
+  const realExt = match ? match[1].toLowerCase() : 'mp3';
+  const otherExt = realExt === 'mp3' ? 'mp4' : 'mp3';
+  return [realExt, otherExt];
+}
+
 const IPA_PILLS_DATA = {
   'clifton': [
     { segments: [
@@ -172,7 +191,7 @@ const IPA_PILLS_DATA = {
       { text: '.', deco: true },
       { text: 't', file: 'audio/phonemes/phon_t.mp3' },
       { text: 'ə', file: 'audio/phonemes/phon_schwa.mp3' },
-      { text: 'n', deco: true },
+      { text: 'n', file: 'audio/phonemes/phon_n.mp3' },
     ]}
   ],
   'the-downs': [
@@ -299,6 +318,13 @@ function renderIpaPills(entry) {
       pill.appendChild(span);
     });
 
+    segEls.forEach(({ file }) => {
+      const base = file.replace(/\.(mp3|mp4)$/i, '');
+      const [realExt, otherExt] = getExtOrder(file);
+      getCachedAudio(`${base}.${realExt}`);
+      getCachedAudio(`${base}.${otherExt}`);
+    });
+
     pill.addEventListener('click', () => playPill(segEls, pill));
     container.appendChild(pill);
   });
@@ -319,16 +345,14 @@ function playPill(segEls, pillEl) {
 
     const { el, file } = segEls[index];
     const base = file.replace(/\.(mp3|mp4)$/i, '');
-    const realExtMatch = file.match(/\.(mp3|mp4)$/i);
-    const realExt = realExtMatch ? realExtMatch[1].toLowerCase() : 'mp3';
-    const otherExt = realExt === 'mp3' ? 'mp4' : 'mp3';
+    const [realExt, otherExt] = getExtOrder(file);
 
     segEls.forEach(s => s.el.classList.remove('active'));
     el.classList.add('active');
 
     function advance() {
       el.classList.remove('active');
-      setTimeout(() => playSegment(index + 1), 15);
+      setTimeout(() => playSegment(index + 1), 0);
     }
 
     tryExtension(base, [realExt, otherExt], 0, advance);
@@ -345,7 +369,7 @@ function playPill(segEls, pillEl) {
 
     const path = `${base}.${exts[extIndex]}`;
     console.log('[IPA] attempting:', path);
-    const audio = new Audio(path);
+    const audio = getCachedAudio(path);
     phonemeAudio = audio;
     let settled = false;
 
@@ -368,6 +392,7 @@ function playPill(segEls, pillEl) {
 
     audio.onended = onSuccess;
     audio.onerror = (e) => onFail(e);
+    audio.currentTime = 0;
     audio.play()
       .then(() => console.log('[IPA] playing:', path))
       .catch(err => onFail(err));
