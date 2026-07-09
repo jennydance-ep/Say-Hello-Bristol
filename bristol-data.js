@@ -289,15 +289,6 @@ const PLACES = [
     "audio": "audio/stokes-croft.mp4"
   },
   {
-    "id": "tourist-information-centre",
-    "name": "Tourist Information Centre",
-    "category": "Landmarks & Destinations",
-    "ipa": "ˌtʊər.ɪst ˌɪn.fəˈmeɪ.ʃən ˌsen.tə",
-    "teachingNote": "This phrase has secondary stresses on words one and three, but the main stress is on syllable three of in-fə-MAY-shən.",
-    "extraNote": "Bristol's official visitor information point - staff can help with maps, accommodation, tours and everything you need to make the most of your visit.",
-    "audio": "audio/tourist-information-centre.mp4"
-  },
-  {
     "id": "bristol-museum-and-art-gallery",
     "name": "Bristol Museum & Art Gallery",
     "category": "Music & Arts",
