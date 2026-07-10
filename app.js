@@ -652,10 +652,13 @@ btnRerecord.addEventListener('click', () => {
   btnRerecord.style.display = 'none';
 });
 
-// Warm up mic permission once on page load so the browser prompt never interrupts recording
-navigator.mediaDevices?.getUserMedia({ audio: true })
-  .then(stream => stream.getTracks().forEach(t => t.stop()))
-  .catch(() => {});
+// Warm up mic permission once per device so the browser prompt never interrupts recording
+if (!localStorage.getItem('micWarmupDone')) {
+  navigator.mediaDevices?.getUserMedia({ audio: true })
+    .then(stream => stream.getTracks().forEach(t => t.stop()))
+    .catch(() => {})
+    .finally(() => localStorage.setItem('micWarmupDone', 'true'));
+}
 
 cardBackdrop.addEventListener('click', closeCard);
 

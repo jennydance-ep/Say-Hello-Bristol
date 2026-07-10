@@ -694,6 +694,8 @@
        Only override display so it spans the full card width. */
     #card-ipa.has-pills {
       display: block;
+      border-left: 3px solid #E07850;
+      padding-left: 10px;
     }
 
     .ipa-pills-container {
