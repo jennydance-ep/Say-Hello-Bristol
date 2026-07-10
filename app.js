@@ -223,7 +223,7 @@ const IPA_PILLS_DATA = {
       { text: 'ˌ', deco: true },
       { text: 't', file: 'audio/phonemes/phon_t.mp3' },
       { text: 'e', file: 'audio/phonemes/phon_e.mp4' },
-      { text: 'm', file: 'audio/phonemes/phon_m.mp3' },
+      { text: 'm', file: 'audio/phonemes/phon_m.mp4' },
       { text: '.', deco: true },
       { text: 'p', file: 'audio/phonemes/phon_p.mp3' },
       { text: 'ə', file: 'audio/phonemes/phon_schwa.mp3' },
@@ -231,7 +231,7 @@ const IPA_PILLS_DATA = {
     ]},
     { segments: [
       { text: 'ˈ', deco: true },
-      { text: 'm', file: 'audio/phonemes/phon_m.mp3' },
+      { text: 'm', file: 'audio/phonemes/phon_m.mp4' },
       { text: 'iː', file: 'audio/phonemes/phon_ee.mp3' },
       { text: 'd', file: 'audio/phonemes/phon_d.mp3' },
       { text: 'z', file: 'audio/phonemes/phon_z.mp3' },
