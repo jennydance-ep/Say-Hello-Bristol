@@ -244,6 +244,13 @@ function populateCard(entry, name, fromIndex = false) {
   currentCardName      = name;
   currentCardFromIndex = fromIndex;
 
+  if (typeof gtag === 'function') {
+    gtag('event', 'card_open', {
+      pin_name: name,
+      source: fromIndex ? 'index' : 'map'
+    });
+  }
+
   cardName.textContent = name;
   cardTeaching.classList.remove('coming-soon');
   resetAudio();
@@ -600,6 +607,9 @@ btnListen.addEventListener('click', () => {
   btnListen.classList.add('active');
   btnListen.textContent = '■ Playing…';
   modelAudio.onended = stopModel;
+  if (typeof gtag === 'function') {
+    gtag('event', 'audio_play', { pin_name: currentCardName });
+  }
 });
 
 btnRecord.addEventListener('click', async () => {
@@ -618,6 +628,9 @@ btnRecord.addEventListener('click', async () => {
       btnStopRec.style.display  = 'none';
       btnPlayback.style.display = '';
       btnRerecord.style.display = '';
+      if (typeof gtag === 'function') {
+        gtag('event', 'recording_made', { pin_name: currentCardName });
+      }
     };
     recorder.start();
     btnRecord.style.display  = 'none';
@@ -821,6 +834,9 @@ subBackdrop.addEventListener('click', closeSubscribeSheet);
 document.getElementById('subscribe-submit').addEventListener('click', () => {
   const code = subCode.value.trim().toUpperCase();
   if (VALID_CODES[code]) {
+    if (typeof gtag === 'function') {
+      gtag('event', 'unlock_code_used', { code: code });
+    }
     const expiry = Date.now() + VALID_CODES[code] * 24 * 60 * 60 * 1000;
     localStorage.setItem(UNLOCK_KEY, String(expiry));
     subStatus.textContent = '✓ Unlocked for 30 days.';
