@@ -784,7 +784,7 @@ const FREE_PINS = new Set([
   'The Llandoger Trow',
 ]);
 
-const VALID_CODES = { 'BRISTOL2026': 30, 'REFUGEE2026': 30 };
+const VALID_CODES = { 'BRISTOL2026': 30, 'REFUGEE2026': 30, 'UWE2026': 30, 'UOB2026': 30 };
 const UNLOCK_KEY  = 'shb_unlock_expiry';
 
 function isUnlocked() {
