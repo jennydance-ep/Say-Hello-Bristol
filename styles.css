@@ -723,7 +723,8 @@
     }
 
     .ipa-deco {
-      color: #aaa;
+      color: #000;
+      font-weight: 700;
     }
 
     .ipa-seg {
