@@ -236,7 +236,108 @@ const IPA_PILLS_DATA = {
       { text: 'd', file: 'audio/phonemes/phon_d.mp3' },
       { text: 'z', file: 'audio/phonemes/phon_z.mp3' },
     ]}
-  ]
+  ],
+  'gloucester-road': [
+    { segments: [
+      { text: 'ˌ', deco: true },
+      { text: 'ɡ', file: 'audio/phonemes/phon_g.mp4' },
+      { text: 'l', file: 'audio/phonemes/phon_l.mp3' },
+      { text: 'ɒ', file: 'audio/phonemes/phon_o_broad.mp3' },
+      { text: 's', file: 'audio/phonemes/phon_s.mp3' },
+      { text: '.', deco: true },
+      { text: 't', file: 'audio/phonemes/phon_t.mp3' },
+      { text: 'ə', file: 'audio/phonemes/phon_schwa.mp3' },
+    ]},
+    { segments: [
+      { text: 'ˈ', deco: true },
+      { text: 'r', file: 'audio/phonemes/phon_r.mp3' },
+      { text: 'ə', file: 'audio/phonemes/phon_schwa.mp3' },
+      { text: 'ʊ', file: 'audio/phonemes/phon_oh.mp3' },
+      { text: 'd', file: 'audio/phonemes/phon_d.mp3' },
+    ]},
+  ],
+  'cabot-circus': [
+    { segments: [
+      { text: 'ˌ', deco: true },
+      { text: 'k', file: 'audio/phonemes/phon_k.mp3' },
+      { text: 'æ', file: 'audio/phonemes/phon_a_short.mp3' },
+      { text: 'b', file: 'audio/phonemes/phon_b.mp3' },
+      { text: '.', deco: true },
+      { text: 'ə', file: 'audio/phonemes/phon_schwa.mp3' },
+      { text: 't', file: 'audio/phonemes/phon_t.mp3' },
+    ]},
+    { segments: [
+      { text: 'ˈ', deco: true },
+      { text: 's', file: 'audio/phonemes/phon_s.mp3' },
+      { text: 'ɜ', file: 'audio/phonemes/phon_ur.mp3' },
+      { text: '.', deco: true },
+      { text: 'k', file: 'audio/phonemes/phon_k.mp3' },
+      { text: 'ə', file: 'audio/phonemes/phon_schwa.mp3' },
+      { text: 's', file: 'audio/phonemes/phon_s.mp3' },
+    ]},
+  ],
+  'the-harbourside': [
+    { segments: [
+      { text: 'ð', file: 'audio/phonemes/phon_th_voiced.mp3' },
+      { text: 'ə', file: 'audio/phonemes/phon_schwa.mp3' },
+    ]},
+    { segments: [
+      { text: 'ˈ', deco: true },
+      { text: 'h', file: 'audio/phonemes/phon_h.mp3' },
+      { text: 'ɑ', file: 'audio/phonemes/phon_ah.mp3' },
+      { text: '.', deco: true },
+      { text: 'b', file: 'audio/phonemes/phon_b.mp3' },
+      { text: 'ə', file: 'audio/phonemes/phon_schwa.mp3' },
+      { text: '.', deco: true },
+      { text: 's', file: 'audio/phonemes/phon_s.mp3' },
+      { text: 'aɪ', file: 'audio/phonemes/phon_ai.mp3' },
+      { text: 'd', file: 'audio/phonemes/phon_d.mp3' },
+    ]},
+  ],
+  'the-avon-gorge': [
+    { segments: [
+      { text: 'ð', file: 'audio/phonemes/phon_th_voiced.mp3' },
+      { text: 'i', file: 'audio/phonemes/phon_ee.mp3' },
+    ]},
+    { segments: [
+      { text: 'ˌ', deco: true },
+      { text: 'eɪ', file: 'audio/phonemes/phon_ei.mp3' },
+      { text: '.', deco: true },
+      { text: 'v', file: 'audio/phonemes/phon_v.mp3' },
+      { text: 'ə', file: 'audio/phonemes/phon_schwa.mp3' },
+      { text: 'n', file: 'audio/phonemes/phon_n.mp3' },
+    ]},
+    { segments: [
+      { text: 'ˈ', deco: true },
+      { text: 'ɡ', file: 'audio/phonemes/phon_g.mp4' },
+      { text: 'ɔ', file: 'audio/phonemes/phon_or.mp4' },
+      { text: 'dʒ', file: 'audio/phonemes/phon_j.mp3' },
+    ]},
+  ],
+  'the-llandoger-trow': [
+    { segments: [
+      { text: 'ð', file: 'audio/phonemes/phon_th_voiced.mp3' },
+      { text: 'ə', file: 'audio/phonemes/phon_schwa.mp3' },
+    ]},
+    { segments: [
+      { text: 'ˌ', deco: true },
+      { text: 'l', file: 'audio/phonemes/phon_l.mp3' },
+      { text: 'æ', file: 'audio/phonemes/phon_a_short.mp3' },
+      { text: 'n', file: 'audio/phonemes/phon_n.mp3' },
+      { text: '.', deco: true },
+      { text: 'd', file: 'audio/phonemes/phon_d.mp3' },
+      { text: 'ɒ', file: 'audio/phonemes/phon_o_broad.mp3' },
+      { text: '.', deco: true },
+      { text: 'ɡ', file: 'audio/phonemes/phon_g.mp4' },
+      { text: 'ə', file: 'audio/phonemes/phon_schwa.mp3' },
+    ]},
+    { segments: [
+      { text: 'ˈ', deco: true },
+      { text: 't', file: 'audio/phonemes/phon_t.mp3' },
+      { text: 'r', file: 'audio/phonemes/phon_r.mp3' },
+      { text: 'aʊ', file: 'audio/phonemes/phon_ow.mp3' },
+    ]},
+  ],
 };
 
 function populateCard(entry, name, fromIndex = false) {
@@ -793,7 +894,7 @@ const FREE_PINS = new Set([
   'The Llandoger Trow',
 ]);
 
-const VALID_CODES = { 'BRISTOL2026': 30, 'REFUGEE2026': 30, 'UWE2026': 30, 'UOB2026': 30 };
+const VALID_CODES = { 'BRISTOL2026': 30, 'REFUGEE2026': 30, 'UWE2026': 30, 'UOB2026': 30, 'HARBOURFEST26': 7 };
 const UNLOCK_KEY  = 'shb_unlock_expiry';
 
 function isUnlocked() {
