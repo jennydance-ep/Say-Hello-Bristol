@@ -279,6 +279,22 @@
     </div>
   </div>
 
+  <div id="feedback-overlay" style="display:none">
+    <div id="feedback-card">
+      <button id="feedback-close" aria-label="Close">&times;</button>
+      <h2>How's it going so far?</h2>
+      <p class="ob-intro">A minute of your time would really help.</p>
+      <p class="fb-question">Would you recommend this app?</p>
+      <div class="fb-yesno">
+        <button class="fb-choice" data-value="Yes" type="button">Yes</button>
+        <button class="fb-choice" data-value="No" type="button">No</button>
+      </div>
+      <p class="fb-question">Which feature(s) did you find most helpful?</p>
+      <textarea id="fb-feature-text" rows="3" placeholder="e.g. record and compare, the clickable IPA..."></textarea>
+      <button id="btn-fb-submit" disabled>Submit feedback</button>
+    </div>
+  </div>
+
   <!-- Subscribe sheet -->
   <div id="subscribe-backdrop"></div>
   <div id="subscribe-sheet">

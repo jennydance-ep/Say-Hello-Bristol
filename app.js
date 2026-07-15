@@ -242,6 +242,15 @@ const IPA_PILLS_DATA = {
 function populateCard(entry, name, fromIndex = false) {
   currentCardEntry     = entry;
   currentCardName      = name;
+
+  if (isUnlocked() && !localStorage.getItem('shb_feedback_shown')) {
+    const n = parseInt(localStorage.getItem('shb_pins_since_unlock') || '0', 10) + 1;
+    localStorage.setItem('shb_pins_since_unlock', String(n));
+    if (n === 5) {
+      showFeedbackPopup();
+    }
+  }
+
   currentCardFromIndex = fromIndex;
 
   if (typeof gtag === 'function') {
@@ -839,7 +848,8 @@ document.getElementById('subscribe-submit').addEventListener('click', () => {
     }
     const expiry = Date.now() + VALID_CODES[code] * 24 * 60 * 60 * 1000;
     localStorage.setItem(UNLOCK_KEY, String(expiry));
-    subStatus.textContent = '✓ Unlocked for 30 days.';
+    localStorage.setItem('shb_pins_since_unlock', '0');
+    subStatus.textContent = `✓ Unlocked for ${VALID_CODES[code]} days.`;
     subStatus.className   = 'subscribe-status--ok';
     applyTier();
     if (card.classList.contains('visible') && currentCardEntry) {
@@ -858,3 +868,36 @@ subCode.addEventListener('keydown', e => {
 });
 
 applyTier();
+
+// ── Feedback pop-up ───────────────────────────────────────────────────────────
+
+function showFeedbackPopup() {
+  localStorage.setItem('shb_feedback_shown', '1');
+  document.getElementById('feedback-overlay').style.display = 'flex';
+}
+
+let fbRecommend = null;
+
+document.querySelectorAll('.fb-choice').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.fb-choice').forEach(b => b.classList.remove('selected'));
+    btn.classList.add('selected');
+    fbRecommend = btn.dataset.value;
+    document.getElementById('btn-fb-submit').disabled = false;
+  });
+});
+
+document.getElementById('feedback-close').addEventListener('click', () => {
+  document.getElementById('feedback-overlay').style.display = 'none';
+});
+
+document.getElementById('btn-fb-submit').addEventListener('click', () => {
+  const featureText = document.getElementById('fb-feature-text').value.trim();
+  if (typeof gtag === 'function') {
+    gtag('event', 'feedback_submitted', {
+      recommend: fbRecommend,
+      feature: featureText.slice(0, 100),
+    });
+  }
+  document.getElementById('feedback-overlay').style.display = 'none';
+});
