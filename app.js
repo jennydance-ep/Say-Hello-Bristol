@@ -269,7 +269,7 @@ const IPA_PILLS_DATA = {
     { segments: [
       { text: 'ˈ', deco: true },
       { text: 's', file: 'audio/phonemes/phon_s.mp3' },
-      { text: 'ɜ', file: 'audio/phonemes/phon_ur.mp3' },
+      { text: 'ɜː', file: 'audio/phonemes/phon_ur.mp3' },
       { text: '.', deco: true },
       { text: 'k', file: 'audio/phonemes/phon_k.mp3' },
       { text: 'ə', file: 'audio/phonemes/phon_schwa.mp3' },
@@ -284,7 +284,7 @@ const IPA_PILLS_DATA = {
     { segments: [
       { text: 'ˈ', deco: true },
       { text: 'h', file: 'audio/phonemes/phon_h.mp3' },
-      { text: 'ɑ', file: 'audio/phonemes/phon_ah.mp3' },
+      { text: 'ɑː', file: 'audio/phonemes/phon_ah.mp3' },
       { text: '.', deco: true },
       { text: 'b', file: 'audio/phonemes/phon_b.mp3' },
       { text: 'ə', file: 'audio/phonemes/phon_schwa.mp3' },
@@ -297,7 +297,7 @@ const IPA_PILLS_DATA = {
   'the-avon-gorge': [
     { segments: [
       { text: 'ð', file: 'audio/phonemes/phon_th_voiced.mp3' },
-      { text: 'i', file: 'audio/phonemes/phon_ee.mp3' },
+      { text: 'iː', file: 'audio/phonemes/phon_ee.mp3' },
     ]},
     { segments: [
       { text: 'ˌ', deco: true },
@@ -310,7 +310,7 @@ const IPA_PILLS_DATA = {
     { segments: [
       { text: 'ˈ', deco: true },
       { text: 'ɡ', file: 'audio/phonemes/phon_g.mp4' },
-      { text: 'ɔ', file: 'audio/phonemes/phon_or.mp4' },
+      { text: 'ɔː', file: 'audio/phonemes/phon_or.mp4' },
       { text: 'dʒ', file: 'audio/phonemes/phon_j.mp3' },
     ]},
   ],
