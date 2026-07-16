@@ -31,6 +31,7 @@ let recStream        = null;
 let pinsData             = [];
 let rawPinsData          = [];
 const markersByName      = {};
+const pinMarkersByName   = {};
 
 // ── Edit mode (hidden, ?editmode=true) ─────────────────────────────────────
 // Not surfaced anywhere in the UI — only reachable via the URL param, and
@@ -651,14 +652,12 @@ fetch('bristol-pins.json')
     pinsData = pins;
     pins.forEach(pinData => {
       const entry    = places.find(p => p.name === pinData.name);
-      // TESTING: completeness check disabled — re-enable for free/paid tier
-      // const complete = !!(entry && entry.audio && entry.ipa && entry.teachingNote);
       const color    = CATEGORY_COLORS[pinData.category] || '#888';
-      // const bg    = hexToRgba(color, complete ? 0.85 : 0.4);
       const bg       = hexToRgba(color, 0.85);
+      const locked   = !hasAccess(pinData.name);
 
       const icon = L.divIcon({
-        html:       `<div class="pin-lozenge" style="background-color:${bg};">${pinData.name}</div>`,
+        html:       `<div class="pin-lozenge${locked ? ' pin-locked' : ''}" style="background-color:${bg};">${pinData.name}</div>`,
         className:  'pin-icon',
         iconSize:   [0, 0],
         iconAnchor: [0, 0],
@@ -697,6 +696,7 @@ fetch('bristol-pins.json')
 
       marker.on('click', onPinClick);
       markersByName[pinData.name] = onPinClick;
+      pinMarkersByName[pinData.name] = marker;
     });
 
     if (EDIT_MODE) initEditMode();
@@ -849,8 +849,15 @@ function buildIndex() {
       name.className = 'index-entry-name';
       name.textContent = entry.name;
 
+      const lock = document.createElement('span');
+      lock.className = 'index-lock';
+      lock.textContent = '🔒';
+      lock.style.display = hasAccess(entry.name) ? 'none' : 'inline';
+
+      row.dataset.name = entry.name;
       row.appendChild(dot);
       row.appendChild(name);
+      row.appendChild(lock);
 
       row.addEventListener('click', () => {
         populateCard(entry, entry.name, true);
@@ -914,6 +921,15 @@ function applyTier() {
   } else {
     statusEl.style.display = 'none';
   }
+
+  document.querySelectorAll('.index-entry').forEach(row => {
+    const lockEl = row.querySelector('.index-lock');
+    if (lockEl) lockEl.style.display = hasAccess(row.dataset.name) ? 'none' : 'inline';
+  });
+  Object.keys(pinMarkersByName).forEach(name => {
+    const el = pinMarkersByName[name].getElement()?.querySelector('.pin-lozenge');
+    if (el) el.classList.toggle('pin-locked', !hasAccess(name));
+  });
 }
 
 const subBackdrop = document.getElementById('subscribe-backdrop');

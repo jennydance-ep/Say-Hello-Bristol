@@ -120,6 +120,12 @@
       color: #E07850;
     }
 
+    .index-lock {
+      margin-left: 6px;
+      font-size: 0.8em;
+      opacity: 0.6;
+    }
+
     /* ── About tab ──────────────────────────────────────────────────────────── */
 
     .about-content {
