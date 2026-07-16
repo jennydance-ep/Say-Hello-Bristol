@@ -33,6 +33,16 @@ let rawPinsData          = [];
 const markersByName      = {};
 const pinMarkersByName   = {};
 
+const FREE_PINS = new Set([
+  'Clifton',
+  'Gloucester Road',
+  'Cabot Circus',
+  'The Harbourside',
+  'Bristol Temple Meads',
+  'The Avon Gorge',
+  'The Llandoger Trow',
+]);
+
 // ── Edit mode (hidden, ?editmode=true) ─────────────────────────────────────
 // Not surfaced anywhere in the UI — only reachable via the URL param, and
 // none of its markup/CSS/behaviour is created unless that param is present.
@@ -889,16 +899,6 @@ document.getElementById('btn-lets-go').addEventListener('click', () => {
 });
 
 // ── Tier / unlock ─────────────────────────────────────────────────────────────
-
-const FREE_PINS = new Set([
-  'Clifton',
-  'Gloucester Road',
-  'Cabot Circus',
-  'The Harbourside',
-  'Bristol Temple Meads',
-  'The Avon Gorge',
-  'The Llandoger Trow',
-]);
 
 const VALID_CODES = { 'BRISTOL2026': 30, 'REFUGEE2026': 30, 'UWE2026': 30, 'UOB2026': 30, 'HARBOURFEST26': 7 };
 const UNLOCK_KEY  = 'shb_unlock_expiry';
