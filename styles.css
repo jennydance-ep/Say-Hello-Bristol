@@ -826,6 +826,8 @@
       cursor: pointer;
       line-height: inherit;
       user-select: none;
+      -webkit-appearance: none;
+      appearance: none;
     }
 
     .ipa-deco {
