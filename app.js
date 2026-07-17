@@ -32,6 +32,7 @@ let pinsData             = [];
 let rawPinsData          = [];
 const markersByName      = {};
 const pinMarkersByName   = {};
+const pinColorsByName    = {};
 const VALID_CODES = { 'BRISTOL2026': 30, 'REFUGEE2026': 30, 'UWE2026': 30, 'UOB2026': 30, 'HARBOURFEST26': 7 };
 const UNLOCK_KEY  = 'shb_unlock_expiry';
 
@@ -665,8 +666,8 @@ fetch('bristol-pins.json')
     pins.forEach(pinData => {
       const entry    = places.find(p => p.name === pinData.name);
       const color    = CATEGORY_COLORS[pinData.category] || '#888';
-      const bg       = hexToRgba(color, 0.85);
       const locked   = !hasAccess(pinData.name);
+      const bg       = hexToRgba(color, locked ? 0.55 : 0.85);
 
       const icon = L.divIcon({
         html:       `<div class="pin-lozenge${locked ? ' pin-locked' : ''}" style="background-color:${bg};">${pinData.name}</div>`,
@@ -709,6 +710,7 @@ fetch('bristol-pins.json')
       marker.on('click', onPinClick);
       markersByName[pinData.name] = onPinClick;
       pinMarkersByName[pinData.name] = marker;
+      pinColorsByName[pinData.name]  = color;
     });
 
     if (EDIT_MODE) initEditMode();
@@ -927,7 +929,10 @@ function applyTier() {
   });
   Object.keys(pinMarkersByName).forEach(name => {
     const el = pinMarkersByName[name].getElement()?.querySelector('.pin-lozenge');
-    if (el) el.classList.toggle('pin-locked', !hasAccess(name));
+    if (!el) return;
+    const locked = !hasAccess(name);
+    el.classList.toggle('pin-locked', locked);
+    el.style.backgroundColor = hexToRgba(pinColorsByName[name], locked ? 0.55 : 0.85);
   });
 }
 
