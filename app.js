@@ -44,6 +44,7 @@ const FREE_PINS = new Set([
   'Bristol Temple Meads',
   'The Avon Gorge',
   'The Llandoger Trow',
+  'Bristol Beacon',
 ]);
 
 // ── Edit mode (hidden, ?editmode=true) ─────────────────────────────────────
