@@ -32,6 +32,8 @@ let pinsData             = [];
 let rawPinsData          = [];
 const markersByName      = {};
 const pinMarkersByName   = {};
+const VALID_CODES = { 'BRISTOL2026': 30, 'REFUGEE2026': 30, 'UWE2026': 30, 'UOB2026': 30, 'HARBOURFEST26': 7 };
+const UNLOCK_KEY  = 'shb_unlock_expiry';
 
 const FREE_PINS = new Set([
   'Clifton',
@@ -899,9 +901,6 @@ document.getElementById('btn-lets-go').addEventListener('click', () => {
 });
 
 // ── Tier / unlock ─────────────────────────────────────────────────────────────
-
-const VALID_CODES = { 'BRISTOL2026': 30, 'REFUGEE2026': 30, 'UWE2026': 30, 'UOB2026': 30, 'HARBOURFEST26': 7 };
-const UNLOCK_KEY  = 'shb_unlock_expiry';
 
 function isUnlocked() {
   const exp = localStorage.getItem(UNLOCK_KEY);
