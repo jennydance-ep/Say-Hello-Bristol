@@ -403,7 +403,7 @@ const IPA_PILLS_DATA = {
       { text: 'ʊə', file: 'audio/phonemes/phon_u_schwa.mp3' },
       { text: '.', deco: true },
       { text: 'r', file: 'audio/phonemes/phon_r.mp3' },
-      { text: 'i', file: 'audio/phonemes/phon_i.mp3' },
+      { text: 'iː', file: 'audio/phonemes/phon_ee.mp3' },
       { text: '.', deco: true },
       { text: 'ə', file: 'audio/phonemes/phon_schwa.mp3' },
       { text: 's', file: 'audio/phonemes/phon_s.mp3' },
@@ -412,7 +412,7 @@ const IPA_PILLS_DATA = {
   'the-arnolfini': [
     { segments: [
       { text: 'ð', file: 'audio/phonemes/phon_th_voiced.mp3' },
-      { text: 'i', file: 'audio/phonemes/phon_ee.mp3' },
+      { text: 'iː', file: 'audio/phonemes/phon_ee.mp3' },
     ]},
     { segments: [
       { text: 'ˌ', deco: true },
@@ -423,10 +423,10 @@ const IPA_PILLS_DATA = {
       { text: 'l', file: 'audio/phonemes/phon_l.mp3' },
       { text: 'ˈ', deco: true },
       { text: 'f', file: 'audio/phonemes/phon_f.mp3' },
-      { text: 'ɪ', file: 'audio/phonemes/phon_i.mp3' },
+      { text: 'iː', file: 'audio/phonemes/phon_ee.mp3' },
       { text: '.', deco: true },
       { text: 'n', file: 'audio/phonemes/phon_n.mp3' },
-      { text: 'i', file: 'audio/phonemes/phon_i.mp3' },
+      { text: 'iː', file: 'audio/phonemes/phon_ee.mp3' },
     ]},
   ],
   'the-wills-memorial-building': [
@@ -449,7 +449,7 @@ const IPA_PILLS_DATA = {
       { text: 'ɔː', file: 'audio/phonemes/phon_or.mp4' },
       { text: '.', deco: true },
       { text: 'r', file: 'audio/phonemes/phon_r.mp3' },
-      { text: 'i', file: 'audio/phonemes/phon_i.mp3' },
+      { text: 'iː', file: 'audio/phonemes/phon_ee.mp3' },
       { text: '.', deco: true },
       { text: 'ə', file: 'audio/phonemes/phon_schwa.mp3' },
       { text: 'l', file: 'audio/phonemes/phon_l.mp3' },
