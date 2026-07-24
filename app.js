@@ -441,7 +441,7 @@ const IPA_PILLS_DATA = {
       { text: 'ə', file: 'audio/phonemes/phon_schwa.mp3' },
     ]},
     { segments: [
-      { text: 'ˈ', deco: true },
+      { text: 'ˌ', deco: true },
       { text: 'w', file: 'audio/phonemes/phon_w.mp3' },
       { text: 'ɪ', file: 'audio/phonemes/phon_i.mp3' },
       { text: 'l', file: 'audio/phonemes/phon_l.mp3' },

@@ -148,8 +148,8 @@ const PLACES = [
     "id": "the-wills-memorial-building",
     "name": "The Wills Memorial Building",
     "category": "Landmarks & Destinations",
-    "ipa": "ðə ˈwɪlz məˈmɔː.ri.əl ˌbɪl.dɪŋ",
-    "teachingNote": "'Memorial' has the strongest beat in this phrase - say: thə wɪlz mə-MAW-ri-əl BIL-dɪŋ",
+    "ipa": "ðə ˌwɪlz məˈmɔː.ri.əl ˌbɪl.dɪŋ",
+    "teachingNote": "'MeMORial' has the stongest beat in this phrase - say: thə wilz me-MAW-ree-əl bil-ding",
     "extraNote": "The centrepiece building of the University of Bristol campus - a magnificent 1925 neo-Gothic tower.",
     "audio": "audio/the-wills-memorial-building.mp4"
   },
