@@ -23,6 +23,7 @@ let activeMarker     = null;
 let suppressMapClick = false;   // prevents map click from closing a card we just opened
 let modelAudio       = null;
 let phonemeAudio     = null;
+let phonemeSeqId     = 0;
 let recorder         = null;
 let recChunks        = [];
 let recUrl           = null;
@@ -167,7 +168,12 @@ function resetAudio() {
 }
 
 function stopPhonemes() {
-  if (phonemeAudio) { phonemeAudio.pause(); phonemeAudio = null; }
+  if (phonemeAudio) {
+    phonemeAudio.pause();
+    phonemeAudio.onended = null;
+    phonemeAudio.onerror = null;
+    phonemeAudio = null;
+  }
   document.querySelectorAll('.ipa-seg.active').forEach(s => s.classList.remove('active'));
   document.querySelectorAll('.ipa-pill.playing').forEach(p => p.classList.remove('playing'));
 }
@@ -579,6 +585,7 @@ function renderIpaPills(entry) {
 function playPill(segEls, pillEl) {
   stopPhonemes();
   pillEl.classList.add('playing');
+  const seqId = ++phonemeSeqId;
 
   function playSegment(index) {
     if (index >= segEls.length) {
@@ -621,8 +628,9 @@ function playPill(segEls, pillEl) {
       if (settled) return;
       settled = true;
       console.warn('[IPA] failed:', path, err);
-      // Bail if stopPhonemes() was called externally (phonemeAudio will no longer be this audio)
-      if (phonemeAudio !== audio) return;
+      // Bail if this sequence is no longer the active one (superseded by a
+      // newer playPill() call, even if it shares this same cached audio object)
+      if (seqId !== phonemeSeqId) return;
       tryExtension(base, exts, extIndex + 1, advance);
     }
 
@@ -630,7 +638,7 @@ function playPill(segEls, pillEl) {
       if (settled) return;
       settled = true;
       console.log('[IPA] succeeded:', path);
-      if (phonemeAudio !== audio) return;
+      if (seqId !== phonemeSeqId) return;
       advance();
     }
 
