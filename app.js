@@ -541,7 +541,7 @@ const IPA_PILLS_DATA = {
       { text: 'ə', file: 'audio/phonemes/phon_schwa.mp3' },
       { text: '.', deco: true },
       { text: 't', file: 'audio/phonemes/phon_t.mp3' },
-      { text: 'i', file: 'audio/phonemes/phon_i.mp3' },
+      { text: 'iː', file: 'audio/phonemes/phon_ee.mp3' },
     ]},
     { segments: [
       { text: 'ə', file: 'audio/phonemes/phon_schwa.mp3' },
@@ -589,7 +589,7 @@ const IPA_PILLS_DATA = {
       { text: 'uː', file: 'audio/phonemes/phon_u_long.mp3' },
       { text: 'ˌ', deco: true },
       { text: 'z', file: 'audio/phonemes/phon_z.mp3' },
-      { text: 'i', file: 'audio/phonemes/phon_i.mp3' },
+      { text: 'iː', file: 'audio/phonemes/phon_ee.mp3' },
       { text: '.', deco: true },
       { text: 'ə', file: 'audio/phonemes/phon_schwa.mp3' },
       { text: 'm', file: 'audio/phonemes/phon_m.mp4' },
@@ -612,7 +612,7 @@ const IPA_PILLS_DATA = {
       { text: '.', deco: true },
       { text: 'ə', file: 'audio/phonemes/phon_schwa.mp3' },
       { text: 'r', file: 'audio/phonemes/phon_r.mp3' },
-      { text: 'i', file: 'audio/phonemes/phon_i.mp3' },
+      { text: 'iː', file: 'audio/phonemes/phon_ee.mp3' },
     ]},
   ],
   'portishead': [

@@ -220,7 +220,7 @@ const PLACES = [
     "id": "the-university-of-bristol",
     "name": "The University of Bristol",
     "category": "Landmarks & Destinations",
-    "ipa": "ðə ˌjuː.nɪˈvɜː.sə.ti əv ˈbrɪs.təl",
+    "ipa": "ðə ˌjuː.nɪˈvɜː.sə.tiː əv ˈbrɪs.təl",
     "teachingNote": "This phrase has two stressed syllables - say: thə uni-VER-si-tee əv BRIS-təl",
     "extraNote": "A Russell Group university founded in 1909, with a beautiful campus in Clifton - consistently ranked in the UK top 10.",
     "audio": "audio/the-university-of-bristol.mp4"
@@ -292,7 +292,7 @@ const PLACES = [
     "id": "bristol-museum-and-art-gallery",
     "name": "Bristol Museum & Art Gallery",
     "category": "Music & Arts",
-    "ipa": "ˌbrɪs.təl mjuːˌzi.əm ənd ˈɑːt ˌɡæl.ər.i",
+    "ipa": "ˌbrɪs.təl mjuːˌziː.əm ənd ˈɑːt ˌɡæl.ər.iː",
     "teachingNote": "'Museum' has three syllables - with stress on the middle syllable. The first syllable rhymes with 'new', and the s is pronounced /z/ here: myoo-ZEE-əm",
     "extraNote": "Free to visit and right in the heart of the city - collections include dinosaur skeletons, ancient Egyptian artefacts, local art and a world-famous Banksy piece.",
     "audio": "audio/bristol-museum-and-art-gallery.mp4"
