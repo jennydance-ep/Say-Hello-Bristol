@@ -964,7 +964,7 @@ const IPA_PILLS_DATA = {
   ],
   'clifton-suspension-bridge': [
     { segments: [
-      { text: 'ˈ', deco: true },
+      { text: 'ˌ', deco: true },
       { text: 'k', file: 'audio/phonemes/phon_k.mp3' },
       { text: 'l', file: 'audio/phonemes/phon_l.mp3' },
       { text: 'ɪ', file: 'audio/phonemes/phon_i.mp3' },
@@ -1004,7 +1004,7 @@ const IPA_PILLS_DATA = {
       { text: 's', file: 'audio/phonemes/phon_s.mp3' },
     ]},
     { segments: [
-      { text: 'ˈ', deco: true },
+      { text: 'ˌ', deco: true },
       { text: 'ɡ', file: 'audio/phonemes/phon_g.mp4' },
       { text: 'r', file: 'audio/phonemes/phon_r.mp3' },
       { text: 'eɪ', file: 'audio/phonemes/phon_ei.mp3' },

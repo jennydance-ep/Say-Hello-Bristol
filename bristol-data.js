@@ -139,7 +139,7 @@ const PLACES = [
     "id": "clifton-suspension-bridge",
     "name": "Clifton Suspension Bridge",
     "category": "Landmarks & Destinations",
-    "ipa": "ˈklɪf.tən səˈspen.ʃən ˌbrɪdʒ",
+    "ipa": "ˌklɪf.tən səˈspen.ʃən ˌbrɪdʒ",
     "teachingNote": "The strongest beat is on the second syllable of 'suspension' - say: klɪf-tən səs-PEN-shən bridge",
     "extraNote": "Iconic Bristol landmark, designed by Isambard Kingdom Brunel, finished in 1864 - sits across the Avon Gorge.",
     "audio": "audio/clifton-suspension-bridge.mp4"
@@ -175,7 +175,7 @@ const PLACES = [
     "id": "ss-great-britain",
     "name": "SS Great Britain",
     "category": "Landmarks & Destinations",
-    "ipa": "ˌes.es ˈɡreɪt ˈbrɪt.ən",
+    "ipa": "ˌes.es ˌɡreɪt ˈbrɪt.ən",
     "teachingNote": "Say each of the first letters separately: ess-ess, and the main stress on the first syllable of 'Britain': ess-ess grayt BRI-tən",
     "extraNote": "The world's first ocean-going propeller-driven iron ship, designed by Brunel and launched in 1843 - now restored and on permanent display in the Great Western Dockyard where she was built.",
     "audio": "audio/ss-great-britain.mp4"
@@ -201,7 +201,7 @@ const PLACES = [
   {
     "id": "the-hippodrome",
     "name": "The Hippodrome",
-    "category": "Landmarks & Destinations",
+    "category": "Music & Arts",
     "ipa": "ðə ˈhɪp.ə.drəʊm",
     "teachingNote": "Say: thə HIP-ə-drohm. The final syllable rhymes with 'home'.",
     "extraNote": "Well known Bristol theatre venue, opened in 1912 - hosts West End touring productions, opera, ballet and pantomime.",
