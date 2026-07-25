@@ -18,6 +18,7 @@ const btnRerecord   = document.getElementById('btn-rerecord');
 const btnFindOnMap    = document.getElementById('btn-find-on-map');
 const cardMapRow      = document.getElementById('card-map-row');
 const cardLockedBody  = document.getElementById('card-locked-body');
+const cardLockedFreeList = document.getElementById('card-locked-free-list');
 
 let activeMarker     = null;
 let suppressMapClick = false;   // prevents map click from closing a card we just opened
@@ -34,7 +35,7 @@ let rawPinsData          = [];
 const markersByName      = {};
 const pinMarkersByName   = {};
 const pinColorsByName    = {};
-const VALID_CODES = { 'BRISTOL2026': 30, 'REFUGEE2026': 30, 'UWE2026': 30, 'UOB2026': 30, 'HARBOURFEST26': 7 };
+const VALID_CODES = { 'BRISTOL2026': 30, 'REFUGEE2026': 30, 'UWE2026': 30, 'UOB2026': 30, 'HARBOURFEST26': 7, 'SHBJUL26': 30 };
 const UNLOCK_KEY  = 'shb_unlock_expiry';
 
 const FREE_PINS = new Set([
@@ -1076,6 +1077,7 @@ function populateCard(entry, name, fromIndex = false) {
     labelExtra.style.display     = 'none';
     cardExtra.textContent        = '';
     cardAudio.style.display      = 'none';
+    cardLockedFreeList.textContent = 'Try these unlocked places: ' + Array.from(FREE_PINS).join(', ');
     cardLockedBody.style.display = '';
     return;
   }

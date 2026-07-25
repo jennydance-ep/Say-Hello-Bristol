@@ -759,6 +759,13 @@
       margin: 0 0 10px;
     }
 
+    .card-locked-free-list {
+      font-size: 0.85rem;
+      color: #777;
+      margin-top: 8px;
+      line-height: 1.5;
+    }
+
     .card-locked-link-row { margin: 0; }
 
     .card-unlock-link {
