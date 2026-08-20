@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Say Hello Bristol — Payment Confirmation</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    #success-container {
+      width: 100%;
+      max-width: 480px;
+      margin: 60px auto;
+      padding: 0 20px;
+      font-family: Georgia, serif;
+      text-align: center;
+    }
+
+    #success-card {
+      background: #faf7f2;
+      border: 1px solid #e0d8cc;
+      border-radius: 18px;
+      padding: 32px 24px;
+      box-shadow: 0 4px 24px rgba(60, 40, 10, 0.10);
+    }
+
+    #success-card h1 {
+      font-size: 1.3rem;
+      font-weight: normal;
+      color: #2a1f14;
+      margin-bottom: 14px;
+    }
+
+    #success-card p {
+      font-size: 0.95rem;
+      color: #5a4a38;
+      line-height: 1.7;
+      margin-bottom: 14px;
+    }
+
+    #success-card a.about-link {
+      color: #E07850;
+    }
+
+    .success-code-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin: 18px 0;
+    }
+
+    .success-code {
+      font-family: Georgia, serif;
+      font-size: 1rem;
+      font-weight: bold;
+      letter-spacing: 0.08em;
+      background: #fff;
+      border: 1.5px solid #d4c9b8;
+      border-radius: 8px;
+      padding: 8px 14px;
+      color: #2a1f14;
+    }
+
+    .success-copy-btn {
+      font-family: Georgia, serif;
+      font-size: 0.85rem;
+      background: #E07850;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 8px 14px;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+
+    .success-copy-btn:hover { background: #c85e32; }
+
+    .success-back-btn {
+      display: inline-block;
+      font-family: Georgia, serif;
+      font-size: 0.95rem;
+      background: #E07850;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 8px;
+      padding: 10px 22px;
+      margin-top: 8px;
+      transition: background 0.15s;
+    }
+
+    .success-back-btn:hover { background: #c85e32; }
+
+    .success-status--err { color: #b03020; }
+    .success-status--ok  { color: #2e7d52; }
+  </style>
+</head>
+<body>
+
+  <header id="site-header">
+    <h1>Say Hello Bristol</h1>
+  </header>
+
+  <div id="success-container">
+    <div id="success-card">
+      <div id="success-content">
+        <h1>Confirming your payment&hellip;</h1>
+        <p>Please wait a moment.</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const contentEl = document.getElementById('success-content');
+    const UNLOCK_KEY = 'shb_unlock_expiry';
+    const SUCCESS_CODE = 'SHB90DAY';
+    const NINETY_DAYS_MS = 90 * 24 * 60 * 60 * 1000;
+
+    function renderError(message) {
+      contentEl.innerHTML = `
+        <h1 class="success-status--err">Something went wrong</h1>
+        <p>${message}</p>
+      `;
+    }
+
+    function renderSuccess() {
+      contentEl.innerHTML = `
+        <h1 class="success-status--ok">Thank you for your purchase!</h1>
+        <p>Your device is now unlocked for 90 days.</p>
+        <p>Want to use this on another device too? Enter this code there:</p>
+        <div class="success-code-row">
+          <span class="success-code" id="success-code-text">${SUCCESS_CODE}</span>
+          <button class="success-copy-btn" id="success-copy-btn">Copy</button>
+        </div>
+        <p id="success-copy-status" style="min-height:1.2em;font-size:0.85rem;"></p>
+        <p><a class="success-back-btn" href="https://sayhellobristol.co.uk/">Back to the map</a></p>
+      `;
+
+      const copyBtn = document.getElementById('success-copy-btn');
+      const copyStatus = document.getElementById('success-copy-status');
+      copyBtn.addEventListener('click', async () => {
+        try {
+          await navigator.clipboard.writeText(SUCCESS_CODE);
+          copyStatus.textContent = 'Copied!';
+          copyStatus.className = 'success-status--ok';
+        } catch (err) {
+          copyStatus.textContent = 'Could not copy — please copy the code manually.';
+          copyStatus.className = 'success-status--err';
+        }
+      });
+    }
+
+    function renderNotVerified() {
+      contentEl.innerHTML = `
+        <h1 class="success-status--err">We couldn't confirm your payment</h1>
+        <p>If you were charged, please contact
+          <a class="about-link" href="mailto:jenny@jdenglishpronunciation.co.uk">jenny@jdenglishpronunciation.co.uk</a>
+          and we'll sort it out.</p>
+        <p><a class="success-back-btn" href="https://sayhellobristol.co.uk/">Back to the map</a></p>
+      `;
+    }
+
+    const params = new URLSearchParams(window.location.search);
+    const sessionId = params.get('session_id');
+
+    if (!sessionId) {
+      renderError('No payment reference found. Please contact <a class="about-link" href="mailto:jenny@jdenglishpronunciation.co.uk">jenny@jdenglishpronunciation.co.uk</a> for help.');
+    } else {
+      fetch(`/.netlify/functions/verify-payment?session_id=${encodeURIComponent(sessionId)}`)
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.verified) {
+            localStorage.setItem(UNLOCK_KEY, String(Date.now() + NINETY_DAYS_MS));
+            renderSuccess();
+          } else {
+            renderNotVerified();
+          }
+        })
+        .catch(() => {
+          renderNotVerified();
+        });
+    }
+  </script>
+
+</body>
+</html>
