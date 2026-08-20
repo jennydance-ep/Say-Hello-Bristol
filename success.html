@@ -6,6 +6,14 @@
   <title>Say Hello Bristol — Payment Confirmation</title>
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="stylesheet" href="styles.css">
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-J6G4SCD483"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-J6G4SCD483');
+  </script>
   <style>
     #success-container {
       width: 100%;
@@ -41,40 +49,6 @@
     #success-card a.about-link {
       color: #E07850;
     }
-
-    .success-code-row {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      margin: 18px 0;
-    }
-
-    .success-code {
-      font-family: Georgia, serif;
-      font-size: 1rem;
-      font-weight: bold;
-      letter-spacing: 0.08em;
-      background: #fff;
-      border: 1.5px solid #d4c9b8;
-      border-radius: 8px;
-      padding: 8px 14px;
-      color: #2a1f14;
-    }
-
-    .success-copy-btn {
-      font-family: Georgia, serif;
-      font-size: 0.85rem;
-      background: #E07850;
-      color: #fff;
-      border: none;
-      border-radius: 8px;
-      padding: 8px 14px;
-      cursor: pointer;
-      transition: background 0.15s;
-    }
-
-    .success-copy-btn:hover { background: #c85e32; }
 
     .success-back-btn {
       display: inline-block;
@@ -113,7 +87,6 @@
   <script>
     const contentEl = document.getElementById('success-content');
     const UNLOCK_KEY = 'shb_unlock_expiry';
-    const SUCCESS_CODE = 'SHB90DAY';
     const NINETY_DAYS_MS = 90 * 24 * 60 * 60 * 1000;
 
     function renderError(message) {
@@ -127,27 +100,8 @@
       contentEl.innerHTML = `
         <h1 class="success-status--ok">Thank you for your purchase!</h1>
         <p>Your device is now unlocked for 90 days.</p>
-        <p>Want to use this on another device too? Enter this code there:</p>
-        <div class="success-code-row">
-          <span class="success-code" id="success-code-text">${SUCCESS_CODE}</span>
-          <button class="success-copy-btn" id="success-copy-btn">Copy</button>
-        </div>
-        <p id="success-copy-status" style="min-height:1.2em;font-size:0.85rem;"></p>
         <p><a class="success-back-btn" href="https://sayhellobristol.co.uk/">Back to the map</a></p>
       `;
-
-      const copyBtn = document.getElementById('success-copy-btn');
-      const copyStatus = document.getElementById('success-copy-status');
-      copyBtn.addEventListener('click', async () => {
-        try {
-          await navigator.clipboard.writeText(SUCCESS_CODE);
-          copyStatus.textContent = 'Copied!';
-          copyStatus.className = 'success-status--ok';
-        } catch (err) {
-          copyStatus.textContent = 'Could not copy — please copy the code manually.';
-          copyStatus.className = 'success-status--err';
-        }
-      });
     }
 
     function renderNotVerified() {
@@ -171,6 +125,9 @@
         .then((data) => {
           if (data.verified) {
             localStorage.setItem(UNLOCK_KEY, String(Date.now() + NINETY_DAYS_MS));
+            if (typeof gtag === 'function') {
+              gtag('event', 'purchase_verified', { session_id: sessionId });
+            }
             renderSuccess();
           } else {
             renderNotVerified();
