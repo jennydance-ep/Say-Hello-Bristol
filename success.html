@@ -87,7 +87,7 @@
   <script>
     const contentEl = document.getElementById('success-content');
     const UNLOCK_KEY = 'shb_unlock_expiry';
-    const NINETY_DAYS_MS = 90 * 24 * 60 * 60 * 1000;
+    const THIRTY_DAYS_MS = 30 * 24 * 60 * 60 * 1000;
 
     function renderError(message) {
       contentEl.innerHTML = `
@@ -99,7 +99,7 @@
     function renderSuccess() {
       contentEl.innerHTML = `
         <h1 class="success-status--ok">Thank you for your purchase!</h1>
-        <p>Your device is now unlocked for 90 days.</p>
+        <p>Your device is now unlocked for 30 days.</p>
         <p><a class="success-back-btn" href="https://sayhellobristol.co.uk/">Back to the map</a></p>
       `;
     }
@@ -124,7 +124,7 @@
         .then((res) => res.json())
         .then((data) => {
           if (data.verified) {
-            localStorage.setItem(UNLOCK_KEY, String(Date.now() + NINETY_DAYS_MS));
+            localStorage.setItem(UNLOCK_KEY, String(Date.now() + THIRTY_DAYS_MS));
             if (typeof gtag === 'function') {
               gtag('event', 'purchase_verified', { session_id: sessionId });
             }

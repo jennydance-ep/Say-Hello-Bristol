@@ -35,7 +35,7 @@ let rawPinsData          = [];
 const markersByName      = {};
 const pinMarkersByName   = {};
 const pinColorsByName    = {};
-const VALID_CODES = { 'BRISTOL2026': 30, 'REFUGEE2026': 30, 'UWE2026': 30, 'UOB2026': 30, 'HARBOURFEST26': 7, 'SHBJUL26': 30, 'SHB90DAY': 90 };
+const VALID_CODES = { 'BRISTOL2026': 30, 'REFUGEE2026': 30, 'UWE2026': 30, 'UOB2026': 30, 'HARBOURFEST26': 7, 'SHBJUL26': 30, 'SHB30DAY': 30 };
 const UNLOCK_KEY  = 'shb_unlock_expiry';
 
 const FREE_PINS = new Set([

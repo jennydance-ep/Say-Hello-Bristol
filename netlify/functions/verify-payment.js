@@ -18,7 +18,7 @@ exports.handler = async (event) => {
       return {
         statusCode: 200,
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ verified: true, code: 'SHB90DAY' }),
+        body: JSON.stringify({ verified: true, code: 'SHB30DAY' }),
       };
     }
 
