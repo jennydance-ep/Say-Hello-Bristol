@@ -806,6 +806,12 @@
 
     .card-unlock-link:hover { color: #c85e32; }
 
+    .inline-subscribe-teaser {
+      margin-top: 24px;
+      padding-top: 16px;
+      border-top: 1px solid #e0d8cc;
+    }
+
     /* ── About tab unlock status ─────────────────────────────────────────── */
 
     .about-unlock-status {

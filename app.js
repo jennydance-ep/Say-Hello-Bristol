@@ -1810,6 +1810,8 @@ function closeSubscribeSheet() {
 document.getElementById('btn-open-subscribe').addEventListener('click', openSubscribeSheet);
 document.getElementById('subscribe-close').addEventListener('click', closeSubscribeSheet);
 document.getElementById('btn-card-unlock').addEventListener('click', openSubscribeSheet);
+document.getElementById('btn-index-unlock').addEventListener('click', openSubscribeSheet);
+document.getElementById('btn-about-unlock').addEventListener('click', openSubscribeSheet);
 subBackdrop.addEventListener('click', closeSubscribeSheet);
 
 document.getElementById('subscribe-submit').addEventListener('click', () => {
