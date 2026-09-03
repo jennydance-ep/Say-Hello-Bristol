@@ -1524,13 +1524,14 @@ fetch('bristol-pins.json')
     pins = spreadOverlappingPins(pins);
     pinsData = pins;
     pins.forEach(pinData => {
-      const entry    = places.find(p => p.name === pinData.name);
-      const color    = CATEGORY_COLORS[pinData.category] || '#888';
-      const locked   = !hasAccess(pinData.name);
-      const bg       = hexToRgba(color, locked ? 0.55 : 0.85);
+      const entry     = places.find(p => p.name === pinData.name);
+      const color     = CATEGORY_COLORS[pinData.category] || '#888';
+      const locked    = !hasAccess(pinData.name);
+      const freeTier  = FREE_PINS.has(pinData.name);
+      const bg        = hexToRgba(color, locked ? 0.55 : 0.85);
 
       const icon = L.divIcon({
-        html:       `<div class="pin-lozenge${locked ? ' pin-locked' : ''}" style="background-color:${bg};">${pinData.name}</div>`,
+        html:       `<div class="pin-lozenge${locked ? ' pin-locked' : ''}${freeTier ? ' pin-free-tier' : ''}" style="background-color:${bg};">${pinData.name}</div>`,
         className:  'pin-icon',
         iconSize:   [0, 0],
         iconAnchor: [0, 0],
