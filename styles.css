@@ -828,6 +828,44 @@
       border-top: 1px solid #e0d8cc;
     }
 
+    /* Index-tab pay prompt: sits mid-list (see buildIndex()), so it's
+       centred like a standalone card rather than a left-aligned footnote. */
+    .index-teaser {
+      text-align: center;
+      margin: 20px 0;
+      padding: 16px 0;
+      border-top: 1px solid #e0d8cc;
+      border-bottom: 1px solid #e0d8cc;
+    }
+
+    .index-teaser .card-locked-msg {
+      margin: 0 auto 14px;
+      max-width: 420px;
+    }
+
+    .index-teaser .card-locked-link-row {
+      margin-top: 10px;
+    }
+
+    .index-pay-btn {
+      display: block;
+      margin: 0 auto;
+      font-family: Georgia, serif;
+      font-size: 0.95rem;
+      background: #E07850;
+      color: #fff;
+      text-align: center;
+      border: none;
+      border-radius: 24px;
+      padding: 11px 26px;
+      cursor: pointer;
+      transition: background 0.15s;
+      width: 280px;
+      letter-spacing: 0.02em;
+    }
+
+    .index-pay-btn:hover { background: #c85e32; }
+
     .about-trial-note {
       font-size: 0.88rem;
       color: #5a4a38;
@@ -956,6 +994,10 @@
 
       #index-list {
         padding: 16px 12px 40px;
+      }
+
+      .index-pay-btn {
+        width: 100%;
       }
 
       .about-content {

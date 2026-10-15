@@ -50,6 +50,9 @@ const EXPIRED_TEASER_MSG     = '🔒 Your free trial has ended. 8 central places
 const DEFAULT_SUBSCRIBE_NOTE = "Full 3-day free trial, then 8 free central places, or pay £3.99 for 30 days' full access.";
 const EXPIRED_SUBSCRIBE_NOTE = 'Your free trial has ended — 8 central places stay free. Pay £3.99 to unlock all 50 for 30 days.';
 
+const INDEX_PAY_BTN_TRIAL_LABEL   = 'Keep full access: £3.99';
+const INDEX_PAY_BTN_EXPIRED_LABEL = 'Unlock all 50 places: £3.99';
+
 const FREE_PINS = new Set([
   'Clifton',
   'Gloucester Road',
@@ -1732,6 +1735,14 @@ function buildIndex() {
   const indexList = document.getElementById('index-list');
   const sortedCats = Object.keys(byCategory).sort();
 
+  // Track which category section's cumulative entry count lands closest to
+  // half of all places, so the pay-prompt box can be inserted there —
+  // roughly halfway down the list — without ever splitting a category.
+  const half = places.length / 2;
+  let cumulative   = 0;
+  let bestSection  = null;
+  let bestDiff     = Infinity;
+
   sortedCats.forEach(cat => {
     const entries = byCategory[cat].slice().sort((a, b) => a.name.localeCompare(b.name));
     const color   = CATEGORY_COLORS[cat] || '#888';
@@ -1777,7 +1788,19 @@ function buildIndex() {
     });
 
     indexList.appendChild(section);
+
+    cumulative += entries.length;
+    const diff = Math.abs(cumulative - half);
+    if (diff < bestDiff) {
+      bestDiff    = diff;
+      bestSection = section;
+    }
   });
+
+  const indexTeaser = document.getElementById('index-teaser');
+  if (indexTeaser && bestSection) {
+    bestSection.after(indexTeaser);
+  }
 }
 
 buildIndex();
@@ -1876,6 +1899,11 @@ function updateAccessCopy() {
   if (noteEl) {
     noteEl.textContent = (!trialOn && !unlocked) ? EXPIRED_SUBSCRIBE_NOTE : DEFAULT_SUBSCRIBE_NOTE;
   }
+
+  const indexPayBtn = document.getElementById('btn-index-unlock');
+  if (indexPayBtn) {
+    indexPayBtn.textContent = trialOn ? INDEX_PAY_BTN_TRIAL_LABEL : INDEX_PAY_BTN_EXPIRED_LABEL;
+  }
 }
 
 const subBackdrop = document.getElementById('subscribe-backdrop');
@@ -1900,7 +1928,13 @@ function closeSubscribeSheet() {
 document.getElementById('btn-open-subscribe').addEventListener('click', openSubscribeSheet);
 document.getElementById('subscribe-close').addEventListener('click', closeSubscribeSheet);
 document.getElementById('btn-card-unlock').addEventListener('click', openSubscribeSheet);
-document.getElementById('btn-index-unlock').addEventListener('click', openSubscribeSheet);
+document.getElementById('btn-index-unlock').addEventListener('click', () => {
+  if (typeof gtag === 'function') {
+    gtag('event', 'index_pay_click');
+  }
+  openSubscribeSheet();
+});
+document.getElementById('btn-index-code').addEventListener('click', openSubscribeSheet);
 document.getElementById('btn-about-unlock').addEventListener('click', openSubscribeSheet);
 subBackdrop.addEventListener('click', closeSubscribeSheet);
 
