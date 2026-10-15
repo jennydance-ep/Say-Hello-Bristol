@@ -49,6 +49,14 @@
       transition: color 0.15s;
     }
 
+    .trial-banner {
+      font-size: 0.82rem;
+      font-weight: bold;
+      color: #E07850;
+      letter-spacing: 0.02em;
+      margin: -4px 0 10px;
+    }
+
     .tab-btn:hover { color: #444; }
 
     .tab-btn.active {
@@ -487,6 +495,14 @@
       margin-bottom: 20px;
     }
 
+    .ob-trial-note {
+      font-size: 0.84rem;
+      font-weight: bold;
+      color: #E07850;
+      line-height: 1.5;
+      margin: -8px 0 20px;
+    }
+
     .ob-legend {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -810,6 +826,13 @@
       margin-top: 24px;
       padding-top: 16px;
       border-top: 1px solid #e0d8cc;
+    }
+
+    .about-trial-note {
+      font-size: 0.88rem;
+      color: #5a4a38;
+      line-height: 1.7;
+      margin-bottom: 14px;
     }
 
     /* ── About tab unlock status ─────────────────────────────────────────── */

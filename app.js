@@ -38,6 +38,18 @@ const pinColorsByName    = {};
 const VALID_CODES = { 'BRISTOL2026': 30, 'REFUGEE2026': 30, 'UWE2026': 30, 'UOB2026': 30, 'HARBOURFEST26': 7, 'SHBJUL26': 30, 'SHB30DAY': 30 };
 const UNLOCK_KEY  = 'shb_unlock_expiry';
 
+// ── Free trial ──────────────────────────────────────────────────────────────
+const TRIAL_DAYS        = 3;
+const DAY_MS            = 24 * 60 * 60 * 1000;
+const TRIAL_MS          = TRIAL_DAYS * DAY_MS;
+const TRIAL_KEY         = 'shb_trial_start';
+const TRIAL_EXPIRED_KEY = 'shb_trial_expired_sent';
+
+const TRIAL_TEASER_MSG       = "✨ You're in your free trial — all 50 places are open. After it ends, 8 stay free, or £3.99 unlocks all 50 for 30 days.";
+const EXPIRED_TEASER_MSG     = '🔒 Your free trial has ended. 8 central places stay free — £3.99 unlocks all 50 for 30 days.';
+const DEFAULT_SUBSCRIBE_NOTE = "Full 3-day free trial, then 8 free central places, or pay £3.99 for 30 days' full access.";
+const EXPIRED_SUBSCRIBE_NOTE = 'Your free trial has ended — 8 central places stay free. Pay £3.99 to unlock all 50 for 30 days.';
+
 const FREE_PINS = new Set([
   'Clifton',
   'Gloucester Road',
@@ -48,6 +60,34 @@ const FREE_PINS = new Set([
   'The Llandoger Trow',
   'Bristol Beacon',
 ]);
+
+// Every visitor gets TRIAL_DAYS of full access from their first visit on a
+// given device. After that the app reverts to the free/paid tier model.
+let trialStart = null;
+try {
+  trialStart = localStorage.getItem(TRIAL_KEY);
+  if (!trialStart) {
+    trialStart = String(Date.now());
+    localStorage.setItem(TRIAL_KEY, trialStart);
+    if (typeof gtag === 'function') {
+      gtag('event', 'trial_start');
+    }
+  }
+} catch (e) { /* localStorage unavailable — trial just won't persist */ }
+
+function isTrialActive() {
+  if (!trialStart) return false;
+  return Date.now() < parseInt(trialStart, 10) + TRIAL_MS;
+}
+
+try {
+  if (trialStart && !isTrialActive() && !localStorage.getItem(TRIAL_EXPIRED_KEY)) {
+    localStorage.setItem(TRIAL_EXPIRED_KEY, '1');
+    if (typeof gtag === 'function') {
+      gtag('event', 'trial_expired');
+    }
+  }
+} catch (e) { /* localStorage unavailable */ }
 
 // ── Edit mode (hidden, ?editmode=true) ─────────────────────────────────────
 // Not surfaced anywhere in the UI — only reachable via the URL param, and
@@ -1214,7 +1254,7 @@ function populateCard(entry, name, fromIndex = false) {
   currentCardEntry     = entry;
   currentCardName      = name;
 
-  if (isUnlocked() && !localStorage.getItem('shb_feedback_shown')) {
+  if ((isUnlocked() || isTrialActive()) && !localStorage.getItem('shb_feedback_shown')) {
     const n = parseInt(localStorage.getItem('shb_pins_since_unlock') || '0', 10) + 1;
     localStorage.setItem('shb_pins_since_unlock', String(n));
     if (n === 5) {
@@ -1763,7 +1803,7 @@ function isUnlocked() {
 }
 
 function hasAccess(name) {
-  return FREE_PINS.has(name) || isUnlocked();
+  return FREE_PINS.has(name) || isUnlocked() || isTrialActive();
 }
 
 function applyTier() {
@@ -1776,6 +1816,10 @@ function applyTier() {
     statusEl.style.display = 'none';
   }
 
+  // Full access (trial or paid/code) means there's nothing to distinguish —
+  // the free-pin border only earns its keep once some pins are locked.
+  document.body.classList.toggle('shb-full-access', isTrialActive() || isUnlocked());
+
   document.querySelectorAll('.index-entry').forEach(row => {
     const lockEl = row.querySelector('.index-lock');
     if (lockEl) lockEl.style.display = hasAccess(row.dataset.name) ? 'none' : 'inline';
@@ -1787,6 +1831,51 @@ function applyTier() {
     el.classList.toggle('pin-locked', locked);
     el.style.backgroundColor = hexToRgba(pinColorsByName[name], locked ? 0.55 : 0.85);
   });
+
+  updateTrialBanner();
+  updateAccessCopy();
+}
+
+function updateTrialBanner() {
+  const banner = document.getElementById('trial-banner');
+  if (!banner) return;
+  if (isTrialActive() && !isUnlocked()) {
+    const msRemaining = (parseInt(trialStart, 10) + TRIAL_MS) - Date.now();
+    let text;
+    if (msRemaining < DAY_MS) {
+      text = 'Free trial ends today';
+    } else {
+      const daysLeft = Math.ceil(msRemaining / DAY_MS);
+      text = daysLeft === 1 ? 'Free trial: 1 day left' : `Free trial: ${daysLeft} days left`;
+    }
+    banner.textContent   = text;
+    banner.style.display = '';
+  } else {
+    banner.style.display = 'none';
+  }
+}
+
+// Keeps the Index/About upsell boxes and the subscribe sheet's explainer
+// line accurate for whichever access state the visitor is currently in.
+function updateAccessCopy() {
+  const unlocked = isUnlocked();
+  const trialOn  = isTrialActive();
+
+  document.querySelectorAll('.inline-subscribe-teaser').forEach(box => {
+    const msgEl = box.querySelector('.card-locked-msg');
+    if (!msgEl) return;
+    if (unlocked) {
+      box.style.display = 'none';
+    } else {
+      box.style.display = '';
+      msgEl.textContent = trialOn ? TRIAL_TEASER_MSG : EXPIRED_TEASER_MSG;
+    }
+  });
+
+  const noteEl = document.getElementById('subscribe-trial-note');
+  if (noteEl) {
+    noteEl.textContent = (!trialOn && !unlocked) ? EXPIRED_SUBSCRIBE_NOTE : DEFAULT_SUBSCRIBE_NOTE;
+  }
 }
 
 const subBackdrop = document.getElementById('subscribe-backdrop');
@@ -1814,6 +1903,12 @@ document.getElementById('btn-card-unlock').addEventListener('click', openSubscri
 document.getElementById('btn-index-unlock').addEventListener('click', openSubscribeSheet);
 document.getElementById('btn-about-unlock').addEventListener('click', openSubscribeSheet);
 subBackdrop.addEventListener('click', closeSubscribeSheet);
+
+document.getElementById('subscribe-buy-link').addEventListener('click', () => {
+  if (typeof gtag === 'function') {
+    gtag('event', 'buy_click');
+  }
+});
 
 document.getElementById('subscribe-submit').addEventListener('click', () => {
   const code = subCode.value.trim().toUpperCase();

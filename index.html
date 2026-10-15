@@ -39,7 +39,9 @@
     .pin-icon--active .pin-lozenge {
       box-shadow: 0 0 0 2.5px #fff, 0 0 0 4px rgba(0,0,0,0.25);
     }
-    .pin-lozenge.pin-free-tier {
+    /* Hidden while the trial (or a paid/code unlock) already opens every
+       pin — nothing to distinguish. Shown again once neither applies. */
+    body:not(.shb-full-access) .pin-lozenge.pin-free-tier {
       border: 2px solid #fff;
     }
   </style>
@@ -56,6 +58,7 @@
 
   <header id="site-header">
     <h1>Say Hello Bristol</h1>
+    <p id="trial-banner" class="trial-banner" style="display:none"></p>
     <nav id="tab-nav">
       <button class="tab-btn active" data-tab="map">Map</button>
       <button class="tab-btn" data-tab="index">Index</button>
@@ -161,6 +164,8 @@
 
       <p>For each entry, you can see the phonetic spelling, get a quick tip on how to pronounce it, hear the model audio, and record yourself to compare.</p>
 
+      <p class="about-trial-note">Full 3-day free trial, then 8 free central places, or pay £3.99 for 30 days' full access.</p>
+
       <div class="inline-subscribe-teaser">
         <p class="card-locked-msg">🔒 Want to hear all 50 places? Unlock full access to every recording and the clickable IPA.</p>
         <p class="card-locked-link-row"><button class="card-unlock-link" id="btn-about-unlock">Subscribe or enter access code</button></p>
@@ -200,7 +205,9 @@
 
       <h2 class="about-heading about-heading--section">Access &amp; payment</h2>
 
-      <p>A small number of pins are free to use. Full access to all pins is available either by entering an access code (for example, if you've been given one as part of a trial or partnership), or by paying a one-off fee of £3.99 for 30 days' full access. This is a single payment, not a recurring subscription — your card is never charged again automatically, and access simply reverts to the free pins once the 30 days end. All payments are processed securely by a third-party payment provider; we never see or store your card details.</p>
+      <p>Full 3-day free trial, then 8 free central places, or pay £3.99 for 30 days' full access. The free trial starts automatically the first time you open the app on a device, lasts 3 days, and is per device — using the app on a different phone, tablet or computer (or clearing that device's browser storage) starts a new trial there.</p>
+
+      <p>Once your trial ends, access reverts to the free tier: 8 central places stay free, and the rest can be unlocked either by entering an access code (for example, if you've been given one as part of a trial or partnership), or by paying a one-off fee of £3.99 for 30 days' full access. This is a single payment, not a recurring subscription — your card is never charged again automatically, and access simply reverts to the free tier once the 30 days end. All payments are processed securely by a third-party payment provider; we never see or store your card details.</p>
 
       <h2 class="about-heading about-heading--section">Your recordings</h2>
 
@@ -242,7 +249,7 @@
     </div>
 
     <div id="card-locked-body" style="display:none">
-      <p class="card-locked-msg">🔒 Subscribe to hear how to say this — and practise your pronunciation.</p>
+      <p class="card-locked-msg">🔒 Your free trial has ended. Subscribe to hear how to say this — and practise your pronunciation.</p>
       <p class="card-locked-free-list" id="card-locked-free-list"></p>
       <p class="card-locked-link-row"><button class="card-unlock-link" id="btn-card-unlock">Subscribe or enter access code</button></p>
     </div>
@@ -266,6 +273,7 @@
         Tap a pin (or browse the Index) to hear it said properly &mdash; real British voice, not AI.<br>
         Record yourself and compare, or tap each word in the International Phonetic Alphabet text to hear all the sounds.
       </p>
+      <p class="ob-trial-note">All 50 places free for 3 days. After that, 8 stay free, or £3.99 unlocks all 50 for 30 days.</p>
       <div class="ob-legend">
         <div class="ob-legend-item">
           <span class="ob-dot" style="background:#4CAF7D"></span>Districts
@@ -316,6 +324,7 @@
       <button id="subscribe-close" aria-label="Close">&#215;</button>
       <h2>Unlock 50 places</h2>
       <p class="subscribe-desc">Get full access to every place, every recording, and the clickable IPA — listen, then record yourself to compare.</p>
+      <p class="subscribe-desc" id="subscribe-trial-note">Full 3-day free trial, then 8 free central places, or pay £3.99 for 30 days' full access.</p>
       <a href="https://buy.stripe.com/3cIfZgddV0jY6TBh1L2ZO02" id="subscribe-buy-link" class="subscribe-buy-btn">Buy 30 days' access — £3.99</a>
       <p class="subscribe-divider">or, if you already have a code</p>
       <div class="subscribe-input-row">
